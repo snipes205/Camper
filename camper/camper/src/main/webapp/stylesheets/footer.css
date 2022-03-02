@@ -1,0 +1,35 @@
+.footer_container{
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.footer_item {
+    flex:none;
+    height:100%;
+}
+
+.copy{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 22px;
+    color: rgb(68, 68, 68);
+}
+
+.footer_txt {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 30px;
+    color:rgb(68, 68, 68);
+}
+
+.footer_title {
+    font-size: 23px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+
+
