@@ -268,7 +268,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;5</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [캠핑로그] <a href="view.html">포천캠핑다녀왔어요</a>
+                                        [캠핑로그] <a href="./view.do">포천캠핑다녀왔어요</a>
                                     </td>
                                     <td >캠짱</td>
                                     <td >2022/01/11</td>
@@ -284,7 +284,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;4</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [캠핑로그] <a href="view.html">가평 감성가득 캠핑장</a>             
+                                        [캠핑로그] <a href="./view.do">가평 감성가득 캠핑장</a>             
                                     </td>
                                     <td >캠핑좋아</td>
                                     <td >2022/01/10</td>
@@ -300,7 +300,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;3</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [캠핑가자] <a href="view.html">캠핑 같이 가실분!</a>
+                                        [캠핑가자] <a href="./view.do">캠핑 같이 가실분!</a>
                                     </td>
                                     <td >룰루랄라</td>
                                     <td >2022/01/08</td>
@@ -316,7 +316,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;2</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [캠핑꿀띱] <a href="view.html">캠핑 초보 꿀팁공유해용</a>
+                                        [캠핑꿀띱] <a href="./view.do">캠핑 초보 꿀팁공유해용</a>
                                     </td>
                                     <td >캠린이</td>
                                     <td >2022/01/05</td>
@@ -332,7 +332,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;1</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [캠핑꿀팁] <a href="view.html">캠핑용품 후기</a>
+                                        [캠핑꿀팁] <a href="./view.do">캠핑용품 후기</a>
                                     </td>
                                     <td >나는야</td>
                                     <td >2022/01/02</td>

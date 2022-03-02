@@ -259,7 +259,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;5</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;" >
-                                        <a href="view.html" onclick="location.href='view.html'">문의합니다</a>
+                                        <a href="./view.do" onclick="location.href='view.html'">문의합니다</a>
                                     </td>
                                     <td >아이디</td>
                                     <td >2022/01/11</td>
@@ -274,7 +274,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;4</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        <a href="view.html">문의합니다</a>             
+                                        <a href="./view.do">문의합니다</a>             
                                     </td>
                                     <td >아이디</td>
                                     <td >2022/01/10</td>
@@ -289,7 +289,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;3</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                         <a href="view.html">문의합니다</a>
+                                         <a href="./view.do">문의합니다</a>
                                     </td>
                                     <td >아이디</td>
                                     <td >2022/01/08</td>
@@ -304,7 +304,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;2</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                         <a href="view.html">문의합니다 </a>
+                                         <a href="./view.do">문의합니다 </a>
                                     </td>
                                     <td >아이디</td>
                                     <td >2022/01/05</td>
@@ -319,7 +319,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;1</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        <a href="view.html">문의합니다</a>
+                                        <a href="./view.do">문의합니다</a>
                                     </td>
                                     <td >아이디</td>
                                     <td >2022/01/02</td>

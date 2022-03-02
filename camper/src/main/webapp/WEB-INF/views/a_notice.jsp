@@ -265,7 +265,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;5</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [공지사항] <a href="view.html">사이트 이용공지</a>
+                                        [공지사항] <a href="./view.do">사이트 이용공지</a>
                                     </td>
                                     <td >관리자</td>
                                     <td >2022/01/11</td>
@@ -280,7 +280,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;4</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [공지사항] <a href="view.html">공지사항입니다</a>             
+                                        [공지사항] <a href="./view.do">공지사항입니다</a>             
                                     </td>
                                     <td >관리자</td>
                                     <td >2022/01/10</td>
@@ -295,7 +295,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;3</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [공지사항] <a href="view.html">커뮤니티 이용공지</a>
+                                        [공지사항] <a href="./view.do">커뮤니티 이용공지</a>
                                     </td>
                                     <td >관리자</td>
                                     <td >2022/01/08</td>
@@ -310,7 +310,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;2</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [FAQ] <a href="view.html">로그인 / 회원가입 </a>
+                                        [FAQ] <a href="./view.do">로그인 / 회원가입 </a>
                                     </td>
                                     <td >관리자</td>
                                     <td >2022/01/05</td>
@@ -325,7 +325,7 @@
                                     <td>&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;1</td>
                                     <td align="left" style="padding-left:10px; word-break:break-all;">
-                                        [FAQ] <a href="view.html">CAMPER 이용방법</a>
+                                        [FAQ] <a href="./view.do">CAMPER 이용방법</a>
                                     </td>
                                     <td >관리자</td>
                                     <td >2022/01/02</td>
