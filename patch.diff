@@ -1,0 +1,4422 @@
+diff --git a/.DS_Store b/.DS_Store
+new file mode 100644
+index 0000000..34df56e
+Binary files /dev/null and b/.DS_Store differ
+diff --git a/camper/pom.xml b/camper/pom.xml
+index 55ad0c1..19317c6 100644
+--- a/camper/pom.xml
++++ b/camper/pom.xml
+@@ -1,32 +1,25 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 	<modelVersion>4.0.0</modelVersion>
+ 	<parent>
+ 		<groupId>org.springframework.boot</groupId>
+ 		<artifactId>spring-boot-starter-parent</artifactId>
+-		<version>2.6.3</version>
+-		<relativePath/> <!-- lookup parent from repository -->
++		<version>2.6.4</version>
++		<relativePath /> <!-- lookup parent from repository -->
+ 	</parent>
+ 	<groupId>com.camper</groupId>
+-	<artifactId>camper</artifactId>
++	<artifactId>testCAMPER</artifactId>
+ 	<version>0.0.1-SNAPSHOT</version>
+-	<name>camper</name>
++	<name>testCAMPER</name>
+ 	<description>Camper Web Project</description>
+ 	<properties>
+ 		<java.version>11</java.version>
+ 	</properties>
+ 	<dependencies>
+-		<!--jsp를 위한설정-->
+ 		<dependency>
+-			<groupId>org.apache.tomcat.embed</groupId>
+-			<artifactId>tomcat-embed-jasper</artifactId>
+-			<scope>provided</scope>
++			<groupId>org.springframework.boot</groupId>
++			<artifactId>spring-boot-starter-jdbc</artifactId>
+ 		</dependency>
+-		<dependency>
+-			<groupId>javax.servlet</groupId>
+-			<artifactId>jstl</artifactId>
+-		</dependency>	
+ 		<dependency>
+ 			<groupId>org.springframework.boot</groupId>
+ 			<artifactId>spring-boot-starter-web</artifactId>
+@@ -53,9 +46,21 @@
+ 			<artifactId>spring-boot-starter-test</artifactId>
+ 			<scope>test</scope>
+ 		</dependency>
++
+ 		<dependency>
+-			<groupId>org.springframework.boot</groupId>
+-			<artifactId>spring-boot-starter-jdbc</artifactId>
++			<groupId>org.apache.tomcat.embed</groupId>
++			<artifactId>tomcat-embed-jasper</artifactId>
++			<scope>provided</scope>
++		</dependency>
++		<dependency>
++			<groupId>javax.servlet</groupId>
++			<artifactId>jstl</artifactId>
++		</dependency>
++
++		<dependency>
++			<groupId>org.mybatis.spring.boot</groupId>
++			<artifactId>mybatis-spring-boot-starter</artifactId>
++			<version>2.2.2</version>
+ 		</dependency>
+ 	</dependencies>
+ 
+diff --git a/camper/src/main/java/com/camper/controller/AdminController.java b/camper/src/main/java/com/camper/controller/AdminController.java
+new file mode 100644
+index 0000000..be9a60b
+--- /dev/null
++++ b/camper/src/main/java/com/camper/controller/AdminController.java
+@@ -0,0 +1,153 @@
++package com.camper.config;
++
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++import javax.sql.DataSource;
++
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.jdbc.core.JdbcTemplate;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RestController;
++import org.springframework.web.servlet.ModelAndView;
++
++@RestController
++public class AdminController {
++	
++	@RequestMapping("/admin/main.do")
++	public ModelAndView adminMain(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_dashboard");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/ask.do")
++	public ModelAndView adminAsk(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_ask");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/comm.do")
++	public ModelAndView adminComm(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_comm");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/admin.do")
++	public ModelAndView adminAdmin(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_admin");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/default.do")
++	public ModelAndView adminDefault(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_default");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/member.do")
++	public ModelAndView adminMember(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_member");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/modify_a.do")
++	public ModelAndView adminModifyA(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_modify_a");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/modify_c.do")
++	public ModelAndView adminModifyC(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_modify_c");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/modify_n.do")
++	public ModelAndView adminModifyN(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_modify_n");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/notice.do")
++	public ModelAndView adminNotice(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_notice");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/profile.do")
++	public ModelAndView adminProfile(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_profile");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/site.do")
++	public ModelAndView adminSite(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_site");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/terms.do")
++	public ModelAndView adminTerms(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_terms");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/view.do")
++	public ModelAndView adminView(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_view");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/write_a.do")
++	public ModelAndView adminWriteA(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_write_a");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/write_c.do")
++	public ModelAndView adminWriteC(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_write_c");
++		
++
++		return modelAndView;
++	}
++	@RequestMapping("/admin/write_n.do")
++	public ModelAndView adminWriteN(HttpServletRequest request,HttpServletResponse response ) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("a_write_n");
++		
++
++		return modelAndView;
++	}
++	
++}
+diff --git a/camper/src/main/java/com/camper/controller/CommController.java b/camper/src/main/java/com/camper/controller/CommController.java
+new file mode 100644
+index 0000000..6365bcd
+--- /dev/null
++++ b/camper/src/main/java/com/camper/controller/CommController.java
+@@ -0,0 +1,93 @@
++package com.camper.controller;
++
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RestController;
++import org.springframework.web.servlet.ModelAndView;
++
++//커뮤니티 컨트롤러
++@RestController
++public class CommController {
++
++	// 게시판
++
++	@RequestMapping("/community/main.do")
++	public ModelAndView boardMain() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_main");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/camplog.do")
++	public ModelAndView boardCamplog() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_list1");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/camptip.do")
++	public ModelAndView boardCamptip() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_list2");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/campgo.do")
++	public ModelAndView boardCampgo() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_list3");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/write.do")
++	public ModelAndView boardWrite() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_write");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/view.do")
++	public ModelAndView boardView() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_view");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/modify.do")
++	public ModelAndView boardModify() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_modify");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/delete.do")
++	public ModelAndView boardDelete() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_delete");
++		return modelAndView;
++	}
++
++	@RequestMapping("/community/deleteOk.do")
++	public ModelAndView boardDeleteOk() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_delete_Ok");
++		return modelAndView;
++	}
++
++	// 공지사항
++	@RequestMapping("/ask/faq.do")
++	public ModelAndView boardFaq() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_faq");
++		return modelAndView;
++	}
++
++	@RequestMapping("/ask/notice.do")
++	public ModelAndView boardNotice() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("board_notice");
++		return modelAndView;
++	}
++}
+diff --git a/camper/src/main/java/com/camper/controller/DashboadController.java b/camper/src/main/java/com/camper/controller/DashboadController.java
+new file mode 100644
+index 0000000..3b84d14
+--- /dev/null
++++ b/camper/src/main/java/com/camper/controller/DashboadController.java
+@@ -0,0 +1,73 @@
++package com.camper.controller;
++
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++import javax.sql.DataSource;
++
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.jdbc.core.JdbcTemplate;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RestController;
++import org.springframework.web.servlet.ModelAndView;
++
++@RestController
++public class DashboadController {
++
++	// 관리자
++	@RequestMapping("/dashboard/myads.do")
++	public ModelAndView dashMyInfo(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("dashboard_my_ads");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/dashboard/jjim.do")
++	public ModelAndView dashJjim(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("dashboard_jjim");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/dashboard/like.do")
++	public ModelAndView dashLike(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("dashboard_like");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/dashboard/message.do")
++	public ModelAndView dashMassage(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("dashboard_message");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/dashboard/question.do")
++	public ModelAndView dashQuestion(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("dashboard_question");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/dashboard/write.do")
++	public ModelAndView dashWrite(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("dashboard_write");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/dashboard/writeOk.do")
++	public ModelAndView dashWriteOk(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("dashboard_write_ok");
++
++		return modelAndView;
++	}
++
++}
+diff --git a/camper/src/main/java/com/camper/controller/LoginController.java b/camper/src/main/java/com/camper/controller/LoginController.java
+new file mode 100644
+index 0000000..b2c894c
+--- /dev/null
++++ b/camper/src/main/java/com/camper/controller/LoginController.java
+@@ -0,0 +1,39 @@
++package com.camper.controller;
++
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++import javax.sql.DataSource;
++
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.jdbc.core.JdbcTemplate;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RestController;
++import org.springframework.web.servlet.ModelAndView;
++
++@RestController
++public class LoginController {
++
++	@RequestMapping("/index.do")
++	public ModelAndView index() {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("index");
++		return modelAndView;
++	}
++
++	@RequestMapping("/login/login.do")
++	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("login");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/login/register")
++	public ModelAndView Register(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("register");
++
++		return modelAndView;
++	}
++
++}
+diff --git a/camper/src/main/java/com/camper/controller/SearchController.java b/camper/src/main/java/com/camper/controller/SearchController.java
+new file mode 100644
+index 0000000..0e8656b
+--- /dev/null
++++ b/camper/src/main/java/com/camper/controller/SearchController.java
+@@ -0,0 +1,48 @@
++package com.camper.controller;
++
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++import javax.sql.DataSource;
++
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.jdbc.core.JdbcTemplate;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RestController;
++import org.springframework.web.servlet.ModelAndView;
++
++@RestController
++public class SearchController {
++
++	@RequestMapping("/search/main.do")
++	public ModelAndView searchMain(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("search_main");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/search/map.do")
++	public ModelAndView searchMap(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("search_map");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/search/theme.do")
++	public ModelAndView searchTheme(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("search_theme");
++
++		return modelAndView;
++	}
++
++	@RequestMapping("/search/detail.do")
++	public ModelAndView seachDetail(HttpServletRequest request, HttpServletResponse response) {
++		ModelAndView modelAndView = new ModelAndView();
++		modelAndView.setViewName("search_detail");
++
++		return modelAndView;
++	}
++
++}
+diff --git a/camper/src/main/java/com/camper/web/CamperWebApplication.java b/camper/src/main/java/com/camper/web/CamperWebApplication.java
+index ab9072b..c24325e 100644
+--- a/camper/src/main/java/com/camper/web/CamperWebApplication.java
++++ b/camper/src/main/java/com/camper/web/CamperWebApplication.java
+@@ -1,15 +1,19 @@
++<<<<<<<< HEAD:camper/src/main/java/com/camper/web/CamperWebApplication.java
+ package com.camper.web;
++========
++package com.camper;
++>>>>>>>> origin/dongdong:camper/src/main/java/com/camper/CamperApplication.java
+ 
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ import org.springframework.context.annotation.ComponentScan;
+ 
+ @SpringBootApplication
+-@ComponentScan(basePackages = {"com.camper.config,com.camper.model1"})//패키지 읽기.. 중요함 
+-public class CamperWebApplication {
++@ComponentScan(basePackages = {"com.camper.controller,com.camper.model, com.camper.service, com.camper.mapper"})
++public class CamperApplication {
+ 
+ 	public static void main(String[] args) {
+-		SpringApplication.run(CamperWebApplication.class, args);
++		SpringApplication.run(CamperApplication.class, args);
+ 		System.out.println("서버시작");
+ 	}
+ 
+diff --git a/camper/src/main/resources/application.properties b/camper/src/main/resources/application.properties
+index e8d2a12..0317864 100644
+--- a/camper/src/main/resources/application.properties
++++ b/camper/src/main/resources/application.properties
+@@ -1,8 +1,17 @@
++<<<<<<< HEAD
+ #Tomcat
++=======
++spring.datasource.driverClassName= org.mariadb.jdbc.Driver
++spring.datasource.url=jdbc:mysql://camper.cj5cene6fh3i.us-east-1.rds.amazonaws.com:3306/camper
++spring.datasource.username=engenius
++spring.datasource.password=123456qwerty
++
++>>>>>>> origin/dongdong
+ spring.mvc.view.prefix=/WEB-INF/views/
+ spring.mvc.view.suffix=.jsp
+-#mariadb
+-spring.datasource.url=jdbc:mariadb://localhost:3306/project
+-spring.datasource.username=project
+-spring.datasource.password=1234
+-spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
++devtools.livereload.enabled=true
++
++
++# testMapper.xml 위치 지정
++# **은 하위 폴더 레벨에 상관없이 모든 경로를 뜻하며, *는 아무 이름이나 와도 된다는것을 뜻합니다.
++mybatis.mapper-locations: mybatis/*.xml
+\ No newline at end of file
+diff --git a/camper/src/main/webapp/WEB-INF/index.html b/camper/src/main/webapp/WEB-INF/index.html
+new file mode 100644
+index 0000000..4708180
+--- /dev/null
++++ b/camper/src/main/webapp/WEB-INF/index.html
+@@ -0,0 +1,359 @@
++<html lang="ko">
++
++<head>
++    <meta charset="UTF-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <title>CAMPER</title>
++    <link href="images/favicon.png" rel="shortcut icon">
++    <link rel="stylesheet" href="/stylesheets/layout.css">
++    <link rel="stylesheet" href="/stylesheets/header.css">
++    <link rel="stylesheet" href="/stylesheets/footer.css">
++    <link rel="stylesheet" href="/stylesheets/modal.css">
++    <link rel="stylesheet" href="/stylesheets/main.css">
++    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
++
++    <style>
++        @media screen and (max-width: 1780px) {
++            .second_item:last-child {
++                display: none;
++            }
++        }
++
++        @media screen and (max-width: 1250px) {
++            .header_container {
++                width: 100%;
++                padding: 12vw;
++                padding-top: 20px;
++                padding-bottom: 0;
++                margin-top: 20px;
++                display: flex;
++                align-items: center;
++            }
++
++            .logo img {
++                width: 130px;
++                height: 30px;
++            }
++
++            .tab_menu_container {
++                display: none;
++                flex-direction: column;
++                align-items: center;
++                width: 100%;
++
++            }
++
++            .tab_menu_btn {
++                width: 100%;
++                text-align: center;
++            }
++
++            .burgerBar {}
++
++            .burger_menu_container {
++                justify-content: end;
++                z-index: -1;
++                margin-right: 10px;
++            }
++
++            .burger_menu {
++                background: none;
++                border: 0;
++                outline: 0;
++                cursor: pointer;
++                width: 15%;
++                height: 40px;
++                transition: 0.3s all;
++                text-align: center;
++                font-size: 25px;
++                font-weight: 500;
++                color: #fff;
++                display: block;
++                padding: 5px 0 0 20px;
++            }
++
++
++            .tab_menu_container.active {
++                display: flex;
++                background-color: black;
++                color: white;
++            }
++        }
++
++        @media screen and (max-width: 950px) {
++
++            .leftItem {
++                width: 100%;
++                height: 400px;
++                margin: 0px;
++            }
++
++            .third_item_thumb1 {
++                height: 275px;
++            }
++
++            .third_txt1 {
++                height: 125px;
++                width: 100%;
++                border-radius: 0px 0px 12px 12px;
++                font-weight: bold;
++            }
++
++            .rightItem {
++                display: none;
++            }
++
++            .thirdContainer {
++                display: flex;
++                padding: 30px 10px 10px 10px;
++                height: 400px;
++                width: 100%;
++            }
++
++            body {
++                background-size: 100% 700px;
++            }
++
++            header {
++                height: 150px;
++                width: 100%;
++            }
++
++            .first_section {
++                margin: 0 12vw 20px 12vw;
++            }
++
++            .first_article {
++                width: 60%;
++                margin-bottom: -50px;
++            }
++
++            .article_title {
++                font-size: 30px;
++                white-space: pre-line;
++                color: #ef8f1e;
++                font-weight: 500;
++            }
++
++            .article_content {
++                font-size: 18px;
++                font-weight: 300;
++                color: #fff;
++                margin-top: 20px;
++                line-height: 27px;
++                overflow: hidden;
++            }
++
++            .article_view {
++                font-size: 20px;
++                font-weight: 400;
++                margin-top: 5px;
++                overflow: hidden;
++            }
++        }
++    </style>
++</head>
++
++<body>
++    <header>
++        <nav class="header_container">
++            <div class="header_item logo"><a href="/"><img src="/images/logo.png" height="90px"></a></div>
++            <div class="header_item searchBar">
++                <div class="tab_menu_container">
++                    <button class="tab_menu_btn" id="stayBtn"><a href="./search/theme.do" style="color: #fff;">캠핑어때</a></button>
++                    <button class="tab_menu_btn" id="experienceBtn"><a href="./community/main.do" style="color: #fff;">캠핑톡톡</a></button>
++                    <button class="tab_menu_btn" id="onlineBtn"><a href="./dashboard/myads.do" style="color: #fff;">고객센터</a></button>
++                </div>
++            </div>
++
++            <div class="header_item">
++                <div class="header_dropdown"><button class="dropBtn"><img class="user_icon" src="./images/1.jpg"
++                            height="30px"></button>
++                    <div class="dropdown-content hidden"><a href="./login/login.do" id="loginBtn">로그인</a><a id="signupBtn" href="./login/register">회원가입</a></div>
++                </div>
++            </div>
++
++            <div class="header_item BurgerBar">
++                <div class="burger_menu_container">
++                    <a href="#" class="burger_menu"><i class="fas fa-bars"></i></a>
++                </div>
++            </div>
++
++            <div class="login hidden">
++                <div class="modal_overlay"></div>
++                <div class="modal_content">
++                    <div class="modalTop"><button>&times</button></div>
++                    <div class="modalTitle">로그인</div>
++                    <form class="loginForm" action="/login" method="post">
++                        <table>
++                            <tr>
++                                <td><input class="modalInput" type="email" placeholder="이메일" name="id" required></td>
++                            </tr>
++                            <tr>
++                                <td><input class="modalInput" type="password" placeholder="비밀번호" name="password"
++                                        required></td>
++                            </tr>
++                            <tr>
++                                <td><input class="modalSubmit" type="submit" value="로그인"></td>
++                            </tr>
++                        </table>
++                    </form>
++                </div>
++            </div>
++            <div class="signup hidden">
++                <div class="modal_overlay"></div>
++                <div class="modal_content">
++                    <div class="modalTop"><button>&times</button></div>
++                    <div class="modalTitle">회원가입</div>
++                    <form class="signupForm" action="/signup" method="post">
++                        <table>
++                            <tr>
++                                <td><input class="modalInput" type="email" placeholder="이메일" name="id" required></td>
++                            </tr>
++                            <tr>
++                                <td><input class="modalInput" type="password" placeholder="비밀번호" name="password"
++                                        required></td>
++                            </tr>
++                            <tr>
++                                <td><input class="modalInput" type="text" placeholder="이름" name="name" required></td>
++                            </tr>
++                            <tr>
++                                <td><input class="modalInput" type="text" placeholder="휴대전화 ex) 010-0000-0000"
++                                        name="phone" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required></td>
++                            </tr>
++                            <tr>
++                                <td><input class="modalSubmit" type="submit" value="회원가입"></td>
++                            </tr>
++                        </table>
++                    </form>
++                </div>
++            </div>
++            <div class="drop_overlay hidden"></div>
++        </nav>
++    </header>
++
++
++    <main>
++        <section>
++            <article class="first_section">
++                <article class="first_article">
++                    <div class="article_title"> <span>별 보러 가자</span></div>
++                    <p class="article_content">나랑 별 보러 가지 않을래 너희 집
++                        앞으로 잠깐 나올래 가볍게
++                        겉옷 하나 걸치고서 나오면 돼
++                        너무 멀리 가지 않을게</p>
++                    <p class="article_view"><a href="#">지금 당장 떠나기 ></a></p>
++                </article>
++            </article>
++        </section>
++        <section>
++            <article class="second_section">
++                <article class="second_article">
++                    <div class="second_title">사랑스런 댕댕이와 함께 !</div>
++                    <article class="second_container">
++                        <div class="second_item">
++                            <a href="./search/detail.do">
++                                <img class="item_thumb" src="./images/camping1.jpeg">
++                                <div class="item_txt">
++                                    <div class="item_title">경기 포천시</div>
++                                    <div class="item_descript">멍쓰댕쓰 캠핑장</div>
++                                </div>
++                            </a>
++                        </div>
++                        <div class="second_item">
++                            <a href="./search/detail.do">
++                                <img class="item_thumb" src="./images/camping2.jpeg">
++                                <div class="item_txt">
++                                    <div class="item_title">경기 포천시</div>
++                                    <div class="item_descript">멍쓰댕쓰 캠핑장</div>
++                                </div>
++                            </a>
++                        </div>
++                        <div class="second_item">
++                            <a href="./search/detail.do">
++                                <img class="item_thumb" src="./images/camping3.jpeg">
++                                <div class="item_txt">
++                                    <div class="item_title">경기 포천시</div>
++                                    <div class="item_descript">멍쓰댕쓰 캠핑장</div>
++                                </div>
++                            </a>
++                        </div>
++                    </article>
++                </article>
++            </article>
++            <article class="third_section">
++                <article class="third_article">
++                    <div class="third_title">당일치기 서울근교 여행</div>
++                    <div class="thirdContainer">
++                        <div class="leftItem">
++                            <a href="#">
++                                <img class="third_item_thumb1" src="./images/1.jpg">
++                                <div class="third_txt1">
++                                    <div class="thirdTitle">서울특별시</div>
++                                    <div class="third_descript">도심 한복판에서 즐기는 감성 캠핑</div>
++                                </div>
++                            </a>
++                        </div>
++                        <div class="rightItem">
++                            <div class="rightTop">
++                                <div class="topleft">
++                                    <a href="#">
++                                        <img class="third_item_thumb2" src="./images/2.jpg">
++                                        <div class="third_txt2">
++                                            <div class="thirdTitle2">경기 가평</div>
++                                            <div class="third_descript2">물놀이 가자</div>
++                                        </div>
++                                    </a>
++                                </div>
++                                <div class="topRight">
++                                    <a href="#">
++                                        <img class="third_item_thumb2" src="./images/3.jpg">
++                                        <div class="third_txt2">
++                                            <div class="thirdTitle2">인천 강화군</div>
++                                            <div class="third_descript2">물놀이 가자</div>
++                                        </div>
++                                    </a>
++                                </div>
++                            </div>
++                            <div class="rightBottom">
++                                <a href="#">
++                                    <img class="third_item_thumb2" src="./images/4.jpg">
++                                    <div class="third_txt2">
++                                        <div class="thirdTitle2">경기 포천시</div>
++                                        <div class="third_descript2">포천으로 떠나자</div>
++                                    </div>
++                                </a>
++                            </div>
++                        </div>
++                    </div>
++                </article>
++            </article>
++        </section>
++
++    </main>
++    <footer>
++        <div class="footer_container">
++            <div class="footer_item">
++                <ul>
++                    <li> <img src="./images/footerlogo.png"></li>
++                </ul>
++            </div>
++            <div class="footer_item">
++                <p class="footer_txt">
++                    <span class="footer_title">상호</span> 캠퍼 <span class="footer_title">대표</span> 엔지니어스 <span
++                        class="footer_title">주소</span> 서울 성동구 왕십리로<br>
++                    <span class="footer_title">개인정보관리 책임자</span> 관리자 (admin@gmail.com) <span class="footer_title">사업자
++                        등록번호</span> 000-00-00000<br>
++                </p>
++            </div>
++            <p class="copy">&copy;2022 CAMPER all rights reserved.</p>
++        </div>
++    </footer>
++
++    <script type="module" src="/javascripts/nav.js"></script>
++    <script type="module" src="/javascripts/header.js"></script>
++    <script type="module" src="/javascripts/header.js"></script>
++</body>
++
++</html>
+\ No newline at end of file
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_delete.jsp b/camper/src/main/webapp/WEB-INF/views/board_delete.jsp
+index c731161..53fc99f 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_delete.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_delete.jsp
+@@ -42,65 +42,7 @@
+ </head>
+ 
+ <body class="body-wrapper">
+- 	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register.do">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+-
++ 	<jsp:include page="../component/header.jsp"></jsp:include>
+   <!--  글삭제 페이지 -->
+ 
+   <section class="user-profile section">
+@@ -136,14 +78,9 @@
+                 </div>
+ 
+                 <!-- 목록 / 보기 / 삭제 버튼 -->
+-                <button style="margin-top:20px; margin-right:10px;" class="btn btn-transparent"
+-                  onclick="location.href='board_list1.html'">
+-                  목록</button>
+-                <button style="margin-top:20px;" class="btn btn-transparent" onclick="location.href='board_view.html'">
+-                  보기</button>
+-                <button style="margin-top:20px; float: right;" class="btn btn-transparent"
+-                  onclick="location.href='/bo'">
+-                  삭제</button>
++                <a href="/community/main.do"><button style="margin-top:20px; margin-right:10px;" class="btn btn-transparent">목록</button></a>
++                <a href="/community/view.do"><button style="margin-top:20px;" class="btn btn-transparent">보기</button></a>
++                <a href="/community/delete_ok.do"><button style="margin-top:20px; float: right;" class="btn btn-transparent">삭제</button></a>
+               </div>
+             </div>
+           </div>
+@@ -151,69 +88,8 @@
+       </div>
+     </div>
+   </section>
+-  <!--============================
+-=            Footer            =
+-=============================-->
+-
+-  <footer class="footer section section-sm">
+-    <!-- Container Start -->
+-    <div class="container">
+-      <div class="row">
+-        <div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-          <!-- About -->
+-          <div class="block about">
+-            <!-- footer logo -->
+-            <img src="images/logo.png" alt="">
+-            <!-- description -->
+-          </div>
+-        </div>
+-        <!-- Link list -->
+-        <div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-          <div class="block">
+-            <a href="./search_theme.html">
+-              <h4>캠핑 어때</h4>
+-            </a>
+-            <ul>
+-              <li><a href="./search_theme.html">테마별 검색</a></li>
+-              <li><a href="#">지역별 검색</a></li>
+-            </ul>
+-          </div>
+-        </div>
+-        <!-- Link list -->
+-        <div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-          <div class="block">
+-            <a href="./board_main.html">
+-              <h4>캠핑 톡톡</h4>
+-            </a>
+-            <ul>
+-              <li><a href="./board_list1.html">캠핑 로그</a></li>
+-              <li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-              <li><a href="./board_list3.html">캠핑 가자</a></li>
+-            </ul>
+-          </div>
+-        </div>
+-        <!-- Link list -->
+-        <div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-          <div class="block">
+-            <h4>고객센터</h4>
+-            <ul>
+-              <li><a href="board_notice.html">공지사항</a></li>
+-              <li><a href="board_faq.html">FAQ</a></li>
+-            </ul>
+-          </div>
+-        </div>
+-
+-
+-
+-      </div>
+-    </div>
+-    <!-- Container End -->
+-    <!-- To Top -->
+-    <div class="top-to">
+-      <a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-    </div>
+-
+-  </footer>
++  
++  	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_faq.jsp b/camper/src/main/webapp/WEB-INF/views/board_faq.jsp
+index d09e999..6f64379 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_faq.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_faq.jsp
+@@ -31,8 +31,8 @@
+ 	<link href="../plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+ 	<link href="../plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+ 	<!-- CUSTOM CSS -->
+-	<link href="css/style.css" rel="stylesheet">
+-	<link href="css/board_main.css" rel="stylesheet">
++	<link href="../css/style.css" rel="stylesheet">
++	<link href="../css/board_main.css" rel="stylesheet">
+ 
+ 
+ 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+@@ -45,65 +45,7 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+-
++	<jsp:include page="../component/header.jsp"></jsp:include>
+ 
+ 	<!--  페이지 제목 Section -->
+ 
+@@ -114,7 +56,7 @@
+ 			<div class="row">
+ 				<div class="col-md-8 offset-md-2 text-center community_title">
+ 					<!-- Title text -->
+-					<i class="ico"><img src="./images/community/faq.png"></i>
++					<i class="ico"><img src="../images/community/faq.png"></i>
+ 					<span>FAQ</span>
+ 
+ 				</div>
+@@ -239,8 +181,8 @@
+ 							<!-- Widget Header -->
+ 							<h5 class="widget-header">카테고리</h5>
+ 							<ul class="category-list">
+-								<li><a href="board_notice.html">공지사항 <span class="float-right">(10)</span></a></li>
+-								<li><a href="board_faq.html">FAQ <span class="float-right">(10)</span></a></li>
++								<li><a href="/ask/notice.do">공지사항 <span class="float-right">(10)</span></a></li>
++								<li><a href="/ask/faq.do">FAQ <span class="float-right">(10)</span></a></li>
+ 							</ul>
+ 						</div>
+ 					</div>
+@@ -248,71 +190,8 @@
+ 			</div>
+ 		</div>
+ 	</section>
+-
+-
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
++	
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_list1.jsp b/camper/src/main/webapp/WEB-INF/views/board_list1.jsp
+index a20601f..a6c2e19 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_list1.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_list1.jsp
+@@ -43,76 +43,12 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+-	<!--  카테고리 이름 Section -->
+-
+-
+-
+-
+-
+-	<!--  캠핑로그 List Section -->
+-
++	<jsp:include page="../component/header.jsp"></jsp:include>
++	
+ 	<section class="blog section">
+ 			<div class="container">
+ 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0"">
+-					<h2><i class="ico"><img src="./images/community/notes.png"></i>
++					<h2><i class="ico"><img src="../images/community/icon_tent.png"></i>
+ 					캠핑로그
+ 					</h2><hr />     
+ 				</div>
+@@ -125,7 +61,7 @@
+ 					<!-- 게시물 1 -->
+ 					<article>
+ 						<div>
+-							<a href="board_view.html">제목5</a>
++							<a href="/community/view.do">제목5</a>
+ 						</div>
+ 						<ul class="list-inline">
+ 							<li class="list-inline-item">by <a href="profile.html">닉네임</a></li>
+@@ -136,7 +72,7 @@
+ 					<!-- 게시물 2 -->
+ 					<article>
+ 						<div>
+-							<a href="board_view.html">제목4</a>
++							<a href="/community/view.do">제목4</a>
+ 						</div>
+ 						<ul class="list-inline">
+ 							<li class="list-inline-item">by <a href="#">닉네임</a></li>
+@@ -147,7 +83,7 @@
+ 					<!-- 게시물 3 -->
+ 					<article>
+ 						<div>
+-							<a href="board_view.html">제목3</a>
++							<a href="/community/view.do">제목3</a>
+ 						</div>
+ 						<ul class="list-inline">
+ 							<li class="list-inline-item">by <a href="#">닉네임</a></li>
+@@ -158,7 +94,7 @@
+ 					<!-- 게시물 4 -->
+ 					<article>
+ 						<div>
+-							<a href="board_view.html">제목2</a>
++							<a href="/community/view.do">제목2</a>
+ 						</div>
+ 						<ul class="list-inline">
+ 							<li class="list-inline-item">by <a href="#">닉네임</a></li>
+@@ -169,7 +105,7 @@
+ 					<!-- 게시물 5 -->
+ 					<article>
+ 						<div>
+-							<a href="board_view.html">제목1</a>
++							<a href="/community/view.do">제목1</a>
+ 						</div>
+ 						<ul class="list-inline">
+ 							<li class="list-inline-item">by <a href="#">닉네임</a></li>
+@@ -178,8 +114,7 @@
+ 					</article>
+ 
+ 					<!--  버튼 Part -->
+-					<span><button type="button" class="btn btn-transparent" style="float: right;"
+-						onclick="location.href='board_write.html'">등록</button></span>
++					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">등록</button></a>
+ 
+ 					<!--  페이지네이션 Part -->
+ 
+@@ -231,9 +166,9 @@
+ 							<!-- Widget Header -->
+ 							<h5 class="widget-header">카테고리</h5>
+ 							<ul class="category-list">
+-								<li><a href="board_list1.html">캠핑로그 <span class="float-right">(2)</span></a></li>
+-								<li><a href="board_list2.html">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
+-								<li><a href="board_list3.html">캠핑가자 <span class="float-right">(7)</span></a></li>
++								<li><a href="/community/camplog.do">캠핑로그 <span class="float-right">(2)</span></a></li>
++								<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
++								<li><a href="/community/campgo.do">캠핑가자 <span class="float-right">(7)</span></a></li>
+ 							</ul>
+ 						</div>
+ 					</div>
+@@ -242,66 +177,7 @@
+ 		</div>
+ 	</section>
+ 
+-
+-		<!--============================
+-=            Footer            =
+-=============================-->
+-
+-<footer class="footer section section-sm">
+-	<!-- Container Start -->
+-	<div class="container">
+-		<div class="row">
+-			<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-				<!-- About -->
+-				<div class="block about">
+-					<!-- footer logo -->
+-					<img src="images/logo.png" alt="">
+-					<!-- description -->
+-				</div>
+-			</div>
+-			<!-- Link list -->
+-			<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-				<div class="block">
+-					<a href="./search_theme.html"><h4>캠핑 어때</h4></a>
+-					<ul>
+-						<li><a href="./search_theme.html">테마별 검색</a></li>
+-						<li><a href="#">지역별 검색</a></li>
+-					</ul>
+-				</div>
+-			</div>
+-			<!-- Link list -->
+-			<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-				<div class="block">
+-					<a href="./board_main.html"><h4>캠핑 톡톡</h4></a>
+-					<ul>
+-						<li><a href="./board_list1.html">캠핑 로그</a></li>
+-						<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-						<li><a href="./board_list3.html">캠핑 가자</a></li>
+-					</ul>
+-				</div>
+-			</div>
+-			<!-- Link list -->
+-			<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-				<div class="block">
+-					<h4>고객센터</h4>
+-					<ul>
+-						<li><a href="board_notice.html">공지사항</a></li>
+-						<li><a href="board_faq.html">FAQ</a></li>
+-					</ul>
+-				</div>
+-			</div>
+-		
+-
+-
+-		</div>
+-	</div>
+-	<!-- Container End -->
+-	<!-- To Top -->
+-	<div class="top-to">
+-		<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-	</div>
+-
+-</footer>
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_list2.jsp b/camper/src/main/webapp/WEB-INF/views/board_list2.jsp
+index 37bb4fe..3e9ccc0 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_list2.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_list2.jsp
+@@ -43,75 +43,14 @@
+ 
+ </head>
+ 
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+-
+-
+-	<!--  페이지 제목 Section -->
+-
++ 	<jsp:include page="../component/header.jsp"></jsp:include>
+ 
+ 	<!--  캠핑꿀팁 List Section -->
+ 
+ 		<section class="blog section">
+ 			<div class="container">
+ 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+-					<h2><i class="ico"><img src="./images/community/notes.png"></i>
++					<h2><i class="ico"><img src="../images/community/icon_tent.png"></i>
+ 					캠핑꿀팁
+ 					</h2><hr />     
+ 				</div>
+@@ -178,9 +117,7 @@
+ 
+ 					<!--  버튼 Part -->
+ 					
+-					<span><button type="button" class="btn btn-transparent" style="float: right;"
+-							onclick="location.href='board_write.html'">등록</button></span>
+-
++					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">등록</button></a>
+ 
+ 					<!--  페이지네이션 Part -->
+ 
+@@ -232,9 +169,9 @@
+ 							<!-- Widget Header -->
+ 							<h5 class="widget-header">카테고리</h5>
+ 							<ul class="category-list">
+-								<li><a href="board_list1.html">캠핑로그 <span class="float-right">(2)</span></a></li>
+-								<li><a href="board_list2.html">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
+-								<li><a href="board_list3.html">캠핑가자 <span class="float-right">(7)</span></a></li>
++								<li><a href="/community/camplog.do">캠핑로그 <span class="float-right">(2)</span></a></li>
++								<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
++								<li><a href="/community/campgo.do">캠핑가자 <span class="float-right">(7)</span></a></li>
+ 							</ul>
+ 						</div>
+ 					</div>
+@@ -242,71 +179,7 @@
+ 			</div>
+ 		</div>
+ 	</section>
+-
+-
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_list3.jsp b/camper/src/main/webapp/WEB-INF/views/board_list3.jsp
+index dddb725..6bf3359 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_list3.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_list3.jsp
+@@ -43,74 +43,14 @@
+ </head>
+ 
+ <body class="body-wrapper">
+- 	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+-	<!--  페이지 제목 Section -->
+-
+-
++ 	 <jsp:include page="../component/header.jsp"></jsp:include>
+ 
+ 	<!--  캠핑어때 List Section -->
+ 	
+ 		<section class="blog section">
+ 			<div class="container">
+ 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0"">
+-					<h2><i class="ico"><img src="./images/community/notes.png"></i>
++					<h2><i class="ico"><img src="../images/community/icon_car.png"></i>
+ 					캠핑가자
+ 					</h2><hr />     
+ 				</div>
+@@ -177,9 +117,7 @@
+ 
+ 					<!--  버튼 Part -->
+ 					
+-					<span><button type="button" class="btn btn-transparent" style="float: right;"
+-							onclick="location.href='board_write.html'">등록</button></span>
+-
++					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">등록</button></a>
+ 
+ 					<!--  페이지네이션 Part -->
+ 
+@@ -231,9 +169,9 @@
+ 							<!-- Widget Header -->
+ 							<h5 class="widget-header">카테고리</h5>
+ 							<ul class="category-list">
+-								<li><a href="board_list1.html">캠핑로그 <span class="float-right">(2)</span></a></li>
+-								<li><a href="board_list2.html">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
+-								<li><a href="board_list3.html">캠핑가자 <span class="float-right">(7)</span></a></li>
++								<li><a href="/community/camplog.do">캠핑로그 <span class="float-right">(2)</span></a></li>
++								<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
++								<li><a href="/community/campgo.do">캠핑가자 <span class="float-right">(7)</span></a></li>
+ 							</ul>
+ 						</div>
+ 					</div>
+@@ -241,71 +179,7 @@
+ 			</div>
+ 		</div>
+ 	</section>
+-
+-
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_main.jsp b/camper/src/main/webapp/WEB-INF/views/board_main.jsp
+index d6ea221..75657f1 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_main.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_main.jsp
+@@ -42,72 +42,14 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+-
+-
++	<jsp:include page="../component/header.jsp"></jsp:include>
++	
+ 	<section class="section bg-gray">
+ 		<div class="container">
+ 			<div class="row">
+ 				<div class="col-lg-12">
+ 					<div class="heading text-center pb-5">
+-						<i class="ico"><img src="./images/community/icon_chat.png"></i>
++						<i class="ico"><img src="../images/community/icon_chat.png"></i>
+ 						<h2 class="font-weight-bold" style="margin:20px;" >
+ 						캠핑톡톡
+ 						</h2>
+@@ -117,7 +59,7 @@
+ 					<div class="package-content bg-light border text-center p-5 my-2 my-lg-0">
+ 						<div class="package-content-heading">
+ 							<h2><i class="ico"><img src="../images/community/icon_tent.png"></i>
+-								<a href="./community/camplog.do">캠핑로그</a>
++								<a href="./camplog.do">캠핑로그</a>
+ 							</h2>
+ 							<hr />
+ 							<div class="board1">
+@@ -160,8 +102,8 @@
+ 				<div class="col-lg-4 col-md-6">
+ 					<div class="package-content bg-light border text-center my-2 my-lg-0 p-5">
+ 						<div class="package-content-heading">
+-							<h2><i class="ico"><img src="./images/community/icon_bag.png"></i><a
+-									href="/community/camptip.do">캠핑꿀팁</a></h2>
++							<h2><i class="ico"><img src="../images/community/icon_bag.png"></i><a
++									href="./camptip.do">캠핑꿀팁</a></h2>
+ 							<hr />
+ 						</div>
+ 						<div class="board1">
+@@ -203,8 +145,8 @@
+ 				<div class="col-lg-4 col-md-6 mx-sm-auto">
+ 					<div class="package-content bg-light border text-center p-5 my-2 my-lg-0">
+ 						<div class="package-content-heading">
+-							<h2><i class="ico"><img src="./images/community/icon_car.png"></i><a
+-									href="./community/campgo.do">캠핑어때</a></h2>
++							<h2><i class="ico"><img src="../images/community/icon_car.png"></i><a
++									href="./campgo.do">캠핑가자</a></h2>
+ 							<hr />
+ 						</div>
+ 						<div class="board1">
+@@ -243,74 +185,10 @@
+ 					</div>
+ 				</div>
+ 			</div>
+-		
+ 	</section>
++	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search/theme.do">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search/theme.do">테마별 검색</a></li>
+-							<li><a href="./search/map.do">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href=".//community/main.do">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./community/camplog.do">캠핑 로그</a></li>
+-							<li><a href="./community/camptip.do">캠핑 꿀팁</a></li>
+-							<li><a href="./community/campgo.do">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="./ask/notice.do">공지사항</a></li>
+-							<li><a href="./ask/faq.do">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+-
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_modify.jsp b/camper/src/main/webapp/WEB-INF/views/board_modify.jsp
+index 2205557..1126a81 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_modify.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_modify.jsp
+@@ -42,64 +42,8 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++	<jsp:include page="../component/header.jsp"></jsp:include>
++
+ 	<!--  글쓰기 페이지 -->
+ 
+ 	<section class="user-profile section">
+@@ -154,12 +98,9 @@
+ 
+ 								<!-- Submit button -->
+ 								<div class="button">
+-									<button style="margin-top:20px; margin-right:10px;" class="btn btn-transparent"
+-										onclick="location.href='board_list1.html'">목록</button>
+-									<button style="margin-top:20px;" class="btn btn-transparent"
+-										onclick="location.href='board_view.html'">보기</button>
+-									<button style="margin-top:20px; float: right;" class="btn btn-transparent"
+-										onclick="location.href='board_list1.html'">수정</button>
++									<a href="/community/main.do"><button style="margin-top:20px; margin-right:10px;" class="btn btn-transparent">목록</button></a>
++									<a href="/community/view.do"><button style="margin-top:20px;" class="btn btn-transparent">보기</button></a>
++									<a href="/community/modify_ok.do"><button style="margin-top:20px; float: right;" class="btn btn-transparent">수정</button></a>
+ 								</div>
+ 							</div>
+ 						</div>
+@@ -168,70 +109,9 @@
+ 			</div>
+ 		</div>
+ 	</section>
++	
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_notice.jsp b/camper/src/main/webapp/WEB-INF/views/board_notice.jsp
+index 1f444b9..5c96a75 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_notice.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_notice.jsp
+@@ -40,64 +40,8 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-		<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++	<jsp:include page="../component/header.jsp"></jsp:include>
++
+ 	<!--  페이지 공지사항 Section -->
+ 
+ 	<section class="page-title">
+@@ -107,7 +51,7 @@
+ 			<div class="row">
+ 				<div class="col-md-8 offset-md-2 text-center community_title">
+ 					<!-- Title text -->
+-					<i class="ico"><img src="./images/community/megaphone.png"></i>
++					<i class="ico"><img src="../images/community/megaphone.png"></i>
+ 					<span>공지사항</span>
+ 
+ 				</div>
+@@ -228,8 +172,8 @@
+ 							<!-- Widget Header -->
+ 							<h5 class="widget-header">카테고리</h5>
+ 							<ul class="category-list">
+-								<li><a href="board_notice.html">공지사항 <span class="float-right">(10)</span></a></li>
+-								<li><a href="board_faq.html">FAQ <span class="float-right">(10)</span></a></li>
++								<li><a href="/ask/notice.do">공지사항 <span class="float-right">(10)</span></a></li>
++								<li><a href="/ask/faq.do">FAQ <span class="float-right">(10)</span></a></li>
+ 							</ul>
+ 						</div>
+ 					</div>
+@@ -237,72 +181,8 @@
+ 			</div>
+ 		</div>
+ 	</section>
+-
+-
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="../board_list1.html">캠핑 로그</a></li>
+-							<li><a href="../board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="../board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+-
++	
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_view.jsp b/camper/src/main/webapp/WEB-INF/views/board_view.jsp
+index 400cc8e..6c4c03b 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_view.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_view.jsp
+@@ -40,70 +40,12 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++	<jsp:include page="../component/header.jsp"></jsp:include>
++
+ 	<!--=================================
+ =            Single Blog            =
+ ==================================-->
+ 
+-
+-
+ 	<section class="blog single-blog section">
+ 		<div class="container">
+ 			<div class="row">
+@@ -116,17 +58,17 @@
+ 							<li class="list-inline-item">by <a href="">작성자</a></li>
+ 							<li class="list-inline-item">2022-02-24</li>
+ 						</ul>
+-						<img src="./images/community/camping.png" alt="phto">
++						<img src="../images/community/camping.png" alt="phto">
+ 						<p>밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다. 밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.
+ 							밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.</p>
+ 
+ 						<!--  좋아요 / 댓글 part -->
+ 						<ul class="list-inline" style="margin-top: 30%;">
+ 							<li class="list-inline-item text-right">
+-								<img src="./images/community/like.png">
++								<img src="../images/community/like.png">
+ 							</li>
+ 							<li class="list-inline-item text-right">
+-								<img src="./images/community/writing.png">
++								<img src="../images/community/writing.png">
+ 							</li>
+ 						</ul>
+ 
+@@ -141,12 +83,10 @@
+ 					</article>
+ 					<!--  등록 버튼 part -->
+ 					<div class="container">
+-						<div style="float: left;">
+-							<button class="btn btn-transparent" onclick="location.href='board_list1.html'">목록</button>
+-						</div>
++						<a href="/community/main.do" style="float: left;"><button class="btn btn-transparent">목록</button></a>
+ 						<div style="float: right;">
+-							<button class="btn btn-transparent" onclick="location.href='board_modify.html'">수정</button>
+-							<button class="btn btn-transparent" onclick="location.href='board_delete.html'">삭제</button>
++							<a href="/community/modify.do"><button class="btn btn-transparent">수정</button></a>
++							<a href="/community/delete.do"><button class="btn btn-transparent">삭제</button></a>
+ 						</div>
+ 					</div>
+ 				</div>
+@@ -177,71 +117,9 @@
+ 		</div>
+ 		</div>
+ 	</section>
++	
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+-
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/board_write.jsp b/camper/src/main/webapp/WEB-INF/views/board_write.jsp
+index c80f70f..286a4af 100644
+--- a/camper/src/main/webapp/WEB-INF/views/board_write.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/board_write.jsp
+@@ -42,65 +42,7 @@
+ </head>
+ 
+ <body class="body-wrapper">
+- 	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+-
++ 	<jsp:include page="../component/header.jsp"></jsp:include>
+ 	<!--  글쓰기 페이지 -->
+ 
+ 	<section class="user-profile section">
+@@ -175,8 +117,7 @@
+ 
+ 								<!-- 등록 버튼 -->
+ 								<div class="button">
+-									<button style="margin-top:20px; margin-right:10px;" class="btn btn-transparent"
+-										onclick="location.href='board_list1.html'">목록</button>
++									<a href="/community/main.do"><button style="margin-top:20px; margin-right:10px;" class="btn btn-transparent">목록</button></a>
+ 									<button style="margin-top:20px; float: right;" class="btn btn-transparent"
+ 										onclick="location.href='board_list1.html'">등록</button>
+ 								</div>
+@@ -187,70 +128,7 @@
+ 			</div>
+ 		</div>
+ 	</section>
+-
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/dashboard_follow.jsp b/camper/src/main/webapp/WEB-INF/views/dashboard_follow.jsp
+index 6369b78..8a00606 100644
+--- a/camper/src/main/webapp/WEB-INF/views/dashboard_follow.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/dashboard_follow.jsp
+@@ -38,65 +38,8 @@
+   <![endif]-->
+ 
+ </head>
++ 	<jsp:include page="../component/header.jsp"></jsp:include>
+ 
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+ 	<!--==================================
+ =            User Profile            =
+ ===================================-->
+@@ -351,69 +294,8 @@
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
++	
++	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/dashboard_jjim.jsp b/camper/src/main/webapp/WEB-INF/views/dashboard_jjim.jsp
+index 9dabee4..3ce973b 100644
+--- a/camper/src/main/webapp/WEB-INF/views/dashboard_jjim.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/dashboard_jjim.jsp
+@@ -37,65 +37,8 @@
+   <![endif]-->
+ 
+ </head>
++ 	<jsp:include page="../component/header.jsp"></jsp:include>
+ 
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+ 	<!--==================================
+ =            User Profile            =
+ ===================================-->
+@@ -349,69 +292,9 @@
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
++	
++	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+-	</footer>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/dashboard_like.jsp b/camper/src/main/webapp/WEB-INF/views/dashboard_like.jsp
+index da6e593..0ee39a3 100644
+--- a/camper/src/main/webapp/WEB-INF/views/dashboard_like.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/dashboard_like.jsp
+@@ -38,65 +38,8 @@
+   <![endif]-->
+ 
+ </head>
++ 	<jsp:include page="../component/header.jsp"></jsp:include>
+ 
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
+ 	<!--==================================
+ =            User Profile            =
+ ===================================-->
+@@ -364,69 +307,8 @@
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+-	</footer>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/dashboard_message.jsp b/camper/src/main/webapp/WEB-INF/views/dashboard_message.jsp
+index 1339f59..0a68f8f 100644
+--- a/camper/src/main/webapp/WEB-INF/views/dashboard_message.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/dashboard_message.jsp
+@@ -40,64 +40,8 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++	<jsp:include page="../component/header.jsp"></jsp:include>
++
+ 	<!--==================================
+ =            User Profile            =
+ ===================================-->
+@@ -468,70 +412,8 @@
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+-
++	
++	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/dashboard_my_ads.jsp b/camper/src/main/webapp/WEB-INF/views/dashboard_my_ads.jsp
+index 5f61a2f..b3a5a67 100644
+--- a/camper/src/main/webapp/WEB-INF/views/dashboard_my_ads.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/dashboard_my_ads.jsp
+@@ -59,64 +59,8 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++    <jsp:include page="../component/header.jsp"></jsp:include>
++
+ 	<!--==================================
+ =            User Profile            =
+ ===================================-->
+@@ -318,70 +262,8 @@
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+-
++	
++	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/dashboard_question.jsp b/camper/src/main/webapp/WEB-INF/views/dashboard_question.jsp
+index fd42d77..93c91e6 100644
+--- a/camper/src/main/webapp/WEB-INF/views/dashboard_question.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/dashboard_question.jsp
+@@ -40,65 +40,8 @@
+ </head>
+ 
+ <body class="body-wrapper">
+- <section class="header">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++  	<jsp:include page="../component/header.jsp"></jsp:include>
++
+ 	<!--==================================
+ =            User Profile            =
+ ===================================-->
+@@ -233,69 +176,7 @@
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
++	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/dashboard_write.jsp b/camper/src/main/webapp/WEB-INF/views/dashboard_write.jsp
+index 5dcb2d7..b45f936 100644
+--- a/camper/src/main/webapp/WEB-INF/views/dashboard_write.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/dashboard_write.jsp
+@@ -40,65 +40,8 @@ board_write.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
+ </head>
+ 
+ <body class="body-wrapper">
+- <section class="header">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++  	<jsp:include page="../component/header.jsp"></jsp:include>
++
+ 	<!--==================================
+ =            User Profile            =
+ ===================================-->
+@@ -429,70 +372,8 @@ board_write.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+-
++	
++	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/login.jsp b/camper/src/main/webapp/WEB-INF/views/login.jsp
+index a4ce6cd..ca50545 100644
+--- a/camper/src/main/webapp/WEB-INF/views/login.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/login.jsp
+@@ -36,75 +36,21 @@
+   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <![endif]-->
++<style>
++.header {background:none;}
++</style>
+ 
+ </head>
+ 
+-<body class="body-wrapper" style="background: url(./images/bg.jpg)  no-repeat; background-size:cover; background-color: #07173c;">
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++<body class="body-wrapper" style="background: url(../images/bg.jpg)  no-repeat; background-size:cover; background-color: #07173c;">
+ 
++	<jsp:include page="../component/header.jsp"></jsp:include>
+ 	<section class="login py-5 border-top-1">
+ 		<div class="container">
+ 			<div class="row justify-content-center">
+ 				<div class="col-lg-5 col-md-8 align-item-center">
+ 					<div class="border" style="background-color: rgba(255,255,255,0.75); border-radius: 20px; text-align: center;">
+-						<img class="mt-4 mb-0" src="./images/login-logo.png">
++						<img class="mt-4 mb-0" src="../images/login-logo.png">
+ 						<form action="#">
+ 							<fieldset class="p-4">
+ 								<input type="text" placeholder="ID" class="border p-3 w-100 my-2">
+@@ -114,7 +60,7 @@
+ 									In</button>
+ 								<a class="mt-3 mr-2 d-inline-block  text-primary" href="#">비밀번호 찾기</a> |
+ 								<a class="mt-3 ml-2 d-inline-block text-primary" href="register.html">회원가입</a>
+-								<a class="mt-4 d-block"><img src="./images/kakao_login_large_wide.png" style="width: 100%;"></a>
++								<a class="mt-4 d-block"><img src="../images/kakao_login_large_wide.png" style="width: 100%;"></a>
+ 								
+ 							</fieldset>
+ 						</form>
+diff --git a/camper/src/main/webapp/WEB-INF/views/register.jsp b/camper/src/main/webapp/WEB-INF/views/register.jsp
+index bc27927..e8a8993 100644
+--- a/camper/src/main/webapp/WEB-INF/views/register.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/register.jsp
+@@ -1,129 +1,91 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+-    pageEncoding="UTF-8"%>
++	pageEncoding="UTF-8"%>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 
+-  <!-- SITE TITTLE -->
+-  <meta charset="utf-8">
+-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+-  <meta name="viewport" content="width=device-width, initial-scale=1">
+-  <title>CAMPER</title>
+-  
+-  <!-- FAVICON -->
+-  <link href ="../images/favicon.png" rel="shortcut icon">
+-  <!-- PLUGINS CSS STYLE -->
+-  <!-- <link href ="../plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
+-  <!-- Bootstrap -->
+-  <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+-  <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap-slider.css">
+-  <!-- Font Awesome -->
+-  <link href ="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+-  <!-- Owl Carousel -->
+-  <link href ="../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+-  <link href ="../plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+-  <!-- Fancy Box -->
+-  <link href ="../plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+-  <link href ="../plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+-  <!-- CUSTOM CSS -->
+-  <link href ="../css/style.css" rel="stylesheet">
++<!-- SITE TITTLE -->
++<meta charset="utf-8">
++<meta http-equiv="X-UA-Compatible" content="IE=edge">
++<meta name="viewport" content="width=device-width, initial-scale=1">
++<title>CAMPER</title>
++
++<!-- FAVICON -->
++<link href="../images/favicon.png" rel="shortcut icon">
++<!-- PLUGINS CSS STYLE -->
++<!-- <link href ="../plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
++<!-- Bootstrap -->
++<link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
++<link rel="stylesheet"
++	href="../plugins/bootstrap/css/bootstrap-slider.css">
++<!-- Font Awesome -->
++<link href="../plugins/font-awesome/css/font-awesome.min.css"
++	rel="stylesheet">
++<!-- Owl Carousel -->
++<link href="../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
++<link href="../plugins/slick-carousel/slick/slick-theme.css"
++	rel="stylesheet">
++<!-- Fancy Box -->
++<link href="../plugins/fancybox/jquery.fancybox.pack.css"
++	rel="stylesheet">
++<link href="../plugins/jquery-nice-select/css/nice-select.css"
++	rel="stylesheet">
++<!-- CUSTOM CSS -->
++<link href="../css/style.css" rel="stylesheet">
+ 
+ 
+-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+-  <!--[if lt IE 9]>
++<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
++<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
++<!--[if lt IE 9]>
+   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <![endif]-->
++  
++  <style>
++.header {background:none;}
++</style>
+ 
+ </head>
+ 
+-<body class="body-wrapper" style="background: url(./images/bg.jpg)  no-repeat; background-size:cover; background-color: #07173c;">
+- 	<section class="header">
++<body class="body-wrapper" style="background: url(../images/bg.jpg) no-repeat; background-size: cover; background-color: #07173c;">
++	
++	<jsp:include page="../component/header.jsp"></jsp:include>
++	<section class="login py-5 border-top-1">
+ 		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
++			<div class="row justify-content-center">
++				<div class="col-lg-5 col-md-8 align-item-center">
++					<div class="border border"
++						style="background-color: rgba(255, 255, 255, 0.75); border-radius: 20px; text-align: center;">
++						<img class="mt-4 mb-0" src="../images/login-logo.png">
++						<form action="#">
++							<fieldset class="p-4" style="text-align: start;">
++								<input type="id" placeholder="ID*" class="border p-3 w-95 my-2">
++								<button class="btn btn-transparent mt-0 ml-5 text-center"
++									style="white-space: nowrap; float:right">중복확인</button>
++								<input type="password" placeholder="Password*"
++									class="border p-3 w-100 my-2"> <input type="password"
++									placeholder="Confirm Password*" class="border p-3 w-100 my-2">
++								<input type="password" placeholder="Confirm Password*"
++									class="border p-3 w-100 my-2">
++								<div class="loggedin-forgot d-inline-flex my-3">
++									<input type="checkbox" id="registering" class="mt-1"> <label
++										for="registering" class="px-2"><a
++										class="text-primary font-weight-bold"
++										href="terms-condition.html">이용약관</a>에 동의합니다.</label>
++								</div>
++								<button type="submit"
++									class="d-block py-3 px-5 bg-primary text-white  border-0 font-weight-bold mt-3 ml-auto mr-auto"
++									style="text-align: center; font-size: 22px; border-radius: 50px; width: 100%;">Join
++									us</button>
++								<a class="mt-3 d-block"><img
++									src="../images/kakao_login_large_wide.png" style="width: 100%;"></a>
++							</fieldset>
++						</form>
++					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</section>
+-<section class="login py-5 border-top-1">
+-        <div class="container">
+-            <div class="row justify-content-center">
+-                <div class="col-lg-5 col-md-8 align-item-center">
+-                    <div class="border border" style="background-color: rgba(255,255,255,0.75); border-radius: 20px; text-align: center;">
+-						<img class="mt-4 mb-0" src="./images/login-logo.png">
+-                        <form action="#">
+-                            <fieldset class="p-4" style="text-align: start;">
+-                                <input type="id" placeholder="ID*" class="border p-3 w-90 my-2">
+-								<button class="btn btn-transparent mt-0 ml-5 text-center"
+-								style="white-space: nowrap;">중복확인</button>
+-                                <input type="password" placeholder="Password*" class="border p-3 w-100 my-2">
+-                                <input type="password" placeholder="Confirm Password*" class="border p-3 w-100 my-2">
+-                                <input type="password" placeholder="Confirm Password*" class="border p-3 w-100 my-2">
+-                                <div class="loggedin-forgot d-inline-flex my-3">
+-                                        <input type="checkbox" id="registering" class="mt-1">
+-                                        <label for="registering" class="px-2"><a class="text-primary font-weight-bold" href="terms-condition.html">이용약관</a>에 동의합니다.</label>
+-                                </div>
+-                                <button type="submit" class="d-block py-3 px-5 bg-primary text-white  border-0 font-weight-bold mt-3 ml-auto mr-auto" style="text-align: center; font-size: 22px; border-radius: 50px; width: 100%;">Join us</button>
+-								<a class="mt-3 d-block"><img src="./images/kakao_login_large_wide.png" style="width: 100%;"></a>
+-                            </fieldset>
+-                        </form>
+-                    </div>
+-                </div>
+-            </div>
+-        </div>
+-    </section>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+@@ -134,7 +96,8 @@
+ 	<script src="../plugins/tether/js/tether.min.js"></script>
+ 	<script src="../plugins/raty/jquery.raty-fa.js"></script>
+ 	<script src="../plugins/slick-carousel/slick/slick.min.js"></script>
+-	<script src="../plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
++	<script
++		src="../plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+ 	<script src="../plugins/fancybox/jquery.fancybox.pack.js"></script>
+ 	<script src="../plugins/smoothscroll/SmoothScroll.min.js"></script>
+ 	<!-- google map -->
+diff --git a/camper/src/main/webapp/WEB-INF/views/search_detail.jsp b/camper/src/main/webapp/WEB-INF/views/search_detail.jsp
+index b246069..fa88305 100644
+--- a/camper/src/main/webapp/WEB-INF/views/search_detail.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/search_detail.jsp
+@@ -54,65 +54,7 @@ img .img-fluid {
+ </head>
+ 
+ <body class="body-wrapper">
+-
+-	<section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++ 	<jsp:include page="../component/header.jsp"></jsp:include>
+ 
+ 	<!--===================================
+ =            Store Section            =
+@@ -297,71 +239,8 @@ img .img-fluid {
+ 		</div>
+ 		<!-- Container End -->
+ 	</section>
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-	<footer class="footer section section-sm">
+-		<!-- Container Start -->
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-					<!-- About -->
+-					<div class="block about">
+-						<!-- footer logo -->
+-						<img src="images/logo.png" alt="">
+-						<!-- description -->
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./search_theme.html">
+-							<h4>캠핑 어때</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./search_theme.html">테마별 검색</a></li>
+-							<li><a href="#">지역별 검색</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<a href="./board_main.html">
+-							<h4>캠핑 톡톡</h4>
+-						</a>
+-						<ul>
+-							<li><a href="./board_list1.html">캠핑 로그</a></li>
+-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-							<li><a href="./board_list3.html">캠핑 가자</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-				<!-- Link list -->
+-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-					<div class="block">
+-						<h4>고객센터</h4>
+-						<ul>
+-							<li><a href="board_notice.html">공지사항</a></li>
+-							<li><a href="board_faq.html">FAQ</a></li>
+-						</ul>
+-					</div>
+-				</div>
+-
+-
+-
+-			</div>
+-		</div>
+-		<!-- Container End -->
+-		<!-- To Top -->
+-		<div class="top-to">
+-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-		</div>
+-
+-	</footer>
+-
+-
++	
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+ 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
+diff --git a/camper/src/main/webapp/WEB-INF/views/search_theme.jsp b/camper/src/main/webapp/WEB-INF/views/search_theme.jsp
+index 50ea507..85f1186 100644
+--- a/camper/src/main/webapp/WEB-INF/views/search_theme.jsp
++++ b/camper/src/main/webapp/WEB-INF/views/search_theme.jsp
+@@ -39,6 +39,9 @@
+   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <![endif]-->
+ 	<style type="text/css">
++		.header {
++			background: none;
++		}
+ 		.thmb {
+ 			width: 200px;
+ 			height: 120px;
+@@ -79,65 +82,9 @@
+ </head>
+ 
+ <body class="body-wrapper">
+-	<section class="top" style="background: url(./images/bg.jpg); background-size: cover;">
+- <section class="header">
+-		<div class="container">
+-			<div class="row">
+-				<div class="col-md-12">
+-					<nav class="navbar navbar-expand-lg navbar-light navigation">
+-						<a class="navbar-brand" href="../">
+-							<img src="../images/logo.png" alt="로고">
+-						</a>
+-						<button class="navbar-toggler" type="button" data-toggle="collapse"
+-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+-							aria-expanded="false" aria-label="Toggle navigation">
+-							<span class="navbar-toggler-icon"></span>
+-						</button>
+-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+-							<ul class="navbar-nav ml-auto main-nav ">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑어때
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
+-										aria-expanded="false">
+-										캠핑톡톡
+-									</a>
+-								</li>
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
+-										aria-haspopup="true" aria-expanded="false">
+-										고객센터
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
+-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
+-									</div>
+-								</li>
+-							</ul>
+-							<ul class="navbar-nav ml-auto mt-10">
+-								<li class="nav-item dropdown dropdown-slide">
+-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
+-										aria-expanded="false">
+-										<img class="profile-img" src="../images/1.jpg">
+-									</a>
+-									<!-- Dropdown list -->
+-									<div class="dropdown-menu">
+-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+-										<a class="nav-link add-button" href="../login/register.do">회원가입</a>
+-									</div>
+-								</li>
+-							</ul>
+-						</div>
+-					</nav>
+-				</div>
+-			</div>
+-		</div>
+-	</section>
++	<section class="top" style="background: url(../images/bg.jpg); background-size: cover;">
++  	<jsp:include page="../component/header.jsp"></jsp:include>
++
+ 		<!--===============================
+ =            Hero Area            =
+ ================================-->
+@@ -227,11 +174,7 @@
+ 											<input type="radio" name="camping_theme" id="mountain" value="mountain">
+ 											<label for="mountain">가능</label>
+ 										</form>
+-
+-
+ 									</div>
+-
+-
+ 								</div>
+ 
+ 								<div class="inner_container TabContent__Search--button">
+@@ -283,7 +226,7 @@
+ 									<div class="thumb-content">
+ 										<!-- <div class="price">$200</div> -->
+ 										<a href="camping_detail.html">
+-											<img class="card-img-top img-fluid" src="images/campsite/캠핑1.jpg"
++											<img class="card-img-top img-fluid" src="../images/campsite/캠핑1.jpg"
+ 												alt="Card image cap">
+ 										</a>
+ 									</div>
+@@ -310,10 +253,8 @@
+ 									</div>
+ 								</div>
+ 							</div>
+-
+-
+-
+ 						</div>
++						
+ 						<div class="col-sm-12 col-lg-4">
+ 							<!-- product card -->
+ 							<div class="product-item bg-light">
+@@ -321,7 +262,7 @@
+ 									<div class="thumb-content">
+ 										<!-- <div class="price">$200</div> -->
+ 										<a href="camping_detail.html">
+-											<img class="card-img-top img-fluid" src="images/campsite/캠핑2.jpg"
++											<img class="card-img-top img-fluid" src="../images/campsite/캠핑2.jpg"
+ 												alt="Card image cap">
+ 										</a>
+ 									</div>
+@@ -348,10 +289,8 @@
+ 									</div>
+ 								</div>
+ 							</div>
+-
+-
+-
+ 						</div>
++						
+ 						<div class="col-sm-12 col-lg-4">
+ 							<!-- product card -->
+ 							<div class="product-item bg-light">
+@@ -359,7 +298,7 @@
+ 									<div class="thumb-content">
+ 										<!-- <div class="price">$200</div> -->
+ 										<a href="camping_detail.html">
+-											<img class="card-img-top img-fluid" src="images/campsite/캠핑3.png"
++											<img class="card-img-top img-fluid" src="../images/campsite/캠핑3.png"
+ 												alt="Card image cap">
+ 										</a>
+ 									</div>
+@@ -386,10 +325,8 @@
+ 									</div>
+ 								</div>
+ 							</div>
+-
+-
+-
+ 						</div>
++						
+ 						<div class="col-sm-12 col-lg-4">
+ 							<!-- product card -->
+ 							<div class="product-item bg-light">
+@@ -397,7 +334,7 @@
+ 									<div class="thumb-content">
+ 										<!-- <div class="price">$200</div> -->
+ 										<a href="camping_detail.html">
+-											<img class="card-img-top img-fluid" src="images/campsite/캠핑4.jpg"
++											<img class="card-img-top img-fluid" src="../images/campsite/캠핑4.jpg"
+ 												alt="Card image cap">
+ 										</a>
+ 									</div>
+@@ -424,79 +361,13 @@
+ 									</div>
+ 								</div>
+ 							</div>
+-
+-
+-
+ 						</div>
+ 					</div>
+ 				</div>
+-
+-
+ 			</div>
+ 		</div>
+ 	</section>
+-
+-	<!--============================
+-=            Footer            =
+-=============================-->
+-
+-<footer class="footer section section-sm">
+-	<!-- Container Start -->
+-	<div class="container">
+-		<div class="row">
+-			<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
+-				<!-- About -->
+-				<div class="block about">
+-					<!-- footer logo -->
+-					<img src="images/logo.png" alt="">
+-					<!-- description -->
+-				</div>
+-			</div>
+-			<!-- Link list -->
+-			<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-				<div class="block">
+-					<a href="./search_theme.html"><h4>캠핑 어때</h4></a>
+-					<ul>
+-						<li><a href="./search_theme.html">테마별 검색</a></li>
+-						<li><a href="#">지역별 검색</a></li>
+-					</ul>
+-				</div>
+-			</div>
+-			<!-- Link list -->
+-			<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-				<div class="block">
+-					<a href="./board_main.html"><h4>캠핑 톡톡</h4></a>
+-					<ul>
+-						<li><a href="./board_list1.html">캠핑 로그</a></li>
+-						<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
+-						<li><a href="./board_list3.html">캠핑 가자</a></li>
+-					</ul>
+-				</div>
+-			</div>
+-			<!-- Link list -->
+-			<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
+-				<div class="block">
+-					<h4>고객센터</h4>
+-					<ul>
+-						<li><a href="category.html">공지사항</a></li>
+-						<li><a href="single.html">FAQ</a></li>
+-					</ul>
+-				</div>
+-			</div>
+-		
+-
+-
+-		</div>
+-	</div>
+-	<!-- Container End -->
+-	<!-- To Top -->
+-	<div class="top-to">
+-		<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
+-	</div>
+-
+-</footer>
+-
+-
++ 	<jsp:include page="../component/footer.jsp"></jsp:include>
+ 
+ 	<!-- JAVASCRIPTS -->
+ 	<script src="../plugins/jQuery/jquery.min.js"></script>
+diff --git a/camper/src/test/java/com/camper/CamperApplicationTests.java b/camper/src/test/java/com/camper/CamperApplicationTests.java
+new file mode 100644
+index 0000000..0313b10
+--- /dev/null
++++ b/camper/src/test/java/com/camper/CamperApplicationTests.java
+@@ -0,0 +1,13 @@
++package com.camper;
++
++import org.junit.jupiter.api.Test;
++import org.springframework.boot.test.context.SpringBootTest;
++
++@SpringBootTest
++class CamperApplicationTests {
++
++	@Test
++	void contextLoads() {
++	}
++
++}

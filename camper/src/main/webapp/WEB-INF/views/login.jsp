@@ -36,75 +36,21 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+<style>
+.header {background:none;}
+</style>
 
 </head>
 
-<body class="body-wrapper" style="background: url(./images/bg.jpg)  no-repeat; background-size:cover; background-color: #07173c;">
-	<section class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light navigation">
-						<a class="navbar-brand" href="../">
-							<img src="../images/logo.png" alt="로고">
-						</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto main-nav ">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑어때
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑톡톡
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										고객센터
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
-									</div>
-								</li>
-							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<img class="profile-img" src="../images/1.jpg">
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
-										<a class="nav-link add-button" href="../login/register">회원가입</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
+<body class="body-wrapper" style="background: url(../images/bg.jpg)  no-repeat; background-size:cover; background-color: #07173c;">
 
+	<jsp:include page="../component/header.jsp"></jsp:include>
 	<section class="login py-5 border-top-1">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-5 col-md-8 align-item-center">
 					<div class="border" style="background-color: rgba(255,255,255,0.75); border-radius: 20px; text-align: center;">
-						<img class="mt-4 mb-0" src="./images/login-logo.png">
+						<img class="mt-4 mb-0" src="../images/login-logo.png">
 						<form action="#">
 							<fieldset class="p-4">
 								<input type="text" placeholder="ID" class="border p-3 w-100 my-2">
@@ -114,7 +60,7 @@
 									In</button>
 								<a class="mt-3 mr-2 d-inline-block  text-primary" href="#">비밀번호 찾기</a> |
 								<a class="mt-3 ml-2 d-inline-block text-primary" href="register.html">회원가입</a>
-								<a class="mt-4 d-block"><img src="./images/kakao_login_large_wide.png" style="width: 100%;"></a>
+								<a class="mt-4 d-block"><img src="../images/kakao_login_large_wide.png" style="width: 100%;"></a>
 								
 							</fieldset>
 						</form>
