@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:camper/src/main/java/com/camper/web/CamperWebApplication.java
-package com.camper.web;
-========
 package com.camper;
->>>>>>>> origin/dongdong:camper/src/main/java/com/camper/CamperApplication.java
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
