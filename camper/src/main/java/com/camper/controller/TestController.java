@@ -25,5 +25,4 @@ public class TestController {
 		mav.addObject("list", testList);
 		return mav;
 	}
-
 }
