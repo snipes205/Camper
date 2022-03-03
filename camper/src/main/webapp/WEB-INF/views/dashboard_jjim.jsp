@@ -37,65 +37,8 @@
   <![endif]-->
 
 </head>
+ 	<jsp:include page="../component/header.jsp"></jsp:include>
 
-	<section class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light navigation">
-						<a class="navbar-brand" href="../">
-							<img src="../images/logo.png" alt="로고">
-						</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto main-nav ">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑어때
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑톡톡
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										고객센터
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
-									</div>
-								</li>
-							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<img class="profile-img" src="../images/1.jpg">
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
-										<a class="nav-link add-button" href="../login/register">회원가입</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!--==================================
 =            User Profile            =
 ===================================-->
@@ -349,69 +292,9 @@
 		</div>
 		<!-- Container End -->
 	</section>
-	<!--============================
-=            Footer            =
-=============================-->
+	
+	<jsp:include page="../component/footer.jsp"></jsp:include>
 
-	<footer class="footer section section-sm">
-		<!-- Container Start -->
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
-					<!-- About -->
-					<div class="block about">
-						<!-- footer logo -->
-						<img src="images/logo.png" alt="">
-						<!-- description -->
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./search_theme.html">
-							<h4>캠핑 어때</h4>
-						</a>
-						<ul>
-							<li><a href="./search_theme.html">테마별 검색</a></li>
-							<li><a href="#">지역별 검색</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./board_main.html">
-							<h4>캠핑 톡톡</h4>
-						</a>
-						<ul>
-							<li><a href="./board_list1.html">캠핑 로그</a></li>
-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
-							<li><a href="./board_list3.html">캠핑 가자</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<h4>고객센터</h4>
-						<ul>
-							<li><a href="board_notice.html">공지사항</a></li>
-							<li><a href="board_faq.html">FAQ</a></li>
-						</ul>
-					</div>
-				</div>
-
-
-
-			</div>
-		</div>
-		<!-- Container End -->
-		<!-- To Top -->
-		<div class="top-to">
-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-		</div>
-
-	</footer>
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>
 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
