@@ -30,6 +30,14 @@ public class DashboadController {
 		return modelAndView;
 	}
 
+	@RequestMapping("/dashboard/follow.do")
+	public ModelAndView dashFollow(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("dashboard_follow");
+
+		return modelAndView;
+	}
+	
 	@RequestMapping("/dashboard/like.do")
 	public ModelAndView dashLike(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -37,6 +45,7 @@ public class DashboadController {
 
 		return modelAndView;
 	}
+
 
 	@RequestMapping("/dashboard/message.do")
 	public ModelAndView dashMassage(HttpServletRequest request, HttpServletResponse response) {

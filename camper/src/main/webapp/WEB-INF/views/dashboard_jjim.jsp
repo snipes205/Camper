@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 
 	<!-- SITE TITTLE -->
@@ -53,7 +53,7 @@
 						<div class="widget user-dashboard-profile">
 							<!-- User Image -->
 							<div class="profile-thumb">
-								<img src="images/1.jpg" alt="" class="rounded-circle">
+								<img src="../images/1.jpg" alt="" class="rounded-circle">
 							</div>
 							<!-- User Name -->
 							<h5 class="text-center">이름이름</h5>
@@ -62,38 +62,14 @@
 						<!-- Dashboard Links -->
 						<div class="widget user-dashboard-menu">
 							<ul>
-								<li>
-									<a href="dashboard-my-ads.html"><i class="fa fa-user"></i> 내 정보 수정 </a>
-								</li>
-								<li class="active">
-									<a href="dashboard-jjim.html"><i class="fa fa-bookmark"></i> 찜한 갬핑장
-										<span>5</span></a>
-								</li>
-								<li>
-									<a href="dashboard-write.html"><i class="fa fa-pencil"></i> 내가 쓴 글
-										<span>5</span></a>
-								</li>
-								<li>
-									<a href="dashboard-like.html"><i class="fa fa-heart"></i> 좋아요 <span>12</span></a>
-								</li>
-								<li>
-									<a href="dashboard-follow.html"><i class="fa fa-handshake-o"></i> 팔로우
-										<span>23</span></a>
-								</li>
-								<li>
-									<a href="dashboard-message.html"><i class="fa fa-comments"></i>
-										메세지함
-										<span>23</span></a>
-								</li>
-								<li>
-									<a href="dashboard-question.html"><i class="fa fa-question-circle"></i> 1:1 문의
-										<span>23</span></a>
-								</li>
-
-								<li>
-									<a href="" data-toggle="modal" data-target="#deleteaccount"><i
-											class="fa fa-trash"></i>탈퇴하기</a>
-								</li>
+								<li><a href="/dashboard/myads.do"><i class="fa fa-user"></i> 내 정보 수정 </a></li>
+								<li class="active"><a href="/dashboard/jjim.do"><i class="fa fa-bookmark"></i> 찜한 갬핑장<span>5</span></a></li>
+								<li><a href="/dashboard/write.do"><i class="fa fa-pencil"></i> 내가 쓴 글<span>5</span></a></li>
+								<li><a href="/dashboard/like.do"><i class="fa fa-heart"></i> 좋아요 <span>12</span></a></li>
+								<li><a href="/dashboard/follow.do"><i class="fa fa-handshake-o"></i> 팔로우<span>23</span></a></li>
+								<li><a href="/dashboard/message.do"><i class="fa fa-comments"></i>메세지함<span>23</span></a></li>
+								<li><a href="/dashboard/question.do"><i class="fa fa-question-circle"></i> 1:1 문의<span>23</span></a></li>
+								<li><a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-trash"></i>탈퇴하기</a></li>
 							</ul>
 						</div>
 
@@ -111,7 +87,7 @@
 										</button>
 									</div>
 									<div class="modal-body text-center">
-										<img src="images/dontleave.jpeg" class="img-fluid mb-2" alt="">
+										<img src="../images/dontleave.jpeg" class="img-fluid mb-2" alt="">
 										<h6 class="py-2">정말 탈퇴하시겠습니까?</h6>
 										<p>캠린이 두고 가지마요 ㅜㅜ
 										</p>
@@ -148,7 +124,7 @@
 							<tbody>
 								<tr>
 									<td class="product-thumb">
-										<img width="80px" height="80px" src="images/camping.jpeg" alt="camping_thumb">
+										<img width="80px" height="80px" src="../images/camping.jpeg" alt="camping_thumb">
 									</td>
 									<td class="product-details">
 										<h3 class="title">양양 포레스트 캠핑장</h3>
@@ -170,7 +146,7 @@
 								</tr>
 								<tr>
 									<td class="product-thumb">
-										<img width="80px" height="80px" src="images/camping.jpeg" alt="camping_thumb">
+										<img width="80px" height="80px" src="../images/camping.jpeg" alt="camping_thumb">
 									</td>
 									<td class="product-details">
 										<h3 class="title">양양 포레스트 캠핑장</h3>
@@ -192,7 +168,7 @@
 								</tr>
 								<tr>
 									<td class="product-thumb">
-										<img width="80px" height="80px" src="images/camping.jpeg" alt="camping_thumb">
+										<img width="80px" height="80px" src="../images/camping.jpeg" alt="camping_thumb">
 									</td>
 									<td class="product-details">
 										<h3 class="title">양양 포레스트 캠핑장</h3>
@@ -214,7 +190,7 @@
 								</tr>
 								<tr>
 									<td class="product-thumb">
-										<img width="80px" height="80px" src="images/camping.jpeg" alt="camping_thumb">
+										<img width="80px" height="80px" src="../images/camping.jpeg" alt="camping_thumb">
 									</td>
 									<td class="product-details">
 										<h3 class="title">양양 포레스트 캠핑장</h3>
@@ -236,7 +212,7 @@
 								</tr>
 								<tr>
 									<td class="product-thumb">
-										<img width="80px" height="80px" src="images/camping.jpeg" alt="camping_thumb">
+										<img width="80px" height="80px" src="../images/camping.jpeg" alt="camping_thumb">
 									</td>
 									<td class="product-details">
 										<h3 class="title">양양 포레스트 캠핑장</h3>
