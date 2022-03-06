@@ -25,4 +25,52 @@ public class TestController {
 		mav.addObject("list", testList);
 		return mav;
 	}
+	@RequestMapping(value = "/maptest")
+	public ModelAndView maptest() throws Exception {
+
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/maptest/maptest");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/maptest2")
+	public ModelAndView maptest2() throws Exception {
+
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/maptest/maptest2");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/maptest3")
+	public ModelAndView maptest3() throws Exception {
+
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/maptest/maptest3");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/maptest4")
+	public ModelAndView maptest4() throws Exception {
+
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/maptest/maptest4");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/maptest5")
+	public ModelAndView maptest5() throws Exception {
+
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/maptest/maptest5");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/maptest6")
+	public ModelAndView maptest6() throws Exception {
+
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/maptest/maptest6");
+		return modelAndView;
+	}
 }
