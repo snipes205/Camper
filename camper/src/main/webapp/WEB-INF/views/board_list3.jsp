@@ -1,17 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!--  캠핑가자 List MVC Model2 구조 -->
+
+<%@ page import="com.camper.model.BoardTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.ResultSet" %>
+
+<%
+	ArrayList<BoardTO> boardLists3 = (ArrayList)request.getAttribute( "boardLists3" );
+	
+	StringBuffer sbHtml = new StringBuffer();
+		for( BoardTO to : boardLists3 ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			String wdate = to.getWdate();
+			
+			// 게시물 내용 form
+			sbHtml.append( "<article>" );
+			sbHtml.append( "	<div>" );
+			sbHtml.append( "		<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>" );
+			sbHtml.append( "	</div>" );
+			sbHtml.append( "	<ul class='list-inline'>" );
+			sbHtml.append( "		<li class='list-inline-item'>by <a href=''>" + nick + "</a></li>" );
+			sbHtml.append( "		<li class='list-inline-item'>" + wdate + "</li>" );
+			sbHtml.append( "	</ul>" );
+			sbHtml.append( "</article>" );
+
+}
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 
-	<!-- SITE TITTLE -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CAMPER</title>
+<!-- SITE TITTLE -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAMPER</title>
 
-	<!-- FAVICON -->
+<!-- FAVICON -->
 <link href="../images/favicon.png" rel="shortcut icon">
 <!-- PLUGINS CSS STYLE -->
 <!-- <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
@@ -19,8 +49,7 @@
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap-slider.css">
 <!-- Font Awesome -->
-<link href="plugins/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <!-- Owl Carousel -->
 <link href="../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
 <link href="../plugins/slick-carousel/slick/slick-theme.css"
@@ -33,84 +62,25 @@
 <link href="../css/style.css" rel="stylesheet">
 <link href="../css/board_main.css" rel="stylesheet">
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
 </head>
 
+<!--  Header part -->
 <body class="body-wrapper">
- 	<section class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light navigation">
-						<a class="navbar-brand" href="../">
-							<img src="../images/logo.png" alt="로고">
-						</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto main-nav ">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑어때
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑톡톡
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										고객센터
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
-									</div>
-								</li>
-							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<img class="profile-img" src="../images/1.jpg">
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
-										<a class="nav-link add-button" href="../login/register">회원가입</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--  페이지 제목 Section -->
+ 	 <jsp:include page="../component/header.jsp"></jsp:include>
 
-
-
-	<!--  캠핑어때 List Section -->
-	
+	<!--  캠핑가자 List Section -->
 		<section class="blog section">
 			<div class="container">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0"">
-					<h2><i class="ico"><img src="./images/community/notes.png"></i>
+					<h2><i class="ico"><img src="../images/community/icon_car.png"></i>
 					캠핑가자
 					</h2><hr />     
 				</div>
@@ -120,69 +90,13 @@
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 
-					<!-- 게시물 1 -->
-					<article>
-						<div>
-							<a href="board_view.html">제목5</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
+					<!--  캠핑가자 List 내용 -->
+					<%= sbHtml.toString() %>
 
-					<!-- 게시물 2 -->
-					<article>
-						<div>
-							<a href="board_view.html">제목4</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 3 -->
-					<article>
-						<div>
-							<a href="board_view.html">제목3</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 4 -->
-					<article>
-						<div>
-							<a href="board_view.html">제목2</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 5 -->
-					<article>
-						<div>
-							<a href="board_view.html">제목1</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!--  버튼 Part -->
-					
-					<span><button type="button" class="btn btn-transparent" style="float: right;"
-							onclick="location.href='board_write.html'">등록</button></span>
-
+					<!--  버튼 Part -->					
+					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">글쓰기</button></a>
 
 					<!--  페이지네이션 Part -->
-
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
@@ -211,12 +125,13 @@
 						</ul>
 					</nav>
 				</div>
+				
+				<!--  우측 사이드 part -->
 				<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
 					<div class="sidebar">
 
 
 						<!-- 검색 Part -->
-
 						<div class="widget search p-0">
 							<div class="input-group">
 								<input type="text" class="form-control" id="expire" placeholder="Search..."> <span
@@ -226,14 +141,13 @@
 
 
 						<!-- 카테고리 메뉴도 Part -->
-
 						<div class="widget category">
 							<!-- Widget Header -->
 							<h5 class="widget-header">카테고리</h5>
 							<ul class="category-list">
-								<li><a href="board_list1.html">캠핑로그 <span class="float-right">(2)</span></a></li>
-								<li><a href="board_list2.html">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
-								<li><a href="board_list3.html">캠핑가자 <span class="float-right">(7)</span></a></li>
+								<li><a href="/community/camplog.do">캠핑로그 <span class="float-right"></span></a></li>
+								<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right"></span></a></li>
+								<li><a href="/community/campgo.do">캠핑가자 <span class="float-right"></span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -241,71 +155,7 @@
 			</div>
 		</div>
 	</section>
-
-
-	<!--============================
-=            Footer            =
-=============================-->
-
-	<footer class="footer section section-sm">
-		<!-- Container Start -->
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
-					<!-- About -->
-					<div class="block about">
-						<!-- footer logo -->
-						<img src="images/logo.png" alt="">
-						<!-- description -->
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./search_theme.html">
-							<h4>캠핑 어때</h4>
-						</a>
-						<ul>
-							<li><a href="./search_theme.html">테마별 검색</a></li>
-							<li><a href="#">지역별 검색</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./board_main.html">
-							<h4>캠핑 톡톡</h4>
-						</a>
-						<ul>
-							<li><a href="./board_list1.html">캠핑 로그</a></li>
-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
-							<li><a href="./board_list3.html">캠핑 가자</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<h4>고객센터</h4>
-						<ul>
-							<li><a href="board_notice.html">공지사항</a></li>
-							<li><a href="board_faq.html">FAQ</a></li>
-						</ul>
-					</div>
-				</div>
-
-
-
-			</div>
-		</div>
-		<!-- Container End -->
-		<!-- To Top -->
-		<div class="top-to">
-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-		</div>
-
-	</footer>
+ 	<jsp:include page="../component/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>

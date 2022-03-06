@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<!--  캠핑톡톡 글보기 MVC Model2 구조 -->
+
+<%@ page import="com.camper.model.BoardTO" %>
+<% 
+	
+	BoardTO to = (BoardTO)request.getAttribute( "to" );
+
+	String pseq = to.getPseq();
+	String title = to.getTitle();
+	String nick = to.getNick();
+	String content = to.getContent();
+	String wdate = to.getWdate();
+	String type = to.getType();
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -39,98 +55,37 @@
 
 </head>
 
+<!--  Header part -->
 <body class="body-wrapper">
-	<section class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light navigation">
-						<a class="navbar-brand" href="../">
-							<img src="../images/logo.png" alt="로고">
-						</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto main-nav ">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑어때
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑톡톡
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										고객센터
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
-									</div>
-								</li>
-							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<img class="profile-img" src="../images/1.jpg">
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
-										<a class="nav-link add-button" href="../login/register">회원가입</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--=================================
-=            Single Blog            =
-==================================-->
+	<jsp:include page="../component/header.jsp"></jsp:include>
 
-
-
+	<!--  글보기 페이지 -->
 	<section class="blog single-blog section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 					<article class="single-post">
 
-						<!--  상세 보기 part -->
-						<h3>제목</h3>
+						<!--  상세 보기 form -->
+						<h3><%=title %></h3>
 						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="">작성자</a></li>
-							<li class="list-inline-item">2022-02-24</li>
+							<li class="list-inline-item">by <a href=""><%=nick %></a></li>
+							<li class="list-inline-item"><%=wdate %></li>
 						</ul>
-						<img src="./images/community/camping.png" alt="phto">
-						<p>밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다. 밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.
-							밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.</p>
+						<img src="../images/community/camping.png" alt="image">
+						<p><%=content %></p>
 
 						<!--  좋아요 / 댓글 part -->
 						<ul class="list-inline" style="margin-top: 30%;">
 							<li class="list-inline-item text-right">
-								<img src="./images/community/like.png">
+								<img src="../images/community/like.png">
 							</li>
 							<li class="list-inline-item text-right">
-								<img src="./images/community/writing.png">
+								<img src="../images/community/writing.png">
 							</li>
 						</ul>
 
-						<!--  댓글 입력칸 part -->
+						<!-- 댓글 입력 part -->
 						<div class="block comment" style="margin-top: 10px;">
 							<div class="form-group mb-30">
 								<label for="message">댓글 쓰기</label>
@@ -139,22 +94,21 @@
 							<button class="btn btn-transparent">댓글 등록</button>
 						</div>
 					</article>
-					<!--  등록 버튼 part -->
+					
+					<!--  버튼 part -->
 					<div class="container">
-						<div style="float: left;">
-							<button class="btn btn-transparent" onclick="location.href='board_list1.html'">목록</button>
-						</div>
+						<input type="button" value="목록" class="btn btn-transparent" style="float: left;" onclick="location.href='/community/main.do'" />
 						<div style="float: right;">
-							<button class="btn btn-transparent" onclick="location.href='board_modify.html'">수정</button>
-							<button class="btn btn-transparent" onclick="location.href='board_delete.html'">삭제</button>
+							<input type="button" value="수정" class="btn btn-transparent" onclick="location.href='/community/modify.do?pseq=<%=pseq %>'" />
+							<input type="button" value="삭제" class="btn btn-transparent" onclick="location.href='/community/delete.do?pseq=<%=pseq %>'" />
 						</div>
 					</div>
 				</div>
 
-				<!--  오른쪽 part -->
+				<!--  우측 사이드 part -->
 				<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
 
-					<!-- 검색 위젯 -->
+					<!-- 검색 part -->
 					<div class="widget search p-0">
 						<div class="input-group">
 							<input type="text" class="form-control" id="expire" placeholder="Search">
@@ -163,13 +117,13 @@
 					</div>
 
 
-					<!-- 카테고리 위젯 -->
+					<!-- 카테고리 part -->
 					<div class="widget category">
 						<h5 class="widget-header">카테고리</h5>
 						<ul class="category-list">
-							<li><a href="board_list1.html">캠핑로그 <span class="float-right">(2)</span></a></li>
-							<li><a href="board_list2.html">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
-							<li><a href="board_list3.html">캠핑어때 <span class="float-right">(7)</span></a></li>
+							<li><a href="/community/camplog.do">캠핑로그 <span class="float-right"></span></a></li>
+							<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right"></span></a></li>
+							<li><a href="/community/campgo.do">캠핑가자 <span class="float-right"></span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -177,71 +131,10 @@
 		</div>
 		</div>
 	</section>
+	
+	<!-- Footer part -->
+ 	<jsp:include page="../component/footer.jsp"></jsp:include>
 
-
-	<!--============================
-=            Footer            =
-=============================-->
-
-	<footer class="footer section section-sm">
-		<!-- Container Start -->
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
-					<!-- About -->
-					<div class="block about">
-						<!-- footer logo -->
-						<img src="images/logo.png" alt="">
-						<!-- description -->
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./search_theme.html">
-							<h4>캠핑 어때</h4>
-						</a>
-						<ul>
-							<li><a href="./search_theme.html">테마별 검색</a></li>
-							<li><a href="#">지역별 검색</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./board_main.html">
-							<h4>캠핑 톡톡</h4>
-						</a>
-						<ul>
-							<li><a href="./board_list1.html">캠핑 로그</a></li>
-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
-							<li><a href="./board_list3.html">캠핑 가자</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<h4>고객센터</h4>
-						<ul>
-							<li><a href="board_notice.html">공지사항</a></li>
-							<li><a href="board_faq.html">FAQ</a></li>
-						</ul>
-					</div>
-				</div>
-
-
-
-			</div>
-		</div>
-		<!-- Container End -->
-		<!-- To Top -->
-		<div class="top-to">
-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-		</div>
-
-	</footer>
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>
 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
