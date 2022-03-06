@@ -1,44 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import="com.camper.model.OboardTO"%>
-<%@ page import="java.util.ArrayList"%>
 
-<%
-	request.setCharacterEncoding("utf-8");
+<%@page import="com.camper.model.OboardTO"%>
+<% 
 
-	ArrayList<OboardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
+	OboardTO to = (OboardTO)request.getAttribute( "to" );
+	String oseq = to.getOseq();
+	String title = to.getTitle();
+	String nick = to.getNick();
+	String content = to.getContent();
+	String wdate = to.getWdate();
 	
-	StringBuffer sbHtml = new StringBuffer();
-
-	for( OboardTO to : boardLists ) {
-		String oseq = to.getOseq();
-		String title = to.getTitle();
-		String nick = to.getNick();
-		String wdate = to.getWdate();
-
-		sbHtml.append( "<tr style=''> " );
-		sbHtml.append( "<td height='30'>" );
-		sbHtml.append( "<form style='margin:0;'>" );
-		sbHtml.append( "<input type='hidden' name='idx' value='5279'>" );
-		sbHtml.append( "<input type='checkbox' name='select_checkbox'>" );
-		sbHtml.append( "</form>" );
-		sbHtml.append( "</td>" );
-		sbHtml.append( "<td>&nbsp;</td>" );
-		sbHtml.append( "<td>&nbsp;&nbsp;&nbsp;"  + oseq + "</td>" );
-		sbHtml.append( "<td align='left' style='padding-left:10px; word-break:break-all;'>" );
-		sbHtml.append( "<a href='view_o.do?oseq=" + oseq + "'>" + title + "</a>" );
-		sbHtml.append( "</td>" );
-		sbHtml.append( "<td>" + nick + "</td>" );
-		sbHtml.append( "<td>" + wdate + "</td>" );
-		sbHtml.append( "<td>&nbsp;</td>" );
-		sbHtml.append( "</tr>" );
-
-	}
 %>
-    
-    
-    
     
     
 <!DOCTYPE html>
@@ -49,8 +22,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
-    <meta name="description" content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <title>CAMPER</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
@@ -64,7 +39,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-
 </head>
 
 <body>
@@ -154,7 +128,7 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
+      <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
@@ -230,7 +204,7 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">1:1 문의</h4>
+                        <h4 class="page-title">1:1 문의 </h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -238,8 +212,8 @@
                                 <li><a href="#" class="fw-normal">로그아웃</a></li>
                             </ol>
                             <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
-                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">홈페이지 바로가기
-                            </a>
+                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">
+                                홈페이지 바로가기</a>
                         </div>
                     </div>
                 </div>
@@ -258,162 +232,133 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="white-box">
-                            <body marginwidth="0" marginheight="0">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="top15">
-                                    <tbody>
-                                        <tr>
-                                        <td style="padding:0px 10px 10px 10px">
-                                            <script language="JavaScript" src="/adm/js/lib.js"></script>
-                                            <link href="/adm/bbs/skin/bbsBasic/style.css" rel="stylesheet" type="text/css">
-                                            
-                        <!-- 카테고리 -->
-                         
-                        <!-- 카테고리 끝-->
-                            
-                            
-                            <!-- 게시물 시작 -->
-                            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-top:1px solid #333;">
-                                <tbody>
-                                <tr style="background:#fdfcfc;">
-                                    <td width="1%">
-                                        <form style="margin:0;">
-                                            <input type="checkbox" name="select_tmp" onclick="selectReverseBbs(this.form)">
-                                        </form>
-                                    </td>
-                                    <th width="3%">&nbsp;</th>
-                                    <th width="8%" height="38">번호</th>
-                                    <th>제목</th>
-                                    <th width="10%">작성자</th>
-                                    <th width="10%">작성일</th>
-                                    <th width="5%">&nbsp;</th>
-                                </tr>  
-                                <tr>
-                                    <td colspan="10" height="1" bgcolor="#d7d7d7"></td>
-                                </tr>  
+                            <!-- 상단 디자인 -->
 
-								<!-- 게시판 -->
-                                <tr style="">
-                                <form style="margin:0;">
-                                <input type="hidden" name="idx" value="">
-                                <%= sbHtml.toString() %>
-                                </form>
-                                </tr>
-                                
-                               <!-- 하단 프레임 -->
-                                <tr>
-                                    <td colspan="10" height="1" bgcolor="#d7d7d7"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                            <!-- 게시판 끝 -->   
-                              
-                            <!-- 페이지 번호 -->
-                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td height="50" align="center" class="Paging_Num">
-                                            <table width="100%" border="0" cellspacing="0"
-                                                cellpadding="0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td align="center">
-                                                            <table border="0" cellspacing="0"
-                                                                cellpadding="0">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td width="22"
-                                                                            height="50">
-                                                                            <a href="?ptype=&amp;page=1&amp;code=bbsBasic">
-                                                                                <i class="fas fa-chevron-left" aria-hidden="true" align="absmiddle" border="0'"></i>
-                                                                            </a>
-                                                                        </td>
+<div class="con_txt">
+	<div class="contents_sub">
+		<!--게시판-->
+		<div class="board_view">
+			<table>
+			<tr>
+				<th width="10%">제목</th>
+				<td width="60%"><%=title%></td>
+				<th width="10%">등록일</th>
+				<td width="20%"><%=wdate%></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td><%=nick%></td>
 
-                                                                        <td align="center">
-                                                                            &nbsp; <b>1</b>
-                                                                            &nbsp; </td>
-                                                                        <td width="22" align="right">
-                                                                            <a href="?ptype=&amp;page=1&amp;code=bbsBasic">
-                                                                            <i class="fas fa-chevron-right" aria-hidden="true" align="absmiddle" border="0"></i>
-                                                                            </a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>                           
-                            <!-- 페이지 번호끝 -->
-                            
-                            <!-- 검색 -->
-                            <div class="AWbbs_f_search">
-                                <table width="0%" border="0" cellpadding="0" cellspacing="0" align="center">
-                                    <form name="sfrm" action="/adm/manage/bbs/bbs.php"></form>
-                                    <input type="hidden" name="code" value="bbsBasic">
-                                    <input type="hidden" name="category" value="">
-                                    <tbody><tr>
-                                        <td>
-                                            <select name="searchopt">
-                                            <option value="">--검색--</option>
-                                            <option value="subject">제 목</option>
-                                            <option value="content">내 용</option>
-                                            <option value="subcon">제목 + 내용</option>
-                                            <option value="name">작성자</option>
-                                            <option value="memid">아이디</option>
-                                            </select>	
-                                            <script language="javascript">
-                                            
-                                            searchopt = document.sfrm.searchopt;
-                                            for(ii=0; ii<searchopt.length; ii++){
-                                            if(searchopt.options[ii].value == "")
-                                            searchopt.options[ii].selected = true;
-                                            }
-                                            
-                                            </script>
-                                        </td>
-                                        <td><input name="searchkey" type="text" value=""></td>
-                                        <td>
-                                            <button type="submit">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                        </button>
-                                        </td>                                   
-                                     </tr>
-                                </tbody>
-                            </table> 
-                            </div>
-                            <!-- 검색 끝 -->                                                 
-                            
-                            <!-- 버튼 -->
-                            <div style="margin:10px 0 0;">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                    <tbody>
-                                        <tr>
-                                            <td width="20%">
-                                                <div class="col-sm-12">
-                                                    <input type="button" value="삭제" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href=''" />
-                                                </div>
-                                            </td>
-                                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                                                <tbody>
-                                                    <tr>
-                                            <td align="right">
-                                            <td width="7%">
-                                                <div class="align_right">
-                                                    <input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='write-a.html'" />
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- 버튼 끝 -->
-                            
-                            
-                            </body>
+			</tr>
+			<tr>
+				<td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%">
+                    <%=content%>
+                </td>
+			</tr>
+		</table>
+	</div>
+
+    <br><br><br>
+
+        <!-- 버튼 시작 -->
+        <div style="margin:10px 0 0;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td align="right">
+                                <input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='/admin/notice.do'" />
+                                <input type="button" value="삭제" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='modify.html'" />
+                                <input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_delete1.jsp'" />
+                                <input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='write.html'" />
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 버튼 끝-->
+        <br><br><br>
+
+
+
+<!-- 댓글 목록-->
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #ddd;">
+    <tbody>
+    <tr>
+    	<td colspan="4" height="1" style="background:#ddd; "></td>
+    </tr>
+    <tr>
+    	<td width="15%" height="45" class="AWbbs_comment_id" align="center">
+           닉네임 
+    	</td>
+        
+		<td align="left" style="padding:5px 10px; line-height:1.4;">댓글입니다.댓글입니다.댓글입니다.댓글입니다.</td>
+        <td align="center" width="15%" style="font-weight:normal; font-size:8pt;">2022-01-13 10:57</td>
+        <td align="right" width="7%">
+            <a href="/adm/manage/bbs/bbs.php?ptype=passwd&amp;mode=delco&amp;cidx=5318&amp;idx=35&amp;code=notice&amp;page=1">
+                <input type="button" value="삭제" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href=''" />
+            </a>
+        </td>
+    </tr>
+
+    <tr>
+    	<td width="15%" height="45" class="AWbbs_comment_id" align="center">
+           닉네잉
+    	</td>
+        
+		<td align="left" style="padding:5px 10px; line-height:1.4;">댓글입니다.댓글입니다.댓글입니다.댓글입니다.</td>
+        <td align="center" width="15%" style="font-weight:normal; font-size:8pt;">2022-01-13 10:57</td>
+        <td align="right" width="7%">
+            <a href="/adm/manage/bbs/bbs.php?ptype=passwd&amp;mode=delco&amp;cidx=5318&amp;idx=35&amp;code=notice&amp;page=1">
+                <input type="button" value="삭제" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href=''" />
+            </a>
+        </td>
+    </tr>
+
+</tbody>
+</table>
+
+
+<!-- 댓글 목록 끝-->
+
+<br><br>
+
+
+<!-- 댓글 작성-->
+        <div style="background:#f7f7f7; border:1px solid #ddd; padding:15px; margin-bottom:20px;">
+            <form name="comment" action="/adm/manage/bbs/bbs.php?code=notice&amp;page=1" method="post" onsubmit="return commentCheck(this);">
+            <input type="hidden" name="ptype" value="save">
+            <input type="hidden" name="mode" value="comment">
+            <input type="hidden" name="cidx" value="5318">
+            <input type="hidden" name="tmp_vcode" value="0b421baece866d39ad4a90cd337450b0">
+                <div>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="AWbbs_comment_input_info"><tbody><tr>
+                    <td><input type="text" name="name" value="관리자" class="input w80"></td>
+                    <td><!--<img src='/adm/bbs/norobot_image.php?ss_norobot_key=940b33' border='0' style='border: 1px solid #343d4f;' align='absmiddle'> <input type='text' name='vcode' id='vcode' class='input w100' /><font class='comment left10'>* 왼쪽의 자동등록방지 코드를 입력하세요.</font> --></td>
+                </tr></tbody></table>
+                </div>
+                
+
+                <div style="margin:5px 0 0;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+                    <td>
+                        <textarea name="content" onclick="memberCheck();" class="input" style="width:100%; height:55px; word-break:break-all; background:#fff; padding:3px 1px;"></textarea>
+                    </td>
+                    <td width="90" align="right">
+                    <input type="button" value="등록" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href=''" />
+
+
+
+
+                </tr></tbody></table>
+                </div>
+            </form>
+            </div>
+<!--댓글 작성 끝-->
+
+
+		<!--//게시판-->
+	</div>
+</div>
                         </div>
                     </div>
                 </div>

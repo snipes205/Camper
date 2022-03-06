@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.camper.config,com.camper.model1"})//패키지 읽기.. 중요함 
+@ComponentScan(basePackages = {"com.camper.config,com.camper.model,com.camper.web"})//패키지 읽기.. 중요함 
 public class CamperWebApplication {
 
 	public static void main(String[] args) {

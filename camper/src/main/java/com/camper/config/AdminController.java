@@ -1,5 +1,6 @@
 package com.camper.config;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -10,9 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.camper.model.NboardDAO;
+import com.camper.model.NboardTO;
+import com.camper.model.OboardDAO;
+import com.camper.model.OboardTO;
+import com.camper.model.PtableDAO;
+import com.camper.model.PtableTO;
+
 @RestController
+
+//admin controller
 public class AdminController {
 	
+	// Nboard controller
+	@Autowired
+	private NboardDAO ndao;
+	
+	// Nboard controller
+		@Autowired
+		private OboardDAO odao;
+		
+	// Ptable controller
+		@Autowired
+		private PtableDAO pdao;
+	
+	// 관리자 메인
 	@RequestMapping("/admin/main.do")
 	public ModelAndView adminMain(HttpServletRequest request,HttpServletResponse response ) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -21,22 +44,35 @@ public class AdminController {
 
 		return modelAndView;
 	}
+	
+	// 1:1 문의 list oboard
 	@RequestMapping("/admin/ask.do")
 	public ModelAndView adminAsk(HttpServletRequest request,HttpServletResponse response ) {
+		
+		ArrayList<OboardTO> boardLists = odao.boardList();
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("a_ask");
+		modelAndView.addObject( "boardLists", boardLists );
 		
-
 		return modelAndView;
 	}
+		
+		
+	// 커뮤니티 게시판 list
 	@RequestMapping("/admin/comm.do")
 	public ModelAndView adminComm(HttpServletRequest request,HttpServletResponse response ) {
+		
+		ArrayList<PtableTO> boardLists = pdao.boardList();
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("a_comm");
-		
+		modelAndView.addObject( "boardLists", boardLists );
 
 		return modelAndView;
 	}
+	
+	
 	@RequestMapping("/admin/admin.do")
 	public ModelAndView adminAdmin(HttpServletRequest request,HttpServletResponse response ) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -85,14 +121,20 @@ public class AdminController {
 
 		return modelAndView;
 	}
+	
+	// 고객지원 list
 	@RequestMapping("/admin/notice.do")
 	public ModelAndView adminNotice(HttpServletRequest request,HttpServletResponse response ) {
+		
+		ArrayList<NboardTO> boardLists = ndao.boardList();
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("a_notice");
+		modelAndView.addObject( "boardLists", boardLists );
 		
-
 		return modelAndView;
 	}
+	
 	@RequestMapping("/admin/profile.do")
 	public ModelAndView adminProfile(HttpServletRequest request,HttpServletResponse response ) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -117,14 +159,60 @@ public class AdminController {
 
 		return modelAndView;
 	}
+	
+	//nboard view
 	@RequestMapping("/admin/view.do")
-	public ModelAndView adminView(HttpServletRequest request,HttpServletResponse response ) {
+	public ModelAndView adminView(HttpServletRequest request ) {
+		
+		NboardTO to = new NboardTO();
+		to.setNseq( request.getParameter( "nseq" ) );
+		to.setType( request.getParameter( "type" ) );
+		
+		to = ndao.boardView( to );	
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("a_view");
+		modelAndView.addObject( "to", to );
 		
-
 		return modelAndView;
 	}
+	
+	
+	//oboard view
+		@RequestMapping("/admin/view_o.do")
+		public ModelAndView adminView_o(HttpServletRequest request ) {
+			
+			OboardTO to = new OboardTO();
+			to.setOseq( request.getParameter( "oseq" ) );
+
+			to = odao.boardView( to );	
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName( "a_view_o" );
+			modelAndView.addObject( "to", to );
+			
+			return modelAndView;
+		}
+
+		
+		//Ptable view
+		@RequestMapping("/admin/view_p.do")
+		public ModelAndView adminView_p(HttpServletRequest request ) {
+			
+			PtableTO to = new PtableTO();
+			to.setPseq( request.getParameter( "pseq" ) );
+			to.setType( request.getParameter( "type" ) );
+			
+			to = pdao.boardView( to );	
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("a_view_p");
+			modelAndView.addObject( "to", to );
+			
+			return modelAndView;
+		}
+	
+	
 	@RequestMapping("/admin/write_a.do")
 	public ModelAndView adminWriteA(HttpServletRequest request,HttpServletResponse response ) {
 		ModelAndView modelAndView = new ModelAndView();

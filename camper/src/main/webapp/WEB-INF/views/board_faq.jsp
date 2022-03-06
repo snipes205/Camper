@@ -31,8 +31,8 @@
 	<link href="../plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
 	<link href="../plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 	<!-- CUSTOM CSS -->
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/board_main.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
+	<link href="../css/board_main.css" rel="stylesheet">
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -44,89 +44,19 @@
 
 </head>
 
+<!-- Header part -->
 <body class="body-wrapper">
-	<section class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light navigation">
-						<a class="navbar-brand" href="../">
-							<img src="../images/logo.png" alt="로고">
-						</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto main-nav ">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑어때
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑톡톡
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										고객센터
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
-									</div>
-								</li>
-							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<img class="profile-img" src="../images/1.jpg">
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
-										<a class="nav-link add-button" href="../login/register">회원가입</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
+	<jsp:include page="../component/header.jsp"></jsp:include>
 
-
-	<!--  페이지 제목 Section -->
-
-	<section class="page-title">
-
-		<!-- 컨테이너 시작부분 -->
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 offset-md-2 text-center community_title">
-					<!-- Title text -->
-					<i class="ico"><img src="./images/community/faq.png"></i>
-					<span>FAQ</span>
-
-				</div>
-			</div>
-		</div>
-		<!-- Container End -->
-	</section>
-
-
-	<!--  캠핑톡톡 Section -->
-
+	<!-- FAQ Section -->
 	<section class="blog section">
+	<div class="container">
+				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0"">
+					<h2><i class="ico"><img src="../images/community/faq.png"></i>
+					FAQ
+					</h2><hr />     
+				</div>
+			</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
@@ -136,37 +66,36 @@
 					<article>
 						<div id="accordion">
 							<h3>자주 묻는 질문</h3>
-							<hr />
-							<div class="card">
+							<div class="card" style="margin-top:20px;">
 								<div class="card-header">
 									<a class="card-link" data-toggle="collapse" href="#collapseOne">
-										자주묻는 질문 1입니다. </a>
+										캠핑가자에서 캠핑을 같이가고싶으면 어떡해야 하나요 ? </a>
 								</div>
 								<div id="collapseOne" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 자주 묻는 질문 1에 대한 대답입니다. 이러쿵저러쿵 이러쿵저러쿵
-										이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 </div>
+									<div class="card-body"> 캠핑가자 카테고리에 올라온 다른 회원님의 글을 통해서 캠핑에 같이가고
+									싶으신 회원님은 쪽지로 상호간의 약속을 잡으셔서 함께 가시면 됩니다.  </div>
 								</div>
 							</div>
 
 							<div class="card">
 								<div class="card-header">
 									<a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-										자주묻는 질문 2입니다. </a>
+										쪽지는 어떻게 보내나요 ? </a>
 								</div>
 								<div id="collapseTwo" class="collapse" data-parent="#accordion">
-									<div class="card-body">자주 묻는 질문 2에 대한 대답입니다. 이러쿵저러쿵 이러쿵저러쿵
-										이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 </div>
+									<div class="card-body"> 게시물 작성하신 다른 회원님의 닉네임을 누르셔서 뜨는 회원프로필 창 하단에
+									팔로우 / 쪽지하기 버튼을 누르셔서 보내고 싶으신 내용을 보내시면 됩니다. </div>
 								</div>
 							</div>
 
 							<div class="card">
 								<div class="card-header">
 									<a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-										자주묻는 질문 3입니다. </a>
+										좋아요 눌렀던 게시물을 취소하려면 어떻게 해야하나요 ? </a>
 								</div>
 								<div id="collapseThree" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 자주 묻는 질문 2에 대한 대답입니다. 이러쿵저러쿵 이러쿵저러쿵
-										이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 </div>
+									<div class="card-body"> 마이페이지안의 좋아요 목록보기에서 회원님이 누르신 게시물들을
+									확인 할수 있기 때문에 다시 게시물 들어가셔서 좋아요를 취소하시면 됩니다. </div>
 								</div>
 							</div>
 
@@ -239,8 +168,8 @@
 							<!-- Widget Header -->
 							<h5 class="widget-header">카테고리</h5>
 							<ul class="category-list">
-								<li><a href="board_notice.html">공지사항 <span class="float-right">(10)</span></a></li>
-								<li><a href="board_faq.html">FAQ <span class="float-right">(10)</span></a></li>
+								<li><a href="/ask/notice.do">공지사항 <span class="float-right">(10)</span></a></li>
+								<li><a href="/ask/faq.do">FAQ <span class="float-right">(10)</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -248,71 +177,8 @@
 			</div>
 		</div>
 	</section>
-
-
-	<!--============================
-=            Footer            =
-=============================-->
-
-	<footer class="footer section section-sm">
-		<!-- Container Start -->
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
-					<!-- About -->
-					<div class="block about">
-						<!-- footer logo -->
-						<img src="images/logo.png" alt="">
-						<!-- description -->
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./search_theme.html">
-							<h4>캠핑 어때</h4>
-						</a>
-						<ul>
-							<li><a href="./search_theme.html">테마별 검색</a></li>
-							<li><a href="#">지역별 검색</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./board_main.html">
-							<h4>캠핑 톡톡</h4>
-						</a>
-						<ul>
-							<li><a href="./board_list1.html">캠핑 로그</a></li>
-							<li><a href="./board_list2.html">캠핑 꿀팁</a></li>
-							<li><a href="./board_list3.html">캠핑 가자</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<h4>고객센터</h4>
-						<ul>
-							<li><a href="board_notice.html">공지사항</a></li>
-							<li><a href="board_faq.html">FAQ</a></li>
-						</ul>
-					</div>
-				</div>
-
-
-
-			</div>
-		</div>
-		<!-- Container End -->
-		<!-- To Top -->
-		<div class="top-to">
-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-		</div>
-
-	</footer>
+	
+ 	<jsp:include page="../component/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>

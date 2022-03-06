@@ -1,7 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!--  캠핑톡톡 메인 List MVC Model2 구조 -->
+
+<%@ page import="com.camper.model.BoardTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.ResultSet" %>
+<%
+
+	// 캠핑로그 
+	
+	ArrayList<BoardTO> boardLists = (ArrayList<BoardTO>)request.getAttribute( "boardLists" );
+	
+	StringBuffer sbHtml = new StringBuffer();
+		for( BoardTO to : boardLists ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			
+			sbHtml.append( "	<div class='item'>" );
+			sbHtml.append( "		<div class='title'>" );
+			sbHtml.append( "			<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>&nbsp;" );
+			sbHtml.append( "		</div>" );
+			sbHtml.append( "			<div class='writer'>" + nick + "</div>" );
+			sbHtml.append( "	</div>" );
+
+	}
+%>
+<%
+	// 캠핑꿀팁
+	
+	ArrayList<BoardTO> boardLists2 = (ArrayList<BoardTO>)request.getAttribute( "boardLists2" );
+	
+	StringBuffer sbHtml2 = new StringBuffer();
+		for( BoardTO to : boardLists2 ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			
+			sbHtml2.append( "	<div class='item'>" );
+			sbHtml2.append( "		<div class='title'>" );
+			sbHtml2.append( "			<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>&nbsp;" );
+			sbHtml2.append( "		</div>" );
+			sbHtml2.append( "			<div class='writer'>" + nick + "</div>" );
+			sbHtml2.append( "	</div>" );
+
+	}
+%>
+<% 
+		
+	// 캠핑가자
+	ArrayList<BoardTO> boardLists3 = (ArrayList<BoardTO>)request.getAttribute( "boardLists3" );
+	
+	StringBuffer sbHtml3 = new StringBuffer();
+		for( BoardTO to : boardLists3 ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			
+			sbHtml3.append( "	<div class='item'>" );
+			sbHtml3.append( "		<div class='title'>" );
+			sbHtml3.append( "			<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>&nbsp;" );
+			sbHtml3.append( "		</div>" );
+			sbHtml3.append( "			<div class='writer'>" + nick + "</div>" );
+			sbHtml3.append( "	</div>" );
+
+	}	
+	
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -42,72 +110,16 @@
 </head>
 
 <body class="body-wrapper">
-	<section class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-expand-lg navbar-light navigation">
-						<a class="navbar-brand" href="../">
-							<img src="../images/logo.png" alt="로고">
-						</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav ml-auto main-nav ">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../search/theme.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑어때
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../community/main.do" aria-haspopup="true"
-										aria-expanded="false">
-										캠핑톡톡
-									</a>
-								</li>
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link dropdown-toggle" href="../ask/faq.do" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false">
-										고객센터
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="../ask/faq.do">공지사항</a>
-										<a class="dropdown-item" href="../ask/notice.do">FAQ</a>
-									</div>
-								</li>
-							</ul>
-							<ul class="navbar-nav ml-auto mt-10">
-								<li class="nav-item dropdown dropdown-slide">
-									<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<img class="profile-img" src="../images/1.jpg">
-									</a>
-									<!-- Dropdown list -->
-									<div class="dropdown-menu">
-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
-										<a class="nav-link add-button" href="../login/register">회원가입</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
 
-
+<!--  Header part -->
+	<jsp:include page="../component/header.jsp"></jsp:include>
+	
 	<section class="section bg-gray">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading text-center pb-5">
-						<i class="ico"><img src="./images/community/icon_chat.png"></i>
+						<i class="ico"><img src="../images/community/icon_chat.png"></i>
 						<h2 class="font-weight-bold" style="margin:20px;" >
 						캠핑톡톡
 						</h2>
@@ -117,40 +129,13 @@
 					<div class="package-content bg-light border text-center p-5 my-2 my-lg-0">
 						<div class="package-content-heading">
 							<h2><i class="ico"><img src="../images/community/icon_tent.png"></i>
-								<a href="./community/camplog.do">캠핑로그</a>
+								<a href="./camplog.do">캠핑로그</a>
 							</h2>
 							<hr />
 							<div class="board1">
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목5</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목4</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목3</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목2</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목1</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
+								
+								<!-- 캠핑로그 List 내용 -->
+								<%=sbHtml.toString() %>
 							</div>
 						</div>
 					</div>
@@ -160,156 +145,40 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="package-content bg-light border text-center my-2 my-lg-0 p-5">
 						<div class="package-content-heading">
-							<h2><i class="ico"><img src="./images/community/icon_bag.png"></i><a
-									href="/community/camptip.do">캠핑꿀팁</a></h2>
+							<h2><i class="ico"><img src="../images/community/icon_bag.png"></i><a
+									href="./camptip.do">캠핑꿀팁</a></h2>
 							<hr />
-						</div>
-						<div class="board1">
-							<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목5</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목4</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목3</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목2</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목1</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
+							<div class="board1">
+							
+								<!--  캠핑꿀팁 List 내용 -->
+								<%=sbHtml2.toString() %>
+							</div>
 						</div>
 					</div>
 				</div>
-
+				
 				<!--  board3 -->
 				<div class="col-lg-4 col-md-6 mx-sm-auto">
 					<div class="package-content bg-light border text-center p-5 my-2 my-lg-0">
 						<div class="package-content-heading">
-							<h2><i class="ico"><img src="./images/community/icon_car.png"></i><a
-									href="./community/campgo.do">캠핑어때</a></h2>
+							<h2><i class="ico"><img src="../images/community/icon_car.png"></i><a
+									href="./campgo.do">캠핑가자</a></h2>
 							<hr />
-						</div>
-						<div class="board1">
-							<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목5</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목4</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목3</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목2</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목1</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
+							<div class="board1">
+							
+								<!-- 캠핑가자 List 내용 -->
+								<%= sbHtml3.toString() %>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		
+		</div>
 	</section>
+	
+	<!-- Footer part -->
+	<jsp:include page="../component/footer.jsp"></jsp:include>
 
-
-	<!--============================
-=            Footer            =
-=============================-->
-
-	<footer class="footer section section-sm">
-		<!-- Container Start -->
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 col-md-12 offset-md-1 offset-lg-0">
-					<!-- About -->
-					<div class="block about">
-						<!-- footer logo -->
-						<img src="images/logo.png" alt="">
-						<!-- description -->
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href="./search/theme.do">
-							<h4>캠핑 어때</h4>
-						</a>
-						<ul>
-							<li><a href="./search/theme.do">테마별 검색</a></li>
-							<li><a href="./search/map.do">지역별 검색</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<a href=".//community/main.do">
-							<h4>캠핑 톡톡</h4>
-						</a>
-						<ul>
-							<li><a href="./community/camplog.do">캠핑 로그</a></li>
-							<li><a href="./community/camptip.do">캠핑 꿀팁</a></li>
-							<li><a href="./community/campgo.do">캠핑 가자</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- Link list -->
-				<div class="col-lg-2 col-md-2 offset-md-1 offset-lg-0">
-					<div class="block">
-						<h4>고객센터</h4>
-						<ul>
-							<li><a href="./ask/notice.do">공지사항</a></li>
-							<li><a href="./ask/faq.do">FAQ</a></li>
-						</ul>
-					</div>
-				</div>
-
-
-
-			</div>
-		</div>
-		<!-- Container End -->
-		<!-- To Top -->
-		<div class="top-to">
-			<a id="top" class="" href="#"><i class="fa fa-angle-up"></i></a>
-		</div>
-
-	</footer>
 
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>
