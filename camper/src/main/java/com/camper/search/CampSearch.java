@@ -15,9 +15,7 @@ import org.jsoup.select.Elements;
 public class CampSearch {
 	private String strMapX;
 	private String strMapY;
-	
-
-	
+		
 	public ArrayList<HashMap<String, String>> mapSearch(String strMapX,String strMapY) {
 	
 		strMapX= this.strMapX;
