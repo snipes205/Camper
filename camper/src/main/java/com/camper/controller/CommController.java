@@ -1,4 +1,4 @@
-package com.camper.config;
+package com.camper.controller;
 
 import java.util.ArrayList;
 

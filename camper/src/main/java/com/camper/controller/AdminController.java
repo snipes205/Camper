@@ -1,6 +1,7 @@
-package com.camper.config;
+package com.camper.controller;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;

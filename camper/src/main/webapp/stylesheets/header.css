@@ -105,7 +105,7 @@
     color: #fff;
   }
   
-  .tab_menu_btn a:hover {
+  .tab_menu_btn:hover {
     color: #ef8f1e;
   }
 

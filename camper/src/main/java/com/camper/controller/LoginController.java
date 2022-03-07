@@ -1,4 +1,4 @@
-package com.camper.config;
+package com.camper.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,22 +19,21 @@ public class LoginController {
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
+
 	@RequestMapping("/login/login.do")
-	public ModelAndView login(HttpServletRequest request,HttpServletResponse response ) {
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
-		
 
 		return modelAndView;
 	}
+
 	@RequestMapping("/login/register")
-	public ModelAndView Register(HttpServletRequest request,HttpServletResponse response ) {
+	public ModelAndView Register(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("register");
-		
 
 		return modelAndView;
 	}
-	
-	
+
 }

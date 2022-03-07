@@ -22,7 +22,7 @@
     font: 14px "애플산돌고딕M";
     display: flex;
     flex-direction: column;
-    background: url(../images/bg.png) no-repeat;
+    background: url(/images/bg.png) no-repeat;
     background-size: 100% 1000px;
     background-color: #f4f9fd;
     

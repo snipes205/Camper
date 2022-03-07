@@ -1,15 +1,15 @@
-package com.camper.web;
+package com.camper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.camper.config,com.camper.model,com.camper.web"})//패키지 읽기.. 중요함 
-public class CamperWebApplication {
+@ComponentScan(basePackages = {"com.camper.controller,com.camper.model, com.camper.service, com.camper.mapper", "com.camper.search"})
+public class CamperApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CamperWebApplication.class, args);
+		SpringApplication.run(CamperApplication.class, args);
 		System.out.println("서버시작");
 	}
 

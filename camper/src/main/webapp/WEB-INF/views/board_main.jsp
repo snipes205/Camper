@@ -10,7 +10,7 @@
 
 	// 캠핑로그 
 	
-	ArrayList<BoardTO> boardLists = (ArrayList<BoardTO>)request.getAttribute( "boardLists" );
+	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
 	
 	StringBuffer sbHtml = new StringBuffer();
 		for( BoardTO to : boardLists ) {
@@ -30,7 +30,7 @@
 <%
 	// 캠핑꿀팁
 	
-	ArrayList<BoardTO> boardLists2 = (ArrayList<BoardTO>)request.getAttribute( "boardLists2" );
+	ArrayList<BoardTO> boardLists2 = (ArrayList)request.getAttribute( "boardLists2" );
 	
 	StringBuffer sbHtml2 = new StringBuffer();
 		for( BoardTO to : boardLists2 ) {
@@ -50,7 +50,7 @@
 <% 
 		
 	// 캠핑가자
-	ArrayList<BoardTO> boardLists3 = (ArrayList<BoardTO>)request.getAttribute( "boardLists3" );
+	ArrayList<BoardTO> boardLists3 = (ArrayList)request.getAttribute( "boardLists3" );
 	
 	StringBuffer sbHtml3 = new StringBuffer();
 		for( BoardTO to : boardLists3 ) {

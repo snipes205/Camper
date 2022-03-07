@@ -93,7 +93,7 @@
 					<%= sbHtml.toString() %>
 					
 					<!--  버튼 Part -->
-					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">글쓰기</button></a>
+					<a href="./community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">글쓰기</button></a>
 					
 					<!--  페이지네이션 내용 표시 -->
 					
