@@ -25,7 +25,25 @@ public class SearchController {
 	public ModelAndView searchMap(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("search_map");
+		
+		
+		
+		
 
+		return modelAndView;
+	}
+	@RequestMapping("/search/map_ok.do")
+	public ModelAndView searchMapOk(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		String strSearchMap = request.getParameter("strSearchMap");
+		
+		
+		
+		
+		
+		
+		modelAndView.setViewName("search_map_ok");
 		return modelAndView;
 	}
 
@@ -36,6 +54,14 @@ public class SearchController {
 
 		return modelAndView;
 	}
+	@RequestMapping("/search/theme_ok.do")
+	public ModelAndView searchTheme_ok(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("search_theme_ok");
+
+		return modelAndView;
+	}
+
 
 	@RequestMapping("/search/detail.do")
 	public ModelAndView seachDetail(HttpServletRequest request, HttpServletResponse response) {

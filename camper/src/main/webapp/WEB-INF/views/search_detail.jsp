@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,22 +11,24 @@
 <title>CAMPER</title>
 
 <!-- FAVICON -->
-<link href ="../images/favicon.png" rel="shortcut icon">
+<link href="../images/favicon.png" rel="shortcut icon">
 <!-- PLUGINS CSS STYLE -->
-<link href ="../plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+<link href="../plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap-slider.css">
+<link rel="stylesheet"
+	href="../plugins/bootstrap/css/bootstrap-slider.css">
 <!-- Font Awesome -->
-<link href ="../plugins/font-awesome/css/font-awesome.min.css"
+<link href="../plugins/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
 <!-- Owl Carousel -->
-<link href ="../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-<link href ="../plugins/slick-carousel/slick/slick-theme.css"
+<link href="../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+<link href="../plugins/slick-carousel/slick/slick-theme.css"
 	rel="stylesheet">
 <!-- Fancy Box -->
-<link href ="../plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-<link href ="../plugins/jquery-nice-select/css/nice-select.css"
+<link href="../plugins/fancybox/jquery.fancybox.pack.css"
+	rel="stylesheet">
+<link href="../plugins/jquery-nice-select/css/nice-select.css"
 	rel="stylesheet">
 <!-- CUSTOM CSS -->
 <link href="../css/style.css" rel="stylesheet">
@@ -35,6 +37,7 @@ img .img-fluid {
 	width: 600px;
 	height: 400px;
 }
+
 .slider {
 	padding-top: 30px;
 	padding-bottom: 30px;
@@ -50,11 +53,125 @@ img .img-fluid {
 	height: 70px;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+<script src="../plugins/bootstrap/js/popper.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap-slider.js"></script>
+
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44d54500db491a25378cc4604dd20efc&libraries=services"></script>
+<script type="text/javascript">
+
+	window.onload=()=>{
+		let urls = location.href;
+		let strParams = urls.toString().split("?");
+		let params= strParams[1].split("&");
+		let smapX=params[0].substring(6);
+		let smapY=params[1].substring(6);
+	
+	
+		const request = new XMLHttpRequest();
+		request.onreadystatechange = function() {
+			if(request.readyState==4){
+				if(request.status==200){
+					let xmlData =request.responseXML;
+					
+					
+					
+					const induty = xmlData.getElementsByTagName('induty');
+					const contentId = xmlData.getElementsByTagName('contentId');
+					
+					
+					
+					
+					
+					
+					const facltNm = xmlData.getElementsByTagName('facltNm');
+					const addr1 = xmlData.getElementsByTagName('addr1');
+					//const glampInnerFclty = xmlData.getElementsByTagName('glampInnerFclty');
+					const animalCmgCl = xmlData.getElementsByTagName('animalCmgCl');
+					const sbrsCl = xmlData.getElementsByTagName('sbrsCl');
+					//const lineIntro = xmlData.getElementsByTagName('lineIntro');
+					const firstImageUrl = xmlData.getElementsByTagName('firstImageUrl');
+					const doNm =  xmlData.getElementsByTagName('doNm');
+					const hompage = xmlData.getElementsByTagName('homepage');
+					console.log(facltNm[0].childNodes[0].nodeValue);
+					console.log(firstImageUrl[0].childNodes[0].nodeValue);
+					
+					
+					let sInduty= document.getElementById("induty");
+					sInduty.textContent =induty[0].childNodes[0].nodeValue;
+					
+					
+					let sFacltNm= document.getElementById("facltNm");
+					sFacltNm.textContent =facltNm[0].childNodes[0].nodeValue;
+					let sAddr1= document.getElementById("addr1");
+					sAddr1.textContent =addr1[0].childNodes[0].nodeValue ;
+					//let sGlampInnerFclty= document.getElementById("glampInnerFclty");
+					
+					//sGlampInnerFclty.textContent = glampInnerFclty[0].childNodes[0].nodeValue;
+					let sNimalCmgCl= document.getElementById("animalCmgCl");
+					sNimalCmgCl.textContent =animalCmgCl[0].childNodes[0].nodeValue;
+					let sSbrsCl= document.getElementById("sbrsCl");
+					sSbrsCl.textContent =sbrsCl[0].childNodes[0].nodeValue;
+					//let sLineIntro =document.getElementById("lineIntro");
+					//sLineIntro.textContent =lineIntro[0].childNodes[0].nodeValue;
+					let sDoNm =document.getElementById("doNm");
+					sDoNm.textContent =doNm[0].childNodes[0].nodeValue;
+					//let sHompage =document.getElementById("hompage");
+					//sHompage.textContent =hompage[0].childNodes[0].nodeValue;
+					document.getElementById("mainImg").setAttribute("src",firstImageUrl[0].childNodes[0].nodeValue);
+					let sContentId= document.getElementById("contentId");
+					
+					
+				}else{
+					alert("페이지 에러");
+				}
+				
+			}
+		};
+		//요청방식 / 요청 url// 동기
+		request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
+				+"locationBasedList"
+				+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
+				+"&numOfRows=1"
+				+"&pageNo=1"
+				+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
+				+"&mapX="+smapX
+				+"&mapY="+smapY
+				+"&radius=1"
+				,true);
+		request.send();
+		
+		let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(smapY, smapX), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };
+
+		let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+		// 마커가 표시될 위치입니다 
+		let markerPosition  = new kakao.maps.LatLng(smapY, smapX); 
+
+		// 마커를 생성합니다
+		let marker = new kakao.maps.Marker({
+	    	position: markerPosition
+		});
+		marker.setMap(map);
+		}
+
+	
+		
+
+</script>
 
 </head>
 
 <body class="body-wrapper">
- 	<jsp:include page="../component/header.jsp"></jsp:include>
+	<jsp:include page="../component/header.jsp"></jsp:include>
 
 	<!--===================================
 =            Store Section            =
@@ -68,39 +185,40 @@ img .img-fluid {
 						<div
 							class="container-fluid p-5 my-5 bg-light border col-lg-8 shadow-sm pt-3">
 							<div class="product-details">
-								<h1 class="product-title">캠핑장 이름</h1>
+								<div id='facltNm' class="h1"></div>
 								<div class="product-meta">
 									<ul class="list-inline">
 
 										<li class="list-inline-item"><i
-											class="fa fa-location-arrow"></i> 위치<a href="">위치1</a></li>
+											class="fa fa-location-arrow"></i>
+											<div id="doNm"></div></li>
 									</ul>
 								</div>
 								<div class="product-slider">
-									<div class="product-slider-item my-4"
-										data-image="images/campsite/캠핑1.jpg">
-										<img class="img-fluid w-100" src="images/campsite/캠핑1.jpg"
-											alt="product-img" style="height: 500px;">
+									<div class="product-slider-item my-4" id="dMain"
+										>
+										<img class="img-fluid w-100" 
+											alt="product-img" style="height: 500px; "id="mainImg">
 									</div>
-									<div class="product-slider-item my-4"
+									<div class="product-slider-item my-4" id="dsub2"
 										data-image="images/campsite/캠핑2.jpg">
 										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑2.jpg" alt="Second slide">
+											src="images/campsite/캠핑2.jpg" alt="Second slide"id="sub1Img">
 									</div>
-									<div class="product-slider-item my-4"
+									<div class="product-slider-item my-4" id="dsub3"
 										data-image="images/campsite/캠핑3.png">
 										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑3.png" alt="Third slide">
+											src="images/campsite/캠핑3.png" alt="Third slide"id="sub2Img">
 									</div>
-									<div class="product-slider-item my-4"
+									<div class="product-slider-item my-4" id="dsub4"
 										data-image="images/campsite/캠핑4.jpg">
 										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑4.jpg" alt="Third slide">
+											src="images/campsite/캠핑4.jpg" alt="Third slide"id="sub3Img">
 									</div>
-									<div class="product-slider-item my-4"
+									<div class="product-slider-item my-4" id="dsub5"
 										data-image="images/campsite/캠핑5.jpg">
 										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑5.jpg" alt="Third slide">
+											src="images/campsite/캠핑5.jpg" alt="Third slide"id="sub4Img">
 									</div>
 								</div>
 							</div>
@@ -113,53 +231,50 @@ img .img-fluid {
 								<tbody>
 									<tr>
 										<td>주소</td>
-										<td>주소1</td>
+										<td><div id="addr1">주소1</div></td>
 									</tr>
 									<tr>
 										<td>전화</td>
-										<td>02-0000-0000</td>
+										<td><div id="addr1"></div></td>
 									</tr>
 									<tr>
 										<td>홈페이지</td>
-										<td>https://</td>
+										<td><div id="homepage"></div></td>
 									</tr>
 									<tr>
-										<td>화장실</td>
-										<td>0</td>
+										<td>기본 제공</td>
+										<td><div id="sbrsCl"></div></td>
 									</tr>
 									<tr>
-										<td>샤워실</td>
-										<td>1</td>
+										<td>캠프 시설</td>
+										<td><div id="glampInnerFclty"></div></td>
 									</tr>
+									<tr>
+										<td>캠핑 형태</td>
+										<td><div id="induty"></div></td>
+									</tr>
+
 									<tr>
 										<td>애완동물출입</td>
-										<td>2017</td>
+										<td><div id="animalCmgCl"></div></td>
 									</tr>
+
 								</tbody>
 							</table>
-							<p>저희가 운영하는 이지캠핑장은 캠핑에 필요한 장비와 소품들을 제공해 드리고 있으며, 가벼운 맘과 차림으로
-								즐거운 캠핑 라이프를 즐기실 수 있습니다. 기본 제공으로 식기류, 가스버너, 가스, 화로대 등을 제공해 드리고
-								있으며, 필요하신 물품은 캠핑장내 매점을 통해 구입하실 수 있습니다. (침구류 본인지참) 저희 이지캠핑장은 유명산
-								기슭에서 흘러나오는 맑은 계곡과, 가평의 유명한 잣나무숲을 품은 자연친화적 캠핑장입니다. 맑은 계곡가에서의 휴식과
-								물놀이, 그리고 자체 수영장에서의 즐거운 물놀이도 가능합니다.</p>
-
-
+							<h4>한줄소개</h4>
+							<div id="lineIntro"></div>
 						</div>
 					</div>
-						
-						<div id="map" class="container-lg-12 shadow-sm content pt-5 border bg-light" >
+
+					<div id="map"
+						class="container-lg-12 shadow-sm content pt-5 border bg-light">
 						<h3 class="text-center">지도찾기</h3>
-						<div class=" d-flex justify-content-center" >
-						
-						<img alt="" src="./images/campsite/map.png" style="height :300px;width: 400px;">
+						<div class=" d-flex justify-content-center">
+							<div id='map' style="width:300px; height:400px"></div>
 						</div>
-						<div class="container">
-						
-						</div>
-						
 					</div>
-					
-						
+
+
 					<div
 						class="container-block shadow-sm content mt-5 pt-5 border bg-light">
 
@@ -239,8 +354,8 @@ img .img-fluid {
 		</div>
 		<!-- Container End -->
 	</section>
-	
- 	<jsp:include page="../component/footer.jsp"></jsp:include>
+
+	<jsp:include page="../component/footer.jsp"></jsp:include>
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>
 	<script src="../plugins/bootstrap/js/popper.min.js"></script>
@@ -250,7 +365,8 @@ img .img-fluid {
 	<script src="../plugins/tether/js/tether.min.js"></script>
 	<script src="../plugins/raty/jquery.raty-fa.js"></script>
 	<script src="../plugins/slick-carousel/slick/slick.min.js"></script>
-	<script src="../plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+	<script
+		src="../plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="../plugins/fancybox/jquery.fancybox.pack.js"></script>
 	<script src="../plugins/smoothscroll/SmoothScroll.min.js"></script>
 	<!-- google map -->

@@ -9,51 +9,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<title>Kakao 지도 시작하기</title>
+    <meta charset="utf-8">
+    <title>좌표로 주소를 얻어내기</title>
+    <style>
+    .map_wrap {position:relative;width:100%;height:350px;}
+    .title {font-weight:bold;display:block;}
+    .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+    #centerAddr {display:block;margin-top:2px;font-weight: normal;}
+    .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+</style>
 </head>
-
-
 <body>
-	<div id="map" style="width:800px;height:600px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44d54500db491a25378cc4604dd20efc"></script>
+<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div class="hAddr">
+        <span class="title">지도중심기준 행정동 주소정보</span>
+        <span id="centerAddr"></span>
+    </div>
+</div>
 
-	<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-   		mapOption = { 
-      	  center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-      	  level: 3 // 지도의 확대 레벨
- 	 	  };
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44d54500db491a25378cc4604dd20efc&libraries=services"></script>
+<script>
 
-		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+window.onload=()=>{
+	let urls = location.href;
+	let strParams = urls.toString().split("?");
+	let params= strParams[1].split("&");
+	let smapX=params[0].substring(6);
+	let smapY=params[1].substring(6);
 
-		// 지도를 클릭한 위치에 표출할 마커입니다
-		var marker = new kakao.maps.Marker({ 
-   	 // 지도 중심좌표에 마커를 생성합니다 
-   		 	position: map.getCenter() 
-		}); 
-	// 지도에 마커를 표시합니다
-		marker.setMap(map);
 
-	// 지도에 클릭 이벤트를 등록합니다
-	// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-    
-    // 클릭한 위도, 경도 정보를 가져옵니다 
-  			var latlng = mouseEvent.latLng; 
-  	  
-    // 마커 위치를 클릭한 위치로 옮깁니다
-  		 	marker.setPosition(latlng);
-    
- 	  		var message = '클릭한 위치의 위도는 ' +<div id="\'"getLat"\'"> latlng.getLat() + ' 이고, ';
-  		 	message += '경도는 ' + <div id="\'"getLng"\'">latlng.getLng() + ' 입니다';
-    
-   			var resultDiv = document.getElementById('clickLatlng'); 
-   			 resultDiv.innerHTML = message;
-    
-		});
+	const request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+		if(request.readyState==4){
+			if(request.status==200){
+				let xmlImgaeData =request.responseXML;
+				
+				
+				
+				
+				
+			
+				
+				
+			}else{
+				alert("페이지 에러");
+			}
+			
+		}
+	};
+	//요청방식 / 요청 url// 동기
+	request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
+			+"imageList"
+			+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
+			+"&MobileOS=ETC&MobileApp=TestApp"
+			+"&cocontentId=3429"
+			,true);
+	request.send();
+	
+	
 
-	</script>
 
+</script>
 </body>
 </html>

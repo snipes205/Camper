@@ -13,12 +13,12 @@ public class MapListSearch {
 	private String smapX;
 	private String smapY;
 	
-	public ArrayList<HashMap<String, String>> mapSearch() {
+	public ArrayList<HashMap<String, String>> mapSearch(String smapX,String smapY) {
 		String sKey ="02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D";
 		String numOfRows = "10";
 		String pageNo= "1";
-		String smapX="128.1250697";
-		String smapY="37.7927968";
+		smapX=this.smapX;
+		smapY=this.smapY;
 		String radius="10000";
 		String url = "http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/locationBasedList?ServiceKey="
 		+sKey+"&numOfRows="+numOfRows+"&pageNo="+pageNo+"&MobileOS=ETC&MobileApp=TestApp"+
