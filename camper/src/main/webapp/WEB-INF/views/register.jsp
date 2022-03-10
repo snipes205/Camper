@@ -71,7 +71,7 @@
 									<input type="checkbox" id="registering" class="mt-1"> <label
 										for="registering" class="px-2"><a
 										class="text-primary font-weight-bold"
-										href="terms-condition.html">이용약관</a>에 동의합니다.</label>
+										 href data-toggle="modal" data-target="#terms">이용약관</a>에 동의합니다.</label>
 								</div>
 								<button type="submit"
 									class="d-block py-3 px-5 bg-primary text-white  border-0 font-weight-bold mt-3 ml-auto mr-auto"
@@ -86,6 +86,7 @@
 			</div>
 		</div>
 	</section>
+	<jsp:include page="../modal/terms.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>

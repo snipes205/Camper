@@ -49,62 +49,15 @@
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
 					<div class="sidebar">
-						<!-- User Widget -->
-						<div class="widget user-dashboard-profile">
-							<!-- User Image -->
-							<div class="profile-thumb">
-								<img src="../images/1.jpg" alt="" class="rounded-circle">
-							</div>
-							<!-- User Name -->
-							<h5 class="text-center">이름이름</h5>
-							<p>나이(성별)</p>
-						</div>
-						<!-- Dashboard Links -->
-						<div class="widget user-dashboard-menu">
-							<ul>
-								<li><a href="/dashboard/myads.do"><i class="fa fa-user"></i> 내 정보 수정 </a></li>
-								<li class="active"><a href="/dashboard/jjim.do"><i class="fa fa-bookmark"></i> 찜한 갬핑장<span>5</span></a></li>
-								<li><a href="/dashboard/write.do"><i class="fa fa-pencil"></i> 내가 쓴 글<span>5</span></a></li>
-								<li><a href="/dashboard/like.do"><i class="fa fa-heart"></i> 좋아요 <span>12</span></a></li>
-								<li><a href="/dashboard/follow.do"><i class="fa fa-handshake-o"></i> 팔로우<span>23</span></a></li>
-								<li><a href="/dashboard/message.do"><i class="fa fa-comments"></i>메세지함<span>23</span></a></li>
-								<li><a href="/dashboard/question.do"><i class="fa fa-question-circle"></i> 1:1 문의<span>23</span></a></li>
-								<li><a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-trash"></i>탈퇴하기</a></li>
-							</ul>
-						</div>
-
-
+						<!-- MyPage SideNav -->
+						<jsp:include page="../component/dashboard.jsp">
+							<jsp:param value="jjim" name="thisPage"/>
+						</jsp:include>
+						<!-- MyPage SideNav -->
+	
 						<!-- delete-account modal -->
-						<!-- delete account popup modal start-->
-						<!-- Modal -->
-						<div class="modal fade" id="deleteaccount" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered" role="document">
-								<div class="modal-content">
-									<div class="modal-header border-bottom-0">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body text-center">
-										<img src="../images/dontleave.jpeg" class="img-fluid mb-2" alt="">
-										<h6 class="py-2">정말 탈퇴하시겠습니까?</h6>
-										<p>캠린이 두고 가지마요 ㅜㅜ
-										</p>
-										<textarea name="message" id="" cols="40" rows="4"
-											class="w-100 rounded"></textarea>
-									</div>
-									<div
-										class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
-										<button type="button" class="btn btn-primary" data-dismiss="modal">머무르기</button>
-										<button type="button" class="btn btn-danger">진짜떠나기</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- delete account popup modal end-->
+						<jsp:include page="../modal/goodBye.jsp"></jsp:include>
 						<!-- delete-account modal -->
-
 					</div>
 				</div>
 				<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">

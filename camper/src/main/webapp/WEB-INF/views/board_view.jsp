@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<!--  캠핑톡톡 글보기 MVC Model2 구조 -->
+
+<%@ page import="com.camper.model.BoardTO" %>
+<% 
+	
+	BoardTO to = (BoardTO)request.getAttribute( "to" );
+
+	String pseq = to.getPseq();
+	String title = to.getTitle();
+	String nick = to.getNick();
+	String content = to.getContent();
+	String wdate = to.getWdate();
+	String type = to.getType();
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -39,28 +55,25 @@
 
 </head>
 
+<!--  Header part -->
 <body class="body-wrapper">
 	<jsp:include page="../component/header.jsp"></jsp:include>
 
-	<!--=================================
-=            Single Blog            =
-==================================-->
-
+	<!--  글보기 페이지 -->
 	<section class="blog single-blog section">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 					<article class="single-post">
 
-						<!--  상세 보기 part -->
-						<h3>제목</h3>
+						<!--  상세 보기 form -->
+						<h3><%=title %></h3>
 						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="">작성자</a></li>
-							<li class="list-inline-item">2022-02-24</li>
+							<li class="list-inline-item">by <a href=""><%=nick %></a></li>
+							<li class="list-inline-item"><%=wdate %></li>
 						</ul>
-						<img src="../images/community/camping.png" alt="phto">
-						<p>밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다. 밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.
-							밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.밤하늘을 보면서 캠핑을 즐기니 정말 좋은 캠핑이였다.</p>
+						<img src="../images/community/camping.png" alt="image">
+						<p><%=content %></p>
 
 						<!--  좋아요 / 댓글 part -->
 						<ul class="list-inline" style="margin-top: 30%;">
@@ -72,7 +85,7 @@
 							</li>
 						</ul>
 
-						<!--  댓글 입력칸 part -->
+						<!-- 댓글 입력 part -->
 						<div class="block comment" style="margin-top: 10px;">
 							<div class="form-group mb-30">
 								<label for="message">댓글 쓰기</label>
@@ -81,20 +94,21 @@
 							<button class="btn btn-transparent">댓글 등록</button>
 						</div>
 					</article>
-					<!--  등록 버튼 part -->
+					
+					<!--  버튼 part -->
 					<div class="container">
-						<a href="/community/main.do" style="float: left;"><button class="btn btn-transparent">목록</button></a>
+						<input type="button" value="목록" class="btn btn-transparent" style="float: left;" onclick="location.href='/community/main.do'" />
 						<div style="float: right;">
-							<a href="/community/modify.do"><button class="btn btn-transparent">수정</button></a>
-							<a href="/community/delete.do"><button class="btn btn-transparent">삭제</button></a>
+							<input type="button" value="수정" class="btn btn-transparent" onclick="location.href='/community/modify.do?pseq=<%=pseq %>'" />
+							<input type="button" value="삭제" class="btn btn-transparent" onclick="location.href='/community/delete.do?pseq=<%=pseq %>'" />
 						</div>
 					</div>
 				</div>
 
-				<!--  오른쪽 part -->
+				<!--  우측 사이드 part -->
 				<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
 
-					<!-- 검색 위젯 -->
+					<!-- 검색 part -->
 					<div class="widget search p-0">
 						<div class="input-group">
 							<input type="text" class="form-control" id="expire" placeholder="Search">
@@ -103,13 +117,13 @@
 					</div>
 
 
-					<!-- 카테고리 위젯 -->
+					<!-- 카테고리 part -->
 					<div class="widget category">
 						<h5 class="widget-header">카테고리</h5>
 						<ul class="category-list">
-							<li><a href="board_list1.html">캠핑로그 <span class="float-right">(2)</span></a></li>
-							<li><a href="board_list2.html">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
-							<li><a href="board_list3.html">캠핑어때 <span class="float-right">(7)</span></a></li>
+							<li><a href="/community/camplog.do">캠핑로그 <span class="float-right"></span></a></li>
+							<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right"></span></a></li>
+							<li><a href="/community/campgo.do">캠핑가자 <span class="float-right"></span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -118,6 +132,7 @@
 		</div>
 	</section>
 	
+	<!-- Footer part -->
  	<jsp:include page="../component/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->

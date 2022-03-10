@@ -2,21 +2,37 @@ package com.camper.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.camper.service.UserService;
+
 @RestController
 public class DashboadController {
+	
+	@Autowired
+	UserService userService;
 
 	// 관리자
 	@RequestMapping("/dashboard/myads.do")
-	public ModelAndView dashMyInfo(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView dashMyInfo(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
+		session.getAttribute("id");
+		session.getAttribute("pwd");
+		session.getAttribute("name");
+		session.getAttribute("nick");
+		session.getAttribute("birth");
+		session.getAttribute("phone");
+		session.getAttribute("email");
+		session.getAttribute("gen");
+		session.getAttribute("area");
+		session.getAttribute("profile");
+		session.getAttribute("greet");
+		
 		modelAndView.setViewName("dashboard_my_ads");
 
 		return modelAndView;
@@ -43,6 +59,14 @@ public class DashboadController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("dashboard_like");
 
+		return modelAndView;
+	}
+	
+	@RequestMapping("/dashboard/user.do")
+	public ModelAndView dashUser(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("user_profile");
+		
 		return modelAndView;
 	}
 

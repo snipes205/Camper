@@ -1,5 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!--  캠핑로그 List MVC Model2 구조 -->
+
+<%@ page import="com.camper.model.BoardTO" %>
+<%@page import="com.camper.model.BoardListTO"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.ResultSet" %>
+<% 
+	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
+
+	StringBuffer sbHtml = new StringBuffer();
+		for( BoardTO to : boardLists ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			String wdate = to.getWdate();
+			
+			// 게시물 내용 form
+			sbHtml.append( "<article>" );
+			sbHtml.append( "	<div>" );
+			sbHtml.append( "		<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>" );
+			sbHtml.append( "	</div>" );
+			sbHtml.append( "	<ul class='list-inline'>" );
+			sbHtml.append( "		<li class='list-inline-item'>by <a href=''>" + nick + "</a></li>" );
+			sbHtml.append( "		<li class='list-inline-item'>" + wdate + "</li>" );
+			sbHtml.append( "	</ul>" );
+			sbHtml.append( "</article>" );
+
+		}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,8 +48,7 @@
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap-slider.css">
 <!-- Font Awesome -->
-<link href="plugins/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <!-- Owl Carousel -->
 <link href="../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
 <link href="../plugins/slick-carousel/slick/slick-theme.css"
@@ -42,13 +71,15 @@
 
 </head>
 
+<!--  Header part -->
 <body class="body-wrapper">
 	<jsp:include page="../component/header.jsp"></jsp:include>
 	
+	<!--  캠핑로그 List Section  -->
 	<section class="blog section">
 			<div class="container">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0"">
-					<h2><i class="ico"><img src="../images/community/icon_tent.png"></i>
+					<h2><i class="ico"><img src="/images/community/icon_tent.png"></i>
 					캠핑로그
 					</h2><hr />     
 				</div>
@@ -57,74 +88,24 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
-
-					<!-- 게시물 1 -->
-					<article>
-						<div>
-							<a href="/community/view.do">제목5</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="profile.html">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 2 -->
-					<article>
-						<div>
-							<a href="/community/view.do">제목4</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 3 -->
-					<article>
-						<div>
-							<a href="/community/view.do">제목3</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 4 -->
-					<article>
-						<div>
-							<a href="/community/view.do">제목2</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 5 -->
-					<article>
-						<div>
-							<a href="/community/view.do">제목1</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by <a href="#">닉네임</a></li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
+				
+					<!--  List 내용 표시 -->
+					<%= sbHtml.toString() %>
+					
 					<!--  버튼 Part -->
-					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">등록</button></a>
-
+					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">글쓰기</button></a>
+					
+					<!--  페이지네이션 내용 표시 -->
+					
+					
 					<!--  페이지네이션 Part -->
-
-					<nav aria-label="Page navigation example">
+					<nav aria-label="Page navigation">
 						<ul class="pagination" style="margin-top: 0px;">
 							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
 								<span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
 								<span class="sr-only">DPrevious</span></a>
 							</li>
-							<li class="page-item"><a class="page-link" href="#"aria-label="Previous">
+							<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
 								<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
 								<span class="sr-only">Previous</span></a>
 							</li>
@@ -145,12 +126,13 @@
 						</ul>
 					</nav>
 				</div>
+				
+				<!--  우측 사이드 part -->
 				<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
 					<div class="sidebar">
 
 
 						<!-- 검색 Part -->
-
 						<div class="widget search p-0">
 							<div class="input-group">
 								<input type="text" class="form-control" id="expire"
@@ -161,14 +143,13 @@
 
 
 						<!-- 카테고리 메뉴도 Part -->
-
 						<div class="widget category">
 							<!-- Widget Header -->
 							<h5 class="widget-header">카테고리</h5>
 							<ul class="category-list">
-								<li><a href="/community/camplog.do">캠핑로그 <span class="float-right">(2)</span></a></li>
-								<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right">(5)</span></a></li>
-								<li><a href="/community/campgo.do">캠핑가자 <span class="float-right">(7)</span></a></li>
+								<li><a href="/community/camplog.do">캠핑로그 <span class="float-right"></span></a></li>
+								<li><a href="/community/camptip.do">캠핑꿀팁 <span class="float-right"></span></a></li>
+								<li><a href="/community/campgo.do">캠핑가자 <span class="float-right"></span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -177,6 +158,7 @@
 		</div>
 	</section>
 
+	<!-- Footer part -->
  	<jsp:include page="../component/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->

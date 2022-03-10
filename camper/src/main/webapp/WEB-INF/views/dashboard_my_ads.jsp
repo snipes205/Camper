@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+HttpSession httpSession = request.getSession(true);
+String strEmail = String.valueOf(httpSession.getAttribute("email"));
+String[] email = strEmail.split("@");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,7 +37,6 @@
 <!-- CUSTOM CSS -->
 <link href="../css/style.css" rel="stylesheet">
 
-
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -40,8 +44,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 		function execDaumPostcode() {
@@ -58,8 +61,7 @@
 				}
 			}).open();
 		}
-	</script>
-
+</script>
 </head>
 
 <body class="body-wrapper">
@@ -75,63 +77,15 @@
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
 					<div class="sidebar">
-						<!-- User Widget -->
-						<div class="widget user-dashboard-profile">
-							<!-- User Image -->
-							<div class="profile-thumb">
-								<img src="../images/1.jpg" alt="" class="rounded-circle">
-							</div>
-							<!-- User Name -->
-							<h5 class="text-center">이름이름</h5>
-							<p>나이(성별)</p>
-						</div>
-						<!-- Dashboard Links -->
-						<div class="widget user-dashboard-menu">
-							<ul>
-								<li class="active"><a href="/dashboard/myads.do"><i class="fa fa-user"></i> 내 정보 수정 </a></li>
-								<li><a href="/dashboard/jjim.do"><i class="fa fa-bookmark"></i> 찜한 갬핑장<span>5</span></a></li>
-								<li><a href="/dashboard/write.do"><i class="fa fa-pencil"></i> 내가 쓴 글<span>5</span></a></li>
-								<li><a href="/dashboard/like.do"><i class="fa fa-heart"></i> 좋아요 <span>12</span></a></li>
-								<li><a href="/dashboard/follow.do"><i class="fa fa-handshake-o"></i> 팔로우<span>23</span></a></li>
-								<li><a href="/dashboard/message.do"><i class="fa fa-comments"></i>메세지함<span>23</span></a></li>
-								<li><a href="/dashboard/question.do"><i class="fa fa-question-circle"></i> 1:1 문의<span>23</span></a></li>
-								<li><a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-trash"></i>탈퇴하기</a></li>
-							</ul>
-						</div>
-
+						<!-- MyPage SideNav -->
+						<jsp:include page="../component/dashboard.jsp">
+							<jsp:param value="myads" name="thisPage"/>
+						</jsp:include>
+						<!-- MyPage SideNav -->
+	
 						<!-- delete-account modal -->
-						<!-- delete account popup modal start-->
-						<!-- Modal -->
-						<div class="modal fade" id="deleteaccount" tabindex="-1"
-							role="dialog" aria-labelledby="exampleModalCenterTitle"
-							aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered" role="document">
-								<div class="modal-content">
-									<div class="modal-header border-bottom-0">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body text-center">
-										<img src="../images/dontleave.jpeg" class="img-fluid mb-2" alt="">
-										<h6 class="py-2">정말 탈퇴하시겠습니까?</h6>
-										<p>캠린이 두고 가지마요 ㅜㅜ</p>
-										<textarea name="message" id="" cols="40" rows="4"
-											class="w-100 rounded"></textarea>
-									</div>
-									<div
-										class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
-										<button type="button" class="btn btn-primary"
-											data-dismiss="modal">머무르기</button>
-										<button type="button" class="btn btn-danger">진짜떠나기</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- delete account popup modal end-->
+						<jsp:include page="../modal/goodBye.jsp"></jsp:include>
 						<!-- delete-account modal -->
-
 					</div>
 				</div>
 				<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
@@ -148,12 +102,12 @@
 									<!-- id -->
 									<div class="form-group">
 										<label for="form-id">아이디</label> <input type="text"
-											class="form-control" id="form-id" readonly value="${item.id}">
+											class="form-control" id="form-id" readonly value="${sessionScope.id}">
 									</div>
 									<!-- name -->
 									<div class="form-group">
 										<label for="form-name">이름</label> <input type="text"
-											class="form-control" id="form-name" readonly value="${item.name}">
+											class="form-control" id="form-name" readonly value="${sessionScope.name}">
 									</div>
 									<!-- name -->
 									<div class="form-group">
@@ -163,7 +117,7 @@
 									<!-- nick -->
 									<label for="form-nick">닉네임</label>
 									<div class="form-group d-inline-flex">
-										<input type="text" class="form-control mr-2" id="form-nick">
+										<input type="text" class="form-control mr-2" id="form-nick" value="${sessionScope.nick}">
 										<button class="btn btn-transparent mt-0 text-center"
 											style="white-space: nowrap;">중복확인</button>
 									</div>
@@ -176,12 +130,12 @@
 									<!-- Birth -->
 									<div class="form-group">
 										<label for="form-birth">생년월일</label> <input type="text"
-											class="form-control" id="form-birth">
+											class="form-control" id="form-birth" value="${sessionScope.birth}">
 									</div>
 									<!-- Phone -->
 									<div class="form-group">
 										<label for="form-num">핸드폰 번호</label> <input type="text"
-											class="form-control" id="form-num">
+											class="form-control" id="form-num" value="${sessionScope.phone}">
 									</div>
 									<!-- Address -->
 									<label for="form-add">주소</label>
@@ -197,14 +151,14 @@
 									<!-- Email -->
 									<label for="form-mail">E-mail</label>
 									<div class="form-group d-inline-flex">
-										<input type="text" class="form-control" id="form-mail1"><span
+										<input type="text" class="form-control" id="form-mail1" value=<%=email[0] %>><span
 											style="font-size: 23px; text-align: center; padding-top: 5px; margin: 0 5px;">@</span>
-										<input type="text" class="form-control" id="form-mail2">
+										<input type="text" class="form-control" id="form-mail2" value=<%=email[1] %>>
 									</div>
 
 									<label for="form-greet">한 줄 소개</label>
 									<div class="form-group">
-										<textarea style="resize: none; width: 100%;"></textarea>
+										<textarea style="resize: none; width: 100%;">${sessionScope.greet}</textarea>
 									</div>
 
 									<!-- Submit button -->
