@@ -30,6 +30,9 @@ public class LoginController {
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
+	
+	
+	// 로그인 컨트롤러
 
 	@RequestMapping("/login/login.do")
 	public ModelAndView login() {
@@ -85,6 +88,9 @@ public class LoginController {
 
 	}
 	
+	
+	// 회원가입 컨트롤러
+	
 	@RequestMapping("/login/register.do")
 	public ModelAndView Register(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -92,7 +98,10 @@ public class LoginController {
 		
 		return modelAndView;
 	}
-
+	
+	
+	// 로그아웃 컨트롤러
+	
 	@RequestMapping("/logout.do")
 	public ModelAndView logout(HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -100,6 +109,9 @@ public class LoginController {
 		modelAndView.setViewName("/logout");
 		return modelAndView;
 	}
+	
+	
+    // 회원 탈퇴 컨트롤러
 	
 	@RequestMapping("/leave.do")
 	public ModelAndView leave(@RequestParam("msg") String msg, @RequestParam("pwd") String pwd, HttpSession session) {
@@ -123,7 +135,26 @@ public class LoginController {
 		modelAndView.addObject("flag", flag);
 		modelAndView.setViewName("/leave");
 		return modelAndView;
-		
 	}
+	
+	
+	// 비밀번호 찾기 컨트롤러
+	
+	@RequestMapping("/findpwd.do")
+	public ModelAndView findPwd(@RequestParam("fid") String fid, @RequestParam("mail1") String mail1,@RequestParam("mail2") String mail2, HttpServletResponse response) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		String email = mail1.concat("@").concat(mail2);
+		
+		UserDTO to = new UserDTO();
+		to.setId(fid);
+		to.setEmail(email);
+		
+		userService.findPwd(response, to);
+		
+		modelAndView.setViewName("/login");
+		return modelAndView;
+	}
+	
+	
 
 }

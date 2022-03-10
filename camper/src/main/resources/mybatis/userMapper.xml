@@ -38,5 +38,12 @@
     	user
     	WHERE ID = #{id} and PWD = #{pwd}
     </delete>
+    
+    <!-- 비밀번호 찾기 -->
+    <update id="updatePwd" parameterType="com.camper.model.UserDTO">
+    	UPDATE
+    	user
+    	SET PWD = #{pwd} where ID = #{id}
+    </update>
    
 </mapper>
