@@ -163,7 +163,12 @@
 									$("#list").empty();
 									html+="<tr>";
 									html+="<td class='product-thumb'><img width='80px' height='80px'";
-									html+="src='"+nvl(firstImageUrl[i])+"' alt='camping_thumb'></td>"				
+									html+="<td class='product-thumb'><img width='80px' height='80px'";
+									if(nvl(firstImageUrl[i])==""){
+										html+="src='../images/no-image.jpg' alt='이미지 없음'></td>"	
+									}else{
+										html+="src='"+nvl(firstImageUrl[i])+"' alt='이미지 없음'></td>"	
+									}			
 									html+="<td class='product-details'>";
 									html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"'>"+nvl(facltNm[i])+"</a></h3>";	
 									html+="<span class='location'>"+nvl(addr1[i])+"</span>";			
@@ -199,10 +204,10 @@
 							   	 	let infowindow = new kakao.maps.InfoWindow({
 							         	content: "<div style='width:200px;' ><b>"+positions[i].title+"</b></div>" // 인포윈도우에 표시할 내용
 							     	});
+							   	 	let location="./detail.do?sampX="+smapX[i].textContent+"&smapY="+smapY[i].textContent;
 							   		kakao.maps.event.addListener(marker, 'click', function() { 
-							   			for(j=0;j<facltNm.length;j++){
-								    	window.location.href="./detail.do?sampX="+smapX[j].textContent+"&smapY="+smapY[j].textContent;							    
-							   			}
+							   			window.location.href=location					    
+							   	
 							   		});
 							   		function makeOverListener(map, marker, infowindow) {
 									    return function() {
