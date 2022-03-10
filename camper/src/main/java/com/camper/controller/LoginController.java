@@ -139,7 +139,6 @@ public class LoginController {
 	
 	
 	// 비밀번호 찾기 컨트롤러
-	
 	@RequestMapping("/findpwd.do")
 	public ModelAndView findPwd(@RequestParam("fid") String fid, @RequestParam("mail1") String mail1,@RequestParam("mail2") String mail2, HttpServletResponse response) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
@@ -153,8 +152,6 @@ public class LoginController {
 		
 		modelAndView.setViewName("/login");
 		return modelAndView;
-	}
-	
+		}
 	
 
-}

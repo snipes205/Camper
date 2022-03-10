@@ -78,6 +78,3 @@ public class TestController {
 		modelAndView.setViewName("/maptest/maptest6");
 		return modelAndView;
 	}
-	
-}
-
