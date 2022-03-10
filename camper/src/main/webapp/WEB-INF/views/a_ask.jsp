@@ -1,7 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+=======
+    
+<%@ page import="com.camper.model.OboardTO"%>
+<%@ page import="java.util.ArrayList"%>
+
+<%
+	request.setCharacterEncoding("utf-8");
+
+	ArrayList<OboardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
+	
+	StringBuffer sbHtml = new StringBuffer();
+
+	for( OboardTO to : boardLists ) {
+		String oseq = to.getOseq();
+		String title = to.getTitle();
+		String nick = to.getNick();
+		String wdate = to.getWdate();
+
+		sbHtml.append( "<tr style=''> " );
+		sbHtml.append( "<td height='30'>" );
+		sbHtml.append( "<form style='margin:0;'>" );
+		sbHtml.append( "<input type='hidden' name='idx' value='5279'>" );
+		sbHtml.append( "<input type='checkbox' name='select_checkbox'>" );
+		sbHtml.append( "</form>" );
+		sbHtml.append( "</td>" );
+		sbHtml.append( "<td>&nbsp;</td>" );
+		sbHtml.append( "<td>&nbsp;&nbsp;&nbsp;"  + oseq + "</td>" );
+		sbHtml.append( "<td align='left' style='padding-left:10px; word-break:break-all;'>" );
+		sbHtml.append( "<a href='view_o.do?oseq=" + oseq + "'>" + title + "</a>" );
+		sbHtml.append( "</td>" );
+		sbHtml.append( "<td>" + nick + "</td>" );
+		sbHtml.append( "<td>" + wdate + "</td>" );
+		sbHtml.append( "<td>&nbsp;</td>" );
+		sbHtml.append( "</tr>" );
+
+	}
+%>
+    
+    
+    
+    
+    
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+>>>>>>> origin/jk
 
 <head>
     <meta charset="utf-8">
@@ -250,6 +296,7 @@
                                     <td colspan="10" height="1" bgcolor="#d7d7d7"></td>
                                 </tr>  
 
+<<<<<<< HEAD
                                 <tr style="">
                                     <td height="30">
                                         <form style="margin:0;"><input type="hidden" name="idx" value="5279">
@@ -326,12 +373,27 @@
                                     <td>&nbsp;</td>
                                 </tr>
                                 
+=======
+								<!-- 게시판 -->
+                                <tr style="">
+                                <form style="margin:0;">
+                                <input type="hidden" name="idx" value="">
+                                <%= sbHtml.toString() %>
+                                </form>
+                                </tr>
+                                
+                               <!-- 하단 프레임 -->
+>>>>>>> origin/jk
                                 <tr>
                                     <td colspan="10" height="1" bgcolor="#d7d7d7"></td>
                                 </tr>
                             </tbody>
                         </table>
+<<<<<<< HEAD
                             <!-- 게시물 끝 -->   
+=======
+                            <!-- 게시판 끝 -->   
+>>>>>>> origin/jk
                               
                             <!-- 페이지 번호 -->
                             <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -460,9 +522,14 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
+<<<<<<< HEAD
             <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
                     href="https://www.wrappixel.com/">wrappixel.com</a>
             </footer>
+=======
+            
+            
+>>>>>>> origin/jk
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->

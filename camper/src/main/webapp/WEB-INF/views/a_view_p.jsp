@@ -1,26 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-=======
 
-<%@page import="com.camper.model.NboardTO"%>
+<%@page import="com.camper.model.PtableTO"%>
 <% 
 
-	NboardTO to = (NboardTO)request.getAttribute( "to" );
-	String nseq = to.getNseq();
+	PtableTO to = (PtableTO)request.getAttribute( "to" );
+	String pseq = to.getPseq();
 	String title = to.getTitle();
 	String nick = to.getNick();
 	String content = to.getContent();
 	String wdate = to.getWdate();
+	
 	
 %>
     
     
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
->>>>>>> origin/jk
 
 <head>
     <meta charset="utf-8">
@@ -209,28 +205,16 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-<<<<<<< HEAD
-                        <h4 class="page-title">view</h4>
-=======
-                        <h4 class="page-title">고객지원</h4>
->>>>>>> origin/jk
+                        <h4 class="page-title">커뮤니티</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-<<<<<<< HEAD
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
-                            </ol>
-                            <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
-                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Upgrade
-                                to Pro</a>
-=======
                                 <li><a href="#" class="fw-normal">로그아웃</a></li>
                             </ol>
                             <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
                                 class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">
                                 홈페이지 바로가기</a>
->>>>>>> origin/jk
                         </div>
                     </div>
                 </div>
@@ -258,37 +242,6 @@
 			<table>
 			<tr>
 				<th width="10%">제목</th>
-<<<<<<< HEAD
-				<td width="60%">제목입니다.</td>
-				<th width="10%">등록일</th>
-				<td width="20%">2022.01.31 09:57</td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td>닉네임</td>
-				<th>좋아요</th>
-				<td>3</td>
-			</tr>
-			<tr>
-				<th>첨부 파일</th>
-				<td>test.txt(1024 Kbyte)</td>
-				<th></th>
-				<td></td>
-			</tr>
-			<tr>
-				<td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%">
-                    찬 바람이 조금씩 불어오면은 밤 하늘이 반짝이더라 긴 하루를 보내고 집에 들어가는 길에 
-                    네 생각이 문득 나더라 어디야 지금 뭐 해 나랑 별 보러 가지 않을래
-                    너희 집 앞으로 잠깐 나올래 가볍게 겉옷 하나 걸치고서 나오면 돼 너무 멀리 가지 않을게 그렇지만 네 손을 꼭 잡을래 멋진 별자리 이름은 모르지만
-                    나와 같이 가줄래 찬 바람이 조금씩 불어 오면은 네 생각이 난 그렇게 나더라 긴 하루 끝 고요해진 밤거리를 걷다 밤 하늘이 너무 좋더라 어디야 지금 뭐해
-                    나랑 별 보러 가지 않을래 어디든 좋으니 나와 가줄래 네게 하고 싶었던 말이 너무도 많지만 너무 서두르지 않을게 그치만 네 손을 꼭 잡을래
-                    멋진 별자리 이름은 모르지만 나와 같이 가줄래 너와 나의 걸음이 향해 가는 그곳이 어디 일진 모르겠지만 혼자였던 밤 하늘 너와 함께 걸으면 그거면 돼
-                    찬 바람이 조금씩 불어오면은 밤 하늘이 반짝이더라 긴 하루를 보내고 집에 들어가는 길에 네 생각이 문득 나더라 어디야 지금 뭐 해 나랑 별 보러 가지 않을래
-                    너희 집 앞으로 잠깐 나올래 가볍게 겉옷 하나 걸치고서 나오면 돼 너무 멀리 가지 않을게 그렇지만 네 손을 꼭 잡을래 멋진 별자리 이름은 모르지만
-                    나와 같이 가줄래 찬 바람이 조금씩 불어 오면은 네 생각이 난 그렇게 나더라 긴 하루 끝 고요해진 밤거리를 걷다 밤 하늘이 너무 좋더라 어디야 지금 뭐해
-                    나랑 별 보러 가지 않을래 어디든 좋으니 나와 가줄래 네게 하고 싶었던 말이 너무도 많지만 너무 서두르지 않을게 그치만 네 손을 꼭 잡을래
-                    멋진 별자리 이름은 모르지만 나와 같이 가줄래 너와 나의 걸음이 향해 가는 그곳이 어디 일진 모르겠지만 혼자였던 밤 하늘 너와 함께 걸으면 그거면 돼
-=======
 				<td width="60%"><%=title%></td>
 				<th width="10%">등록일</th>
 				<td width="20%"><%=wdate%></td>
@@ -301,7 +254,6 @@
 			<tr>
 				<td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%">
                     <%=content%>
->>>>>>> origin/jk
                 </td>
 			</tr>
 		</table>
@@ -315,11 +267,7 @@
                 <tbody>
                     <tr>
                         <td align="right">
-<<<<<<< HEAD
-                                <input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='faq.html'" />
-=======
                                 <input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='/admin/notice.do'" />
->>>>>>> origin/jk
                                 <input type="button" value="삭제" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='modify.html'" />
                                 <input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_delete1.jsp'" />
                                 <input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='write.html'" />
@@ -431,14 +379,8 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-<<<<<<< HEAD
-            <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
-                    href="https://www.wrappixel.com/">wrappixel.com</a>
-            </footer>
-=======
             
             
->>>>>>> origin/jk
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
