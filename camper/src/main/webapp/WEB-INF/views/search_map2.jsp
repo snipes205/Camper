@@ -108,13 +108,6 @@
 		let container = document.getElementById('map');
 		container.style.display="none";
 		
-		function nvl(item){
-			if(typeof item==="undefined"|| item===null|| item==""){
-				return "";
-			}
-	            return item.textContent;
-			}
-			
 		btn.addEventListener('click',function(){
 			const strSearchMap= document.getElementById("strSearchMap").value;
 			if(strSearchMap.length<2){
@@ -127,93 +120,44 @@
 						let smapY=result[0].y;
 						let smapX=result[0].x;
 						const request = new XMLHttpRequest();
+						function nvl(item){
+							if(typeof item==="undefined"|| item===null|| item==""){
+								return "";
+							}
+					        	
+					        return item.textContent;
+							
+						}
+						
 						request.onreadystatechange = function() {
 							if(request.readyState==4){
 								if(request.status==200){
-									container.style.display="block";
 									let xmlData =request.responseXML;
-									$("#resultNum").empty();
-									$("#map").empty();
-									const facltNm =xmlData.getElementsByTagName('facltNm');
-									const addr1 = xmlData.getElementsByTagName('addr1');
-									const smapX=xmlData.getElementsByTagName('mapX');
-									const smapY=xmlData.getElementsByTagName('mapY');
-									const firstImageUrl = xmlData.getElementsByTagName('firstImageUrl');
-									const induty = xmlData.getElementsByTagName('induty');
-									
-									
-									let options = {
-										
-											center: new kakao.maps.LatLng(smapY[0].childNodes[0].nodeValue,smapX[0].childNodes[0].nodeValue),
-											level: 1
-										};
-									let map = new kakao.maps.Map(container, options);
-									let imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-									let positions = [];
-									
+									const items =xmlData.getElementsByTagName('item');
 									let html = "";
-								
-									$("#resultNum").html("결과\t<b>"+nvl(xmlData.getElementsByTagName('totalCount')[0])+"</b>개");
-									for(i=0;i<facltNm.length;i++){
+									
+									for(let i=0; i<items.length-1; i++){
+									
+										console.log(nvl(items[i].getElementsByTagName("firstImageUrl")[0]));
 										$("#list").empty();
 										html+="<tr>";
 										html+="<td class='product-thumb'><img width='80px' height='80px'";
-										html+="src='"+nvl(firstImageUrl[i])+"' alt='camping_thumb'></td>"				
+										html+="src='"+nvl(items[i].getElementsByTagName("firstImageUrl")[0])+"' alt='No_image'></td>"				
 										html+="<td class='product-details'>";
-										html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"'>"+nvl(facltNm[i])+"</a></h3>";	
-										html+="<span class='location'>"+nvl(addr1[i])+"</span>";			
+										html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(items[i].getElementsByTagName("mapX")[0])+"&smapY="+nvl(items[i].getElementsByTagName("mapY")[0])+"'>"+nvl(items[i].getElementsByTagName("facltNm")[0])+"</a></h3>";	
+										html+="<span class='location'>"+nvl(items[i].getElementsByTagName("addr1")[0])+"</span>";			
 										html+="</td>";		
-										html+="<td class='product-category'><span class='categories'>"+nvl(induty[i])+"</span></td>";		
+										html+="<td class='product-category'><span class='categories'>"+nvl(items[i].getElementsByTagName("induty")[0])+"</span></td>";		
 										html+="<td class='action' data-title='Action'>";		
 										html+="<div class=''>";
 										html+="<ul class='list-inline justify-content-center'>";		
 										html+="<li class='list-inline-item'><a data-toggle='tooltip'";	
 										html+="data-placement='top' title='View' class='view'";
-										html+="'./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"'>";
+										html+="'./detail.do?sampX="+nvl(items[i].getElementsByTagName("mapX")[0])+"&smapY="+nvl(items[i].getElementsByTagName("mapY")[0])+"'>";
 										html+="</a></li></ul></div></td></tr>";	
 										
-										positions.push({
-									        title: facltNm[i].childNodes[0].nodeValue,
-									        latlng: new kakao.maps.LatLng(smapY[i].textContent,smapX[i].textContent)
-									    	
-										})
-									 	// 마커 이미지의 이미지 크기 입니다
-								    	let imageSize = new kakao.maps.Size(24, 35); 
-								    
-								    	// 마커 이미지를 생성합니다    
-								    	let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-								    
-								   	 // 마커를 생성합니다
-								   	 	let marker = new kakao.maps.Marker({
-								       		 map: map, // 마커를 표시할 지도
-								       		 position: positions[i].latlng, // 마커를 표시할 위치
-								       		 title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-								       		 image : markerImage // 마커 이미지 
-								    	});
-								   	 	let infowindow = new kakao.maps.InfoWindow({
-								         	content: "<div style='width:200px;' ><b>"+positions[i].title+"</b></div>" // 인포윈도우에 표시할 내용
-								     	});
-								   		kakao.maps.event.addListener(marker, 'click', function() { 
-								   			for(j=0;j<firstImageUrl.length;j++){
-									    	window.location.href="./detail.do?sampX="+smapX[j].textContent+"&smapY="+smapY[j].textContent;							    
-								   			}
-								   		});
-								   		function makeOverListener(map, marker, infowindow) {
-										    return function() {
-										        infowindow.open(map, marker);
-										    };
-										}
-										console.log(smapX[i].textContent,smapY[i].textContent);
-										// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-										function makeOutListener(infowindow) {
-										    return function() {
-										        infowindow.close();
-										    };
-										}
-										kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-								   	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-									
-								   		$("#list").append(html);
+										
+										$("#list").append(html);
 									}
 								}else{
 									alert("페이지 에러");
@@ -240,7 +184,6 @@
 			}
 		})
 	}
-
 	</script>
 </head>
 

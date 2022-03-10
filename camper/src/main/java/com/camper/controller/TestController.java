@@ -73,5 +73,14 @@ public class TestController {
 		modelAndView.setViewName("/maptest/maptest6");
 		return modelAndView;
 	}
+	@RequestMapping(value = "/search/map2.do")
+	public ModelAndView maptest7() throws Exception {
+
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/search_map2");
+		return modelAndView;
+	}
+
 }
 

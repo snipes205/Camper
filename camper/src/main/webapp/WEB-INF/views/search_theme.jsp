@@ -85,6 +85,167 @@
 	height: 225px;
 }
 </style>
+<script src="../plugins/jQuery/jquery.min.js"></script>
+<script src="../plugins/bootstrap/js/popper.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap-slider.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44d54500db491a25378cc4604dd20efc&libraries=services"></script>
+<script type="text/javascript">
+	window.onload=()=>{
+		
+		const url = window.location.href
+		
+		urls =url.split("/");
+		let underBar = "<div class='underbar'></div>";
+		if(urls[4]=="map.do"){
+			$("#searchMapBar").append(underBar);
+			$("#searchMapBar").attr("class",'tab_txt');
+			$("#searchThemeBar").attr("class",'tab_txt2');
+			$("#searchMapBarLi").attr("data-selected","true");
+		}else{
+			$("#searchThemeBar").append(underBar);
+			$("#searchMapBar").attr("class",'tab_txt2');
+			$("#searchThemeBar").attr("class",'tab_txt');
+			$("#searchThemeBarLi").attr("data-selected","true");
+		}
+		let btn = document.querySelector("#searchButton");
+		let container = document.getElementById('map');
+		container.style.display="none";
+		
+		function nvl(item){
+			if(typeof item==="undefined"|| item===null|| item==""){
+				return "";
+			}
+	            return item.textContent;
+			}
+		
+		btn.addEventListener('click',function(){
+			const strSearchName= document.getElementById("strSearchName").value;
+			if(strSearchName.length<2){
+				alert("이름을 두글자 이상 입력하세요");
+			}else{
+				let keyword= encodeURIComponent(strSearchName);
+				if (keyword != null){
+					const request = new XMLHttpRequest();
+					request.onreadystatechange = function(){
+						if(request.readyState==4){
+							if(request.status==200){
+						
+								container.style.display="block";
+								let xmlData =request.responseXML;
+								$("#resultNum").empty();
+								$("#map").empty();
+								
+								const result=xmlData.getElementsByTagName('totalCount')[0].textContent;
+								if(result==0){
+									alert("결과가 없습니다");
+								}else{
+								
+								const facltNm =xmlData.getElementsByTagName('facltNm');
+								const addr1 = xmlData.getElementsByTagName('addr1');
+								const smapX=xmlData.getElementsByTagName('mapX');
+								const smapY=xmlData.getElementsByTagName('mapY');
+								const firstImageUrl = xmlData.getElementsByTagName('firstImageUrl');
+								const induty = xmlData.getElementsByTagName('induty');
+															
+								let options = {
+									center: new kakao.maps.LatLng(smapY[0].childNodes[0].nodeValue,smapX[0].childNodes[0].nodeValue),
+										level: 1
+									};
+								let map = new kakao.maps.Map(container, options);
+								let imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+								let positions = [];					
+								let html = "";
+								
+								$("#resultNum").html("결과\t<b>"+xmlData.getElementsByTagName('totalCount')[0].textContent+"</b>개");
+								for(i=0;i<facltNm.length;i++){
+									$("#list").empty();
+									html+="<tr>";
+									html+="<td class='product-thumb'><img width='80px' height='80px'";
+									html+="src='"+nvl(firstImageUrl[i])+"' alt='camping_thumb'></td>"				
+									html+="<td class='product-details'>";
+									html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"'>"+nvl(facltNm[i])+"</a></h3>";	
+									html+="<span class='location'>"+nvl(addr1[i])+"</span>";			
+									html+="</td>";		
+									html+="<td class='product-category'><span class='categories'>"+nvl(induty[i])+"</span></td>";		
+									html+="<td class='action' data-title='Action'>";		
+									html+="<div class=''>";
+									html+="<ul class='list-inline justify-content-center'>";		
+									html+="<li class='list-inline-item'><a data-toggle='tooltip'";	
+									html+="data-placement='top' title='View' class='view'";
+									html+="'./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"'>";
+									html+="</a></li></ul></div></td></tr>";	
+										
+										
+									positions.push({
+								        title: facltNm[i].childNodes[0].nodeValue,
+								        latlng: new kakao.maps.LatLng(smapY[i].textContent,smapX[i].textContent)
+									    	
+									})
+								 	// 마커 이미지의 이미지 크기 입니다
+							    	let imageSize = new kakao.maps.Size(24, 35); 
+								    
+								    	// 마커 이미지를 생성합니다    
+							    	let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+								    
+								   	 // 마커를 생성합니다
+							   	 	let marker = new kakao.maps.Marker({
+							       		 map: map, // 마커를 표시할 지도
+							       		 position: positions[i].latlng, // 마커를 표시할 위치
+							       		 title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+							       		 image : markerImage // 마커 이미지 
+							    	});
+							   	 	let infowindow = new kakao.maps.InfoWindow({
+							         	content: "<div style='width:200px;' ><b>"+positions[i].title+"</b></div>" // 인포윈도우에 표시할 내용
+							     	});
+							   		kakao.maps.event.addListener(marker, 'click', function() { 
+							   			for(j=0;j<facltNm.length;j++){
+								    	window.location.href="./detail.do?sampX="+smapX[j].textContent+"&smapY="+smapY[j].textContent;							    
+							   			}
+							   		});
+							   		function makeOverListener(map, marker, infowindow) {
+									    return function() {
+									        infowindow.open(map, marker);
+									    };
+									}
+										// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+									function makeOutListener(infowindow) {
+									    return function() {
+									        infowindow.close();
+									    };
+									}
+									kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+							   	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+									
+							   		$("#list").append(html);
+							   		}
+									}
+							}else{
+								alert("페이지 에러");
+							}
+								
+						}
+					};
+					//요청방식 / 요청 url// 동기
+					request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
+							+"searchList"
+							+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
+							+"&numOfRows=10"
+							+"&pageNo=1"
+							+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
+							+"&keyword="+keyword
+							,true);
+					request.send();
+				}else{
+					alert("이름이 정확하지 않습니다");
+				}
+		}
+	})
+	}
+
+	</script>
+
 </head>
 
 <body class="body-wrapper">
@@ -111,7 +272,7 @@
 								src="https://img.icons8.com/external-icongeek26-glyph-icongeek26/64/000000/external-camping-tent-desert-icongeek26-glyph-icongeek26.png"
 								style="width: 3em; height: 3em;" />
 								<div class="tab_txt">
-									<h6 class="tab_title">테마별 검색</h6>
+									<h6 class="tab_title"><a href="./theme.do">이름으로 검색</a></h6>
 									<div class="underbar"></div>
 								</div></li>
 
@@ -120,7 +281,7 @@
 								src="https://img.icons8.com/external-bartama-glyph-64-bartama-graphic/64/000000/external-location-travel-tourism-glyph-bartama-glyph-64-bartama-graphic.png"
 								style="width: 3em; height: 3em;" />
 								<div class="tab_txt2">
-									<h6 class="tab_title">지역별 검색</h6>
+									<h6 class="tab_title"><a href="./map.do">지도로 검색</a></h6>
 								</div></li>
 						</ul>
 
@@ -142,7 +303,8 @@
 															<input aria-label="찾고 있는 캠핑장이 있으신가요?"
 																data-selenium="textInput" tabindex="-1" type="text"
 																class="SearchBoxTextEditor SearchBoxTextEditor--autocomplete"
-																placeholder="찾고 있는 캠핑장이 있으신가요?" value="">
+																placeholder="찾고 있는 캠핑장이 있으신가요?" value=""
+																id="strSearchName" name="strSearchName">
 														</div>
 													</div>
 												</div>
@@ -193,7 +355,7 @@
 									<button radius="M" data-selenium="searchButton"
 										data-element-name="search-button"
 										class="Buttonstyled__ButtonStyled-sc-5gjk6l-0 search_btn"
-										color="primary">
+										color="primary" id="searchButton">
 										<div
 											class="BaseButtonstyled__HiddenToggler-sc-12j2fzo-2 search_btn_toggle">
 											<div class="inner_container">
@@ -225,8 +387,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-title">
-						<h2>검색 결과 출력</h2>
-						<p>리스트 형식으로 바꿈</p>
+						<div id="map" class="container"
+							style="width: 600px; height: 400px"></div>
 					</div>
 				</div>
 			</div>
@@ -235,8 +397,8 @@
 			<div class="col-md-12">
 
 				<!-- Recently Favorited -->
-				<div>
-
+				<div class="container">
+					<div id="resultNum" class="h4"></div>
 					<table class="table table-responsive product-dashboard-table">
 						<thead>
 							<tr>
@@ -246,102 +408,9 @@
 								<th class="text-center">Action</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td class="product-thumb"><img width="80px" height="80px"
-									src="../images/camping.jpeg" alt="camping_thumb"></td>
-								<td class="product-details">
-									<h3 class="title">양양 포레스트 캠핑장</h3> <span class="location">강원도
-										양양</span>
-								</td>
-								<td class="product-category"><span class="categories">2022.02.23</span></td>
-								<td class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item"><a data-toggle="tooltip"
-												data-placement="top" title="View" class="view"
-												href="category.html">
-											</a></li>
-										</ul>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="product-thumb"><img width="80px" height="80px"
-									src="../images/camping.jpeg" alt="camping_thumb"></td>
-								<td class="product-details">
-									<h3 class="title">양양 포레스트 캠핑장</h3> <span class="location">강원도
-										양양</span>
-								</td>
-								<td class="product-category"><span class="categories">2022.02.23</span></td>
-								<td class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item"><a data-toggle="tooltip"
-												data-placement="top" title="View" class="view"
-												href="category.html">
-											</a></li>
-										</ul>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="product-thumb"><img width="80px" height="80px"
-									src="../images/camping.jpeg" alt="camping_thumb"></td>
-								<td class="product-details">
-									<h3 class="title">양양 포레스트 캠핑장</h3> <span class="location">강원도
-										양양</span>
-								</td>
-								<td class="product-category"><span class="categories">2022.02.23</span></td>
-								<td class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item"><a data-toggle="tooltip"
-												data-placement="top" title="View" class="view"
-												href="category.html"> 
-											</a></li>
-										</ul>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="product-thumb"><img width="80px" height="80px"
-									src="../images/camping.jpeg" alt="camping_thumb"></td>
-								<td class="product-details">
-									<h3 class="title">양양 포레스트 캠핑장</h3> <span class="location">강원도
-										양양</span>
-								</td>
-								<td class="product-category"><span class="categories">2022.02.23</span></td>
-								<td class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item"><a data-toggle="tooltip"
-												data-placement="top" title="View" class="view"
-												href="category.html"> 
-											</a></li>
-										</ul>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td class="product-thumb"><img width="80px" height="80px"
-									src="../images/camping.jpeg" alt="camping_thumb"></td>
-								<td class="product-details">
-									<h3 class="title">양양 포레스트 캠핑장</h3> <span class="location">강원도
-										양양</span>
-								</td>
-								<td class="product-category"><span class="categories">2022.02.23</span></td>
-								<td class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item"><a data-toggle="tooltip"
-												data-placement="top" title="View" class="view"
-												href="category.html">
-											</a></li>
-										</ul>
-									</div>
-								</td>
-							</tr>
+						<tbody id="list">
+
+
 
 						</tbody>
 					</table>
@@ -349,6 +418,7 @@
 				</div>
 
 				<!-- pagination -->
+				<!-- 
 				<div class="pagination justify-content-center">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
@@ -366,9 +436,10 @@
 						</ul>
 					</nav>
 				</div>
+				 -->
 				<!-- pagination -->
-				</div>
 			</div>
+		</div>
 	</section>
 	<jsp:include page="../component/footer.jsp"></jsp:include>
 

@@ -45,13 +45,6 @@ window.onload=()=>{
 			if(request.status==200){
 				let xmlImgaeData =request.responseXML;
 				
-				
-				
-				
-				
-			
-				
-				
 			}else{
 				alert("페이지 에러");
 			}

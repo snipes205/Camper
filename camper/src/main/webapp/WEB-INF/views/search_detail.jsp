@@ -70,7 +70,13 @@ img .img-fluid {
 		let params= strParams[1].split("&");
 		let smapX=params[0].substring(6);
 		let smapY=params[1].substring(6);
-	
+		
+		function nvl(item){
+			if(typeof item==="undefined"|| item===null|| item==""){
+				return "";
+			}
+	            return item.textContent;
+			}
 	
 		const request = new XMLHttpRequest();
 		request.onreadystatechange = function() {
@@ -78,52 +84,38 @@ img .img-fluid {
 				if(request.status==200){
 					let xmlData =request.responseXML;
 					
+					const induty = xmlData.getElementsByTagName('induty')[0];
+					const contentId = xmlData.getElementsByTagName('contentId')[0];
+					const facltNm = xmlData.getElementsByTagName('facltNm')[0];
+					const addr1 = xmlData.getElementsByTagName('addr1')[0];
+					const glampInnerFclty = xmlData.getElementsByTagName('glampInnerFclty')[0];
+					const animalCmgCl = xmlData.getElementsByTagName('animalCmgCl')[0];
+					const sbrsCl = xmlData.getElementsByTagName('sbrsCl')[0];
+					const lineIntro = xmlData.getElementsByTagName('lineIntro')[0];
+					const firstImageUrl = xmlData.getElementsByTagName('firstImageUrl')[0];
+					const doNm =  xmlData.getElementsByTagName('doNm')[0];
+					const hompage = xmlData.getElementsByTagName('homepage')[0];
+					
+					let div = function(){
+						
+						document.getElementById("induty").innerText=nvl(induty);
+						document.getElementById("facltNm").innerText =nvl(facltNm);
+						document.getElementById("addr1").innerText =nvl(addr1);
+						document.getElementById("glampInnerFclty").innerText =nvl(glampInnerFclty);
+						document.getElementById("animalCmgCl").innerText =nvl(animalCmgCl);
+						document.getElementById("sbrsCl").innerText =nvl(sbrsCl);
+						document.getElementById("lineIntro").innerText =nvl(lineIntro);
+						document.getElementById("doNm").innerText =nvl(doNm);
+						document.getElementById("homepage").innerText=nvl(hompage);
+						document.getElementById("homepage").setAttribute("href",nvl(hompage));	
+						document.getElementById("contentId").innerText=nvl(contentId) ; 
+						document.getElementById("mainImg").setAttribute("src",nvl(firstImageUrl));	
+						
+					}
+					div();
 					
 					
-					const induty = xmlData.getElementsByTagName('induty');
-					const contentId = xmlData.getElementsByTagName('contentId');
 					
-					
-					
-					
-					
-					
-					const facltNm = xmlData.getElementsByTagName('facltNm');
-					const addr1 = xmlData.getElementsByTagName('addr1');
-					//const glampInnerFclty = xmlData.getElementsByTagName('glampInnerFclty');
-					const animalCmgCl = xmlData.getElementsByTagName('animalCmgCl');
-					const sbrsCl = xmlData.getElementsByTagName('sbrsCl');
-					//const lineIntro = xmlData.getElementsByTagName('lineIntro');
-					const firstImageUrl = xmlData.getElementsByTagName('firstImageUrl');
-					const doNm =  xmlData.getElementsByTagName('doNm');
-					const hompage = xmlData.getElementsByTagName('homepage');
-					console.log(facltNm[0].childNodes[0].nodeValue);
-					console.log(firstImageUrl[0].childNodes[0].nodeValue);
-					
-					
-					let sInduty= document.getElementById("induty");
-					sInduty.textContent =induty[0].childNodes[0].nodeValue;
-					
-					
-					let sFacltNm= document.getElementById("facltNm");
-					sFacltNm.textContent =facltNm[0].childNodes[0].nodeValue;
-					let sAddr1= document.getElementById("addr1");
-					sAddr1.textContent =addr1[0].childNodes[0].nodeValue ;
-					//let sGlampInnerFclty= document.getElementById("glampInnerFclty");
-					
-					//sGlampInnerFclty.textContent = glampInnerFclty[0].childNodes[0].nodeValue;
-					let sNimalCmgCl= document.getElementById("animalCmgCl");
-					sNimalCmgCl.textContent =animalCmgCl[0].childNodes[0].nodeValue;
-					let sSbrsCl= document.getElementById("sbrsCl");
-					sSbrsCl.textContent =sbrsCl[0].childNodes[0].nodeValue;
-					//let sLineIntro =document.getElementById("lineIntro");
-					//sLineIntro.textContent =lineIntro[0].childNodes[0].nodeValue;
-					let sDoNm =document.getElementById("doNm");
-					sDoNm.textContent =doNm[0].childNodes[0].nodeValue;
-					//let sHompage =document.getElementById("hompage");
-					//sHompage.textContent =hompage[0].childNodes[0].nodeValue;
-					document.getElementById("mainImg").setAttribute("src",firstImageUrl[0].childNodes[0].nodeValue);
-					let sContentId= document.getElementById("contentId");
 					
 					
 				}else{
@@ -186,6 +178,7 @@ img .img-fluid {
 							class="container-fluid p-5 my-5 bg-light border col-lg-8 shadow-sm pt-3">
 							<div class="product-details">
 								<div id='facltNm' class="h1"></div>
+								<div id="contentId" style="display:none;"></div>
 								<div class="product-meta">
 									<ul class="list-inline">
 
@@ -234,12 +227,8 @@ img .img-fluid {
 										<td><div id="addr1">주소1</div></td>
 									</tr>
 									<tr>
-										<td>전화</td>
-										<td><div id="addr1"></div></td>
-									</tr>
-									<tr>
 										<td>홈페이지</td>
-										<td><div id="homepage"></div></td>
+										<td><a id="homepage" href=""></a></td>
 									</tr>
 									<tr>
 										<td>기본 제공</td>
