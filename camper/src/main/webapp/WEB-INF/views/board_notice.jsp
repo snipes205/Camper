@@ -1,5 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!--  공지사항 List MVC Model2 구조 -->
+
+<%@ page import="com.camper.model.BoardTO" %>
+<%@page import="com.camper.model.BoardListTO"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.ResultSet" %>
+<% 
+	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists4" );
+
+	StringBuffer sbHtml = new StringBuffer();
+		for( BoardTO to : boardLists ) {
+			String nseq = to.getNseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			String wdate = to.getWdate();
+			
+			// 게시물 내용 form
+			sbHtml.append( "<article>" );
+			sbHtml.append( "	<div>" );
+			sbHtml.append( "		<a href='/community/view.do?nseq=" + nseq + "'>" + title + "</a>" );
+			sbHtml.append( "	</div>" );
+			sbHtml.append( "	<ul class='list-inline'>" );
+			sbHtml.append( "		<li class='list-inline-item'>by <a href=''>" + nick + "</a></li>" );
+			sbHtml.append( "		<li class='list-inline-item'>" + wdate + "</li>" );
+			sbHtml.append( "	</ul>" );
+			sbHtml.append( "</article>" );
+
+		}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -40,6 +70,7 @@
 </head>
 
 <body class="body-wrapper">
+<<<<<<< HEAD
 	<jsp:include page="../component/header.jsp"></jsp:include>
 
 	<!--  페이지 공지사항 Section -->
@@ -59,71 +90,30 @@
 		</div>
 		<!-- Container End -->
 	</section>
+=======
+
+<!-- Header part -->
+<jsp:include page="../component/header.jsp"></jsp:include>
+>>>>>>> origin/ljh
 
 
-	<!--  캠핑톡톡 Section -->
-
+	<!--  공지사항 Section -->
 	<section class="blog section">
+	<div class="container">
+				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0"">
+					<h2><i class="ico"><img src="../images/community/megaphone.png"></i>
+					공지사항
+					</h2><hr />     
+				</div>
+			</div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 
-					<!-- 게시물 1 -->
-					<article>
-						<div>
-							<a href="board_view.html">공지사항5</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by 관리자</li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 2 -->
-					<article>
-						<div>
-							<a href="board_view.html">공지사항4</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by 관리자</li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 3 -->
-					<article>
-						<div>
-							<a href="board_view.html">공지사항3</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by 관리자</li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 4 -->
-					<article>
-						<div>
-							<a href="board_view.html">공지사항2</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by 관리자</li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!-- 게시물 5 -->
-					<article>
-						<div>
-							<a href="board_view.html">공지사항1</a>
-						</div>
-						<ul class="list-inline">
-							<li class="list-inline-item">by 관리자</li>
-							<li class="list-inline-item">2022-02-24</li>
-						</ul>
-					</article>
-
-					<!--  페이지네이션  section -->
+					<!--  공지사항 내용 표시 -->
+					<%= sbHtml.toString() %>
+					
+					<!--  페이지네이션  part -->
 
 					<nav aria-label="Page navigation example">
 						<ul class="pagination" style="margin-top: 0px;">
@@ -156,7 +146,7 @@
 					<div class="sidebar">
 
 
-						<!-- 검색 부분 -->
+						<!-- 검색 part -->
 
 						<div class="widget search p-0">
 							<div class="input-group">
@@ -166,14 +156,19 @@
 						</div>
 
 
-						<!-- 카테고리 부분 -->
+						<!-- 카테고리 part -->
 
 						<div class="widget category">
 							<!-- Widget Header -->
 							<h5 class="widget-header">카테고리</h5>
 							<ul class="category-list">
+<<<<<<< HEAD
 								<li><a href="/ask/notice.do">공지사항 <span class="float-right">(10)</span></a></li>
 								<li><a href="/ask/faq.do">FAQ <span class="float-right">(10)</span></a></li>
+=======
+								<li><a href="/ask/notice.do">공지사항 <span class="float-right"></span></a></li>
+								<li><a href="/ask/faq.do">FAQ <span class="float-right"></span></a></li>
+>>>>>>> origin/ljh
 							</ul>
 						</div>
 					</div>

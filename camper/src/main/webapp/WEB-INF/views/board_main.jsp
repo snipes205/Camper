@@ -1,7 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!--  캠핑톡톡 메인 List MVC Model2 구조 -->
+
+<%@ page import="com.camper.model.BoardTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.ResultSet" %>
+<%
+
+	// 캠핑로그 
+	
+	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
+	
+	StringBuffer sbHtml = new StringBuffer();
+		for( BoardTO to : boardLists ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			
+			sbHtml.append( "	<div class='item'>" );
+			sbHtml.append( "		<div class='title'>" );
+			sbHtml.append( "			<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>&nbsp;" );
+			sbHtml.append( "		</div>" );
+			sbHtml.append( "			<div class='writer'>" + nick + "</div>" );
+			sbHtml.append( "	</div>" );
+
+	}
+%>
+<%
+	// 캠핑꿀팁
+	
+	ArrayList<BoardTO> boardLists2 = (ArrayList)request.getAttribute( "boardLists2" );
+	
+	StringBuffer sbHtml2 = new StringBuffer();
+		for( BoardTO to : boardLists2 ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			
+			sbHtml2.append( "	<div class='item'>" );
+			sbHtml2.append( "		<div class='title'>" );
+			sbHtml2.append( "			<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>&nbsp;" );
+			sbHtml2.append( "		</div>" );
+			sbHtml2.append( "			<div class='writer'>" + nick + "</div>" );
+			sbHtml2.append( "	</div>" );
+
+	}
+%>
+<% 
+		
+	// 캠핑가자
+	ArrayList<BoardTO> boardLists3 = (ArrayList)request.getAttribute( "boardLists3" );
+	
+	StringBuffer sbHtml3 = new StringBuffer();
+		for( BoardTO to : boardLists3 ) {
+			String pseq = to.getPseq();
+			String title = to.getTitle();
+			String nick = to.getNick();
+			
+			sbHtml3.append( "	<div class='item'>" );
+			sbHtml3.append( "		<div class='title'>" );
+			sbHtml3.append( "			<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>&nbsp;" );
+			sbHtml3.append( "		</div>" );
+			sbHtml3.append( "			<div class='writer'>" + nick + "</div>" );
+			sbHtml3.append( "	</div>" );
+
+	}	
+	
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -42,6 +110,11 @@
 </head>
 
 <body class="body-wrapper">
+<<<<<<< HEAD
+=======
+
+<!--  Header part -->
+>>>>>>> origin/ljh
 	<jsp:include page="../component/header.jsp"></jsp:include>
 	
 	<section class="section bg-gray">
@@ -63,36 +136,9 @@
 							</h2>
 							<hr />
 							<div class="board1">
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목5</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목4</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목3</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목2</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목1</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
+								
+								<!-- 캠핑로그 List 내용 -->
+								<%=sbHtml.toString() %>
 							</div>
 						</div>
 					</div>
@@ -105,42 +151,15 @@
 							<h2><i class="ico"><img src="../images/community/icon_bag.png"></i><a
 									href="./camptip.do">캠핑꿀팁</a></h2>
 							<hr />
-						</div>
-						<div class="board1">
-							<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목5</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목4</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목3</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목2</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목1</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
+							<div class="board1">
+							
+								<!--  캠핑꿀팁 List 내용 -->
+								<%=sbHtml2.toString() %>
+							</div>
 						</div>
 					</div>
 				</div>
-
+				
 				<!--  board3 -->
 				<div class="col-lg-4 col-md-6 mx-sm-auto">
 					<div class="package-content bg-light border text-center p-5 my-2 my-lg-0">
@@ -148,44 +167,23 @@
 							<h2><i class="ico"><img src="../images/community/icon_car.png"></i><a
 									href="./campgo.do">캠핑가자</a></h2>
 							<hr />
-						</div>
-						<div class="board1">
-							<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목5</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목4</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목3</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목2</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
-								<div class="item">
-									<div class="title">
-										<a href="./community/view.do&seq=?">제목1</a>&nbsp;
-									</div>
-									<div class="writer">Egenius</div>
-								</div>
+							<div class="board1">
+							
+								<!-- 캠핑가자 List 내용 -->
+								<%= sbHtml3.toString() %>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 	</section>
+=======
+		</div>
+	</section>
+	
+	<!-- Footer part -->
+>>>>>>> origin/ljh
 	<jsp:include page="../component/footer.jsp"></jsp:include>
 
 

@@ -63,7 +63,11 @@
 </head>
 
 <body class="body-wrapper">
+<<<<<<< HEAD
 	<jsp:include page="../component/header.jsp"></jsp:include>
+=======
+    <jsp:include page="../component/header.jsp"></jsp:include>
+>>>>>>> origin/ljh
 
 	<!--==================================
 =            User Profile            =
@@ -244,7 +248,11 @@
 		</div>
 		<!-- Container End -->
 	</section>
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> origin/ljh
 	<jsp:include page="../component/footer.jsp"></jsp:include>
 	<!-- JAVASCRIPTS -->
 	<script src="../plugins/jQuery/jquery.min.js"></script>

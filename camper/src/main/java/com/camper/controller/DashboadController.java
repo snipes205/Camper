@@ -30,6 +30,7 @@ public class DashboadController {
 		return modelAndView;
 	}
 
+<<<<<<< HEAD
 	@RequestMapping("/dashboard/follow.do")
 	public ModelAndView dashFollow(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -38,6 +39,8 @@ public class DashboadController {
 		return modelAndView;
 	}
 	
+=======
+>>>>>>> origin/ljh
 	@RequestMapping("/dashboard/like.do")
 	public ModelAndView dashLike(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -46,7 +49,10 @@ public class DashboadController {
 		return modelAndView;
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/ljh
 	@RequestMapping("/dashboard/message.do")
 	public ModelAndView dashMassage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();

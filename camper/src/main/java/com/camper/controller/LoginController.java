@@ -31,4 +31,8 @@ public class LoginController {
 
 		return modelAndView;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/ljh
 }

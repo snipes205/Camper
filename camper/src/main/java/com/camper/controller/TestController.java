@@ -25,6 +25,7 @@ public class TestController {
 		mav.addObject("list", testList);
 		return mav;
 	}
+<<<<<<< HEAD
 	@RequestMapping(value = "/maptest")
 	public ModelAndView maptest() throws Exception {
 
@@ -74,3 +75,7 @@ public class TestController {
 		return modelAndView;
 	}
 }
+=======
+
+}
+>>>>>>> origin/ljh
