@@ -1,92 +1,14 @@
 package com.camper.controller;
 
-<<<<<<< HEAD
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-=======
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> origin/ljh
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-//커뮤니티 컨트롤러
-@RestController
-public class CommController {
-
-	// 게시판
-
-	@RequestMapping("/community/main.do")
-	public ModelAndView boardMain() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_main");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/camplog.do")
-	public ModelAndView boardCamplog() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list1");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/camptip.do")
-	public ModelAndView boardCamptip() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list2");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/campgo.do")
-	public ModelAndView boardCampgo() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list3");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/write.do")
-	public ModelAndView boardWrite() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_write");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/view.do")
-	public ModelAndView boardView() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_view");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/modify.do")
-	public ModelAndView boardModify() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_modify");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/delete.do")
-	public ModelAndView boardDelete() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_delete");
-		return modelAndView;
-	}
-
-	@RequestMapping("/community/deleteOk.do")
-	public ModelAndView boardDeleteOk() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_delete_Ok");
-		return modelAndView;
-	}
-
-	// 공지사항
-=======
 import com.camper.model.BoardDAO;
 import com.camper.model.BoardTO;
 
@@ -107,7 +29,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists3 = dao.boardList3();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_main");
+		modelAndView.setViewName("community/board_main");
 		modelAndView.addObject( "boardLists", boardLists );
 		modelAndView.addObject( "boardLists2", boardLists2 );
 		modelAndView.addObject( "boardLists3", boardLists3 );
@@ -122,7 +44,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists = dao.boardList();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list1");
+		modelAndView.setViewName("community/board_list1");
 		modelAndView.addObject( "boardLists", boardLists );
 		
 		return modelAndView;
@@ -135,7 +57,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists2 = dao.boardList2();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list2");
+		modelAndView.setViewName("community/board_list2");
 		modelAndView.addObject( "boardLists2", boardLists2 );
 		
 		return modelAndView;
@@ -148,7 +70,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists3 = dao.boardList3();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list3");
+		modelAndView.setViewName("community/board_list3");
 		modelAndView.addObject( "boardLists3", boardLists3 );
 		
 		return modelAndView;
@@ -164,7 +86,7 @@ public class CommController {
 		to = dao.boardWrite( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_write");
+		modelAndView.setViewName("community/board_write");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -184,7 +106,7 @@ public class CommController {
 			request.setAttribute( "flag", flag );
 			
 			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("board_write_ok");
+			modelAndView.setViewName("community/board_write_ok");
 			modelAndView.addObject( "flag", flag );
 			
 			return modelAndView;
@@ -201,7 +123,7 @@ public class CommController {
 		to = dao.boardView( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_view");
+		modelAndView.setViewName("community/board_view");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -217,7 +139,7 @@ public class CommController {
 		to = dao.boardModify( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_modify");
+		modelAndView.setViewName("community/board_modify");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -236,7 +158,7 @@ public class CommController {
 		int flag = dao.boardMoidfyOk( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_modify_ok");
+		modelAndView.setViewName("community/board_modify_ok");
 		modelAndView.addObject( "flag", flag );
 		modelAndView.addObject( "pseq", to.getPseq() );
 		
@@ -253,7 +175,7 @@ public class CommController {
 		to = dao.boardDelete( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_delete");
+		modelAndView.setViewName("community/board_delete");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -270,27 +192,17 @@ public class CommController {
 		int flag = dao.boardDeleteOk( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_delete_ok");
+		modelAndView.setViewName("community/board_delete_ok");
 		modelAndView.addObject( "flag", flag );
 		
 		return modelAndView;
 	}
 
 	// 자주 묻는 질문 ( FAQ )
->>>>>>> origin/ljh
 	@RequestMapping("/ask/faq.do")
 	public ModelAndView boardFaq() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_faq");
-<<<<<<< HEAD
-		return modelAndView;
-	}
-
-	@RequestMapping("/ask/notice.do")
-	public ModelAndView boardNotice() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_notice");
-=======
+		modelAndView.setViewName("community/board_faq");
 		
 		return modelAndView;
 	}
@@ -302,10 +214,9 @@ public class CommController {
 		ArrayList<BoardTO> boardLists4 = dao.boardList4();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_notice");
+		modelAndView.setViewName("community/board_notice");
 		modelAndView.addObject( "boardLists4", boardLists4 );
 		
->>>>>>> origin/ljh
 		return modelAndView;
 	}
 }

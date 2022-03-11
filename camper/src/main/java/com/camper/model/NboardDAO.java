@@ -71,7 +71,7 @@ public class NboardDAO {
 				conn = this.dataSource.getConnection();
 					
 				String sql = 
-				"select title, date_format( wdate, '%y-%m-%d' ) wdate, nick, content, type from n_board where nseq=?";
+				"select title, date_format( wdate, '%Y-%m-%d' ) wdate, nick, content, type from n_board where nseq=?";
 				
 				pstmt = conn.prepareStatement( sql );
 				pstmt.setString( 1 , to.getNseq() );
@@ -100,4 +100,107 @@ public class NboardDAO {
 		}
 	
 		
+		// 글수정 
+				public NboardTO boardModify(NboardTO to) {
+					
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					
+					try {
+
+						conn = this.dataSource.getConnection();
+						
+						String sql = "select title, nick, content from n_board where nseq=?";
+						pstmt = conn.prepareStatement( sql );
+						pstmt.setString( 1, to.getNseq() );
+						
+						rs = pstmt.executeQuery();
+						
+						if( rs.next() ) {
+							to.setTitle( rs.getString( "title" ) );
+							to.setNick( rs.getString( "nick" ) );
+							to.setContent( rs.getString( "content" ) );
+
+						}
+
+					} catch ( SQLException e ) {
+						System.out.println( "[에러]" + e.getMessage() );
+					} finally {
+						if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
+						if( conn != null ) try {conn.close(); } catch( SQLException e ) {}
+						if( rs != null ) try{ rs.close(); } catch( SQLException e ) {}
+					}
+					
+					return to;
+				}
+				
+				// 글수정 ( board_modfiy_ok.jsp )
+				public int boardMoidfyOk(NboardTO to) {
+					
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					
+					int flag = 1;
+					try{
+						
+						conn = this.dataSource.getConnection();
+						
+						String sql = "update n_board set title=?, content=? where nseq=? ";
+						pstmt = conn.prepareStatement( sql );
+						pstmt.setString( 1, to.getTitle() );
+						pstmt.setString( 2, to.getContent() );
+						pstmt.setString( 3, to.getNseq() );
+						
+						int result = pstmt.executeUpdate();
+						if( result == 0 ) {
+							flag = 1;
+						} else if( result == 1 ) {
+							flag = 0;
+						}
+						
+					} catch ( SQLException e ) {
+						System.out.println( "[에러]" + e.getMessage() );
+					} finally {
+						if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
+						if( conn != null ) try{ conn.close(); } catch( SQLException e ) {}
+					}
+					return flag;
+				}
+		
+				// 글삭제( board_delete_ok.jsp )
+				public int boardDeleteOk(NboardTO to) {
+					
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					
+					int flag = 1;
+					
+					try{
+
+						conn = this.dataSource.getConnection();
+						
+						String sql = "delete from n_board where nseq=? ";
+						pstmt = conn.prepareStatement( sql );
+						pstmt.setString( 1, to.getNseq() );
+						
+						int result = pstmt.executeUpdate();
+						if( result == 0 ) {
+							flag = 1;
+						} else if( result == 1 ) {
+							flag = 0;
+						}
+						
+					} catch ( SQLException e ) {
+						System.out.println( "[에러]" + e.getMessage() );
+					} finally {
+						if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
+						if( conn != null ) try {conn.close(); } catch( SQLException e ) {}
+					}
+					
+					return flag;	
+				}
+				
+				
+				
 }

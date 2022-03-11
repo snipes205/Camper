@@ -16,7 +16,7 @@ public class SearchController {
 	@RequestMapping("/search/main.do")
 	public ModelAndView searchMain(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("search_main");
+		modelAndView.setViewName("search/search_main");
 
 		return modelAndView;
 	}
@@ -24,7 +24,7 @@ public class SearchController {
 	@RequestMapping("/search/map.do")
 	public ModelAndView searchMap(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("search_map");
+		modelAndView.setViewName("search/search_map");
 
 		return modelAndView;
 	}
@@ -32,7 +32,7 @@ public class SearchController {
 	@RequestMapping("/search/theme.do")
 	public ModelAndView searchTheme(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("search_theme");
+		modelAndView.setViewName("search/search_theme");
 
 		return modelAndView;
 	}
@@ -40,7 +40,7 @@ public class SearchController {
 	@RequestMapping("/search/detail.do")
 	public ModelAndView seachDetail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("search_detail");
+		modelAndView.setViewName("search/search_detail");
 
 		return modelAndView;
 	}

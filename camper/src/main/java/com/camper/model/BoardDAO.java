@@ -264,14 +264,9 @@ public class BoardDAO {
 		
 		try {
 			conn = this.dataSource.getConnection();
-			
-			String sql = "select nick from user";
-			pstmt = conn.prepareStatement( sql );
-			pstmt.setString( 1, to.getNick() );
-			rs = pstmt.executeQuery();
-			
-			
-			sql = "select title, content, pwd, type from p_table";
+					
+			String sql = 
+			"select title, content, pwd, type from p_table";
 			
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getType() );

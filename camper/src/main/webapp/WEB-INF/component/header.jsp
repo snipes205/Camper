@@ -1,10 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 	<section class="header">
@@ -44,16 +48,46 @@
 							
 							<ul class="navbar-nav ml-auto mt-10">
 								<li class="nav-item dropdown dropdown-slide">
+							<c:choose>
+								<c:when test="${null eq sessionScope.profile or empty sessionScope.profile}">
 									<a class="nav-link" href="" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false">
-										<img class="profile-img" src="../images/1.jpg">
+										<img class="profile-img" src="../images/default_profile.png">
 									</a>
-									
+								</c:when>
+								<c:otherwise>
+									<a class="nav-link" href="" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+										<img class="profile-img" src="${sessionScope.profile}">
+									</a>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${sessionScope.authority eq 'admin'}">
 									<!-- Dropdown list -->
 									<div class="dropdown-menu">
-										<a class="nav-link login-button" href="../login/login.do">로그인</a>
-										<a class="nav-link add-button" href="../login/register">회원가입</a>
+										<a class="nav-link myPage-button" href="../admin/main.do"><i class="fa fa-wrench" aria-hidden="true"></i>
+										관리자 페이지</a>
+										<a class="nav-link myPage-button" href="../logout.do"><i class="fa fa-sign-out" aria-hidden="true"></i>
+										Log Out</a>
 									</div>
+								</c:when>
+								<c:when test="${!empty sessionScope.id or !empty sessionScope.kakaoid}">
+									<!-- Dropdown list -->
+									<div class="dropdown-menu">
+										<a class="nav-link myPage-button" href="../dashboard/myads.do"><i class="fa fa-user" aria-hidden="true"></i>
+										MyPage</a>
+										<a class="nav-link myPage-button" href="../logout.do"><i class="fa fa-sign-out" aria-hidden="true"></i>
+										Log Out</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="dropdown-menu">
+										<a class="nav-link login-button" href="../login/login.do">로그인</a>
+										<a class="nav-link add-button" href="../login/register.do">회원가입</a>
+								    </div>
+								</c:otherwise>
+							</c:choose>
 								</li>
 							</ul>
 						</div>
