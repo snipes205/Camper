@@ -113,10 +113,37 @@ img .img-fluid {
 						
 					}
 					div();
+					const request2 = new XMLHttpRequest();
+					request.onreadystatechange = function() {
+						if(request.readyState==4){
+							if(request.status==200){
+								let xmlImageData =request.responseXML;
+								let images=xmlImageData.getElementsByTagName("imageUrl");
+								for(let i=0 ; i<images.length; i++){
+
+									let html="";
+									html+="<div class='product-slider-item my-4' id='dsub"+i+"\'";
+									html+="data-image="+nvl(images[i])+">";
+									html+="<img class='d-block img-fluid w-100'";
+									html+="src="+nvl(images[i])+" alt='slides'id='sub"+i+"Img'>";
+									html+="</div>";
+											
+									$("#slider").append(html);	
+									
+								};
+								}
+								
+							}
+						}
+							
+					}
+					request.open("GET","http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/"
+							+"imageList"
+							+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
+							+"&MobileOS=ETC&MobileApp=AppTest&contentId="+nvl(contentId)
+							,true)
 					
-					
-					
-					
+					request.send("GET","",true);
 					
 				}else{
 					alert("페이지 에러");
@@ -176,7 +203,7 @@ img .img-fluid {
 					<div class="row">
 						<div
 							class="container-fluid p-5 my-5 bg-light border col-lg-8 shadow-sm pt-3">
-							<div class="product-details">
+							<div class="product-details"  data-auto-refresh="true">
 								<div id='facltNm' class="h1"></div>
 								<div id="contentId" style="display:none;"></div>
 								<div class="product-meta">
@@ -187,31 +214,10 @@ img .img-fluid {
 											<div id="doNm"></div></li>
 									</ul>
 								</div>
-								<div class="product-slider">
-									<div class="product-slider-item my-4" id="dMain"
-										>
+								<div class="product-slider" id="slider" data-auto-refresh="true">
+									<div class="product-slider-item my-4" id="dMain">
 										<img class="img-fluid w-100" 
 											alt="product-img" style="height: 500px; "id="mainImg">
-									</div>
-									<div class="product-slider-item my-4" id="dsub2"
-										data-image="images/campsite/캠핑2.jpg">
-										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑2.jpg" alt="Second slide"id="sub1Img">
-									</div>
-									<div class="product-slider-item my-4" id="dsub3"
-										data-image="images/campsite/캠핑3.png">
-										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑3.png" alt="Third slide"id="sub2Img">
-									</div>
-									<div class="product-slider-item my-4" id="dsub4"
-										data-image="images/campsite/캠핑4.jpg">
-										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑4.jpg" alt="Third slide"id="sub3Img">
-									</div>
-									<div class="product-slider-item my-4" id="dsub5"
-										data-image="images/campsite/캠핑5.jpg">
-										<img class="d-block img-fluid w-100"
-											src="images/campsite/캠핑5.jpg" alt="Third slide"id="sub4Img">
 									</div>
 								</div>
 							</div>

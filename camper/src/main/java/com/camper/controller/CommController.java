@@ -29,7 +29,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists3 = dao.boardList3();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_main");
+		modelAndView.setViewName("community/board_main");
 		modelAndView.addObject( "boardLists", boardLists );
 		modelAndView.addObject( "boardLists2", boardLists2 );
 		modelAndView.addObject( "boardLists3", boardLists3 );
@@ -44,7 +44,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists = dao.boardList();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list1");
+		modelAndView.setViewName("community/board_list1");
 		modelAndView.addObject( "boardLists", boardLists );
 		
 		return modelAndView;
@@ -57,7 +57,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists2 = dao.boardList2();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list2");
+		modelAndView.setViewName("community/board_list2");
 		modelAndView.addObject( "boardLists2", boardLists2 );
 		
 		return modelAndView;
@@ -70,7 +70,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists3 = dao.boardList3();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_list3");
+		modelAndView.setViewName("community/board_list3");
 		modelAndView.addObject( "boardLists3", boardLists3 );
 		
 		return modelAndView;
@@ -86,7 +86,7 @@ public class CommController {
 		to = dao.boardWrite( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_write");
+		modelAndView.setViewName("community/board_write");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -106,7 +106,7 @@ public class CommController {
 			request.setAttribute( "flag", flag );
 			
 			ModelAndView modelAndView = new ModelAndView();
-			modelAndView.setViewName("board_write_ok");
+			modelAndView.setViewName("community/board_write_ok");
 			modelAndView.addObject( "flag", flag );
 			
 			return modelAndView;
@@ -123,7 +123,7 @@ public class CommController {
 		to = dao.boardView( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_view");
+		modelAndView.setViewName("community/board_view");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -139,7 +139,7 @@ public class CommController {
 		to = dao.boardModify( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_modify");
+		modelAndView.setViewName("community/board_modify");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -158,7 +158,7 @@ public class CommController {
 		int flag = dao.boardMoidfyOk( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_modify_ok");
+		modelAndView.setViewName("community/board_modify_ok");
 		modelAndView.addObject( "flag", flag );
 		modelAndView.addObject( "pseq", to.getPseq() );
 		
@@ -175,7 +175,7 @@ public class CommController {
 		to = dao.boardDelete( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_delete");
+		modelAndView.setViewName("community/board_delete");
 		modelAndView.addObject( "to", to );
 		
 		return modelAndView;
@@ -192,7 +192,7 @@ public class CommController {
 		int flag = dao.boardDeleteOk( to );
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_delete_ok");
+		modelAndView.setViewName("community/board_delete_ok");
 		modelAndView.addObject( "flag", flag );
 		
 		return modelAndView;
@@ -202,7 +202,7 @@ public class CommController {
 	@RequestMapping("/ask/faq.do")
 	public ModelAndView boardFaq() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_faq");
+		modelAndView.setViewName("community/board_faq");
 		
 		return modelAndView;
 	}
@@ -214,7 +214,7 @@ public class CommController {
 		ArrayList<BoardTO> boardLists4 = dao.boardList4();
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("board_notice");
+		modelAndView.setViewName("community/board_notice");
 		modelAndView.addObject( "boardLists4", boardLists4 );
 		
 		return modelAndView;

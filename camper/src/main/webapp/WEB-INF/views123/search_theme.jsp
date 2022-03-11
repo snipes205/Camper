@@ -111,6 +111,9 @@
 		}
 		let btn = document.querySelector("#searchButton");
 		let container = document.getElementById('map');
+		let pageNo = 1;
+		
+		
 		container.style.display="none";
 		
 		function nvl(item){
@@ -119,6 +122,7 @@
 			}
 	            return item.textContent;
 			}
+		
 		
 		btn.addEventListener('click',function(){
 			const strSearchName= document.getElementById("strSearchName").value;
@@ -131,13 +135,37 @@
 					request.onreadystatechange = function(){
 						if(request.readyState==4){
 							if(request.status==200){
-						
 								container.style.display="block";
 								let xmlData =request.responseXML;
 								$("#resultNum").empty();
 								$("#map").empty();
-								
+								$("#pagenation").empty();
 								const result=xmlData.getElementsByTagName('totalCount')[0].textContent;
+
+								//페이지네이션
+								totalPage= Math.floor(xmlData.getElementsByTagName('totalCount')[0].textContent/10);	
+								$("#pagenation").empty();
+								$("#pagenation").append("<li class='page-item'>"
+										+"<a class='page-link' href='#'aria-label='Previous' id='prev'>"
+										+"<span aria-hidden='true'>&laquo;</span>"
+										+"<span class='sr-only'>Previous</span></a></li>"
+										)
+								
+								if(pageNo>1){
+									$("#pagenation").append("<li class='page-item'><a class='page-link'>"+(pageNo-1)+"</a></li>");	
+									}
+								for(let i = pageNo; i<pageNo+10&&i<totalPage; i++){
+									$("#pagenation").append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+								}
+								if(totalPage>10){
+								$("#pagenation").append("<li class='page-item disabled'>"+"..."+"</li>")
+								$("#pagenation").append("<li class='page-item'><a class='page-link' >"+totalPage+"</a></li>")
+								}
+								$("#pagenation").append("<li class='page-item'>"
+										+"<a class='page-link' href='#'aria-label='Next'>" 
+										+"<span aria-hidden='true'>&raquo;</span>"
+										+"<span class='sr-only' id='next'>Next</span></a></li>");
+								
 								if(result==0){
 									alert("결과가 없습니다");
 								}else{
@@ -162,7 +190,6 @@
 								for(i=0;i<facltNm.length;i++){
 									$("#list").empty();
 									html+="<tr>";
-									html+="<td class='product-thumb'><img width='80px' height='80px'";
 									html+="<td class='product-thumb'><img width='80px' height='80px'";
 									if(nvl(firstImageUrl[i])==""){
 										html+="src='../images/no-image.jpg' alt='이미지 없음'></td>"	
@@ -237,16 +264,68 @@
 							+"searchList"
 							+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
 							+"&numOfRows=10"
-							+"&pageNo=1"
+							+"&pageNo="+pageNo
 							+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
 							+"&keyword="+keyword
 							,true);
 					request.send();
+					
 				}else{
 					alert("이름이 정확하지 않습니다");
 				}
 		}
 	})
+
+	$(".page-item").on("click",function(){
+		$("#pagenation").empty();
+		pageNo = $(this).text();
+		request.onreadystatechange()
+		request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
+				+"searchList"
+				+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
+				+"&numOfRows=10"
+				+"&pageNo="+pageNo
+				+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
+				+"&keyword="+keyword
+				,true);
+		request.send();
+	})
+	
+	$("#prev").on('click',function(){
+		if(pageNo>1){
+			$("#pagenation").empty();
+			pageNo = pageNo-1;
+			request.onreadystatechange()
+			request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
+					+"searchList"
+					+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
+					+"&numOfRows=10"
+					+"&pageNo="+pageNo
+					+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
+					+"&keyword="+keyword
+					,true);
+			request.send();
+		}
+	})
+	$("#prev").on('click',function(){
+		if(pageNo<totalPage){
+			$("#pagenation").empty();
+			pageNo = pageNo+1;
+			request.onreadystatechange()
+			request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
+					+"searchList"
+					+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
+					+"&numOfRows=10"
+					+"&pageNo="+pageNo
+					+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
+					+"&keyword="+keyword
+					,true);
+			request.send();
+		}
+	})
+	
+	
+	
 	}
 
 	</script>
@@ -423,26 +502,14 @@
 				</div>
 
 				<!-- pagination -->
-				<!-- 
+			
 				<div class="pagination justify-content-center">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-									class="sr-only">Next</span>
-							</a></li>
+					<nav aria-label="Page navigation example" data-auto-refresh="true">
+						<ul class="pagination" id="pagenation"  data-auto-refresh="true">
+							
 						</ul>
 					</nav>
 				</div>
-				 -->
-				<!-- pagination -->
 			</div>
 		</div>
 	</section>
