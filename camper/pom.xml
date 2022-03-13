@@ -29,12 +29,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
+		
 
 		<!-- mariadb -->
 		<dependency>
@@ -66,6 +61,7 @@
 			<version>2.2.2</version>
 		</dependency>
 		
+		
 		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 		<dependency>
 		    <groupId>org.jsoup</groupId>
@@ -92,6 +88,14 @@
 		    <artifactId>cos</artifactId>
 		    <version>2022.2</version>
 		</dependency>
+		 <!-- json(AJAX) -->
+        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
 		
 		<!-- 비밀번호 찾기 메일 발송을 위한 라이브러리-->
 		<dependency>
@@ -113,11 +117,12 @@
 		    <version>1.5</version>
 		</dependency>
 
-
-
-
-
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>

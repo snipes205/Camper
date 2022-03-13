@@ -176,6 +176,8 @@
 								const smapY=xmlData.getElementsByTagName('mapY');
 								const firstImageUrl = xmlData.getElementsByTagName('firstImageUrl');
 								const induty = xmlData.getElementsByTagName('induty');
+								const contentId = xmlData.getElementsByTagName("contentId");
+								
 															
 								let options = {
 									center: new kakao.maps.LatLng(smapY[0].childNodes[0].nodeValue,smapX[0].childNodes[0].nodeValue),
@@ -197,7 +199,7 @@
 										html+="src='"+nvl(firstImageUrl[i])+"' alt='이미지 없음'></td>"	
 									}			
 									html+="<td class='product-details'>";
-									html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"'>"+nvl(facltNm[i])+"</a></h3>";	
+									html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"&contentId="+nvl(contentId[i])+"'>"+nvl(facltNm[i])+"</a></h3>";
 									html+="<span class='location'>"+nvl(addr1[i])+"</span>";			
 									html+="</td>";		
 									html+="<td class='product-category'><span class='categories'>"+nvl(induty[i])+"</span></td>";		
@@ -206,7 +208,7 @@
 									html+="<ul class='list-inline justify-content-center'>";		
 									html+="<li class='list-inline-item'><a data-toggle='tooltip'";	
 									html+="data-placement='top' title='View' class='view'";
-									html+="'./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"'>";
+									html+="'./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"&contentId="+nvl(contentId[i])+"'>";
 									html+="</a></li></ul></div></td></tr>";	
 										
 										
@@ -231,7 +233,7 @@
 							   	 	let infowindow = new kakao.maps.InfoWindow({
 							         	content: "<div style='width:200px;' ><b>"+positions[i].title+"</b></div>" // 인포윈도우에 표시할 내용
 							     	});
-							   	 	let location="./detail.do?sampX="+smapX[i].textContent+"&smapY="+smapY[i].textContent;
+							   	 	let location="./detail.do?sampX="+smapX[i].textContent+"&smapY="+smapY[i].textContent+"&contentId="+nvl(contentId[i]);
 							   		kakao.maps.event.addListener(marker, 'click', function() { 
 							   			window.location.href=location					    
 							   	

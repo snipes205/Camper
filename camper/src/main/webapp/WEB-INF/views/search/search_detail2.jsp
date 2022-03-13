@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.camper.model.ReviewTO" %>
-
-
-
 <!DOCTYPE html>
 
 
@@ -40,7 +37,6 @@
 	rel="stylesheet">
 <!-- CUSTOM CSS -->
 <link href="../../css/style.css" rel="stylesheet">
-
 <style type="text/css">
 img .img-fluid {
 	width: 600px;
@@ -72,8 +68,6 @@ img .img-fluid {
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44d54500db491a25378cc4604dd20efc&libraries=services"></script>
 <script type="text/javascript">
-	
-	
 
 	window.onload=()=>{
 		let urls = location.href;
@@ -81,130 +75,9 @@ img .img-fluid {
 		let params= strParams[1].split("&");
 		let smapX=params[0].substring(6);
 		let smapY=params[1].substring(6);
-		let contentId=params[2].substring(10);
-		const getReview = function (){
-			$.ajax({
-				url:"./getReview.do",
-				data:{
-					'contentId':contentId
-				},
-				dataType:'json',
-				type:"POST",
-				success:function(datas){
-					$(".review-content").remove();
-					let html ="";
-					for(let i in datas){
-						
-						html+="<div class='review-content media-body container-float'>";
-						html+="<div class='name'>";
-						html+="<h5>"+datas[i].nick+"</h5>";
-						html+="</div>";
-						html+="<div class='date'>";
-						html+="<p>"+datas[i].wdate+"</p>";
-						html+="</div>";
-						html+="<div class='review-comment'>";
-						html+="<p 'class=rcontent''>"+datas[i].content+"</p>";
-						html+="<input type='hidden' class='rvseq' value="+datas[i].rvseq+"></input>";
-						html+="<button class='btn btn-warning modbtn'  data-bs-toggle='modal' data-bs-target='#modModal'>수정</button>";
-						html+="<button class='btn btn-danger delbtn'  data-bs-toggle='modal' data-bs-target='#delModal'>삭제</button>";
-						html+="</div>";
-						html+="</div>";
-					}
-					
-					$("#reviews").append(html); 								
-					$(".modbtn").on('click',function(){
-						$("#modModal").modal();
-						$("#modContent").val($(this).prev().prev().text());  
-						$("#modRvseq").val($(this).prev().val())
-					})
-					$("#modBtn").on('click',function(){						
-							$.ajax({
-								url:"./modifyReview.do",
-								data:{
-									"nick":$("#modNick").val(),
-									"password":$("#modPassword").val(),
-									"rvseq":$("#modRvseq").val(),
-									"content":$('#modContent').val()
-								},
-								dataType:"json",
-								type:'POST',
-								success:function(flag){
-									if(flag==0){
-									alert("리뷰가 수정되었습니다");
-									$("#modModal").modal("hide");
-									}else{
-										alert("수정에 실패했습니다");
-									}
-									getReview();
-								},
-								error:function(){
-								}
-							})
-						})	
-					
-					$(".delbtn").on('click',function(){	
-						$("#delModal").modal();
-						$("#delContent").val($(this).prev().prev().prev().text());  
-						$("#delRvseq").val($(this).prev().prev().val())
-					})
-					$("#delBtn").on('click',function(){
-							$.ajax({
-								url:"./deleteReview.do",
-								data:{
-									"nick":$("#delNick").val(),
-									"password":$("#delPassword").val(),
-									"rvseq":$("#delRvseq").val()
-								},
-								dataType:"json",
-								type:'POST',
-								success:function(flag){
-									
-									if(flag==0){
-									alert("리뷰가 삭제되었습니다");
-									$("#delModal").modal("hide");
-									}else{
-									alert("삭제에 실패했습니다");
-									}
-									getReview();
-								},
-								error:function(){
-								}
-							})
-						})
-				},
-				error:function(err){
-					console.log("리뷰를 불러올수 없습니다.");
-				}
-			})
-		}
-		getReview();
+		let contentId=params[2].substring(9);
+
 		
-		$("#rvSub").on("click",function(){
-			let nick = $("#nick").val();
-			let password = $("#password").val();
-			let content = $("#content").val();
-			$.ajax({
-				url:"./writeReview.do",
-				data:{
-					"nick":nick,
-					"password":password,
-					"contentId":contentId,
-					"content":content
-				},
-				dataType:"json",
-				type:'POST',
-				success:function(flag){
-					if(flag==0){
-					alert("리뷰가 작성되었습니다");
-					}
-					getReview();
-				},
-				error:function(){
-					
-				}
-			})	
-		})
-			
 		function nvl(item){
 			if(typeof item==="undefined"|| item===null|| item==""){
 				return "";
@@ -271,11 +144,9 @@ img .img-fluid {
 											$("#slider").append(html);	
 										}
 								});
-								}
-								
+								}	
 							}
 						}
-							
 					}
 					request.open("GET","http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/"
 							+"imageList"
@@ -414,30 +285,31 @@ img .img-fluid {
 						class="container-block shadow-sm content mt-5 pt-5 border bg-light">
 
 						<h3 class=" text-center">&nbsp;&nbsp;&nbsp;&nbsp; 캠핑 리뷰</h3>
-						<div class="container product-review" id="reviews">
+						<div class="container product-review">
 						
-						</div>
 							<div class="container review-submission bg-light">
-								
+								<h3 class="tab-title text-start">리뷰작성</h3>
 
 
-								<div class="review-submit contianer-float">
-									<div class="col-lg-6">
-										<input type="text" name="nick" id="nick" class="form-control"
-											placeholder="닉네임">
-									</div>
-									<div class="col-lg-6">
-										<input type="password" name="password" id="password"
-											class="form-control" placeholder="비밀번호">
-									</div>
-									<div class="col-12">
-										<textarea name="content" id="content" rows="10"
-										class="form-control" placeholder="리뷰를 작성하세요"></textarea>
-									</div>
-									<div class="col-12">
-										<button type="submit" class="btn btn-main btn-sm" id="rvSub">작성</button>
-									</div>
-								
+								<div class="review-submit">
+									<form action="#" class="row">
+										<div class="col-lg-6">
+											<input type="text" name="name" id="name" class="form-control"
+												placeholder="Name">
+										</div>
+										<div class="col-lg-6">
+											<input type="email" name="email" id="email"
+												class="form-control" placeholder="Email">
+										</div>
+										<div class="col-12">
+											<textarea name="review" id="review" rows="10"
+												class="form-control" placeholder="Message"></textarea>
+										</div>
+										<div class="col-12">
+											<button type="button" class="btn btn-main btn-sm">작성</button>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -446,70 +318,7 @@ img .img-fluid {
 		</div>
 		<!-- Container End -->
 	</section>
-	<!-- modal -->
-	<div class="modal fade" id="modModal" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title" id="modModalLabel">내용수정</h3>
-					<button class="close" type='button' data-dismiss="modal" aria-label="Close"></button>
-	
-					</div>
-					<div class="modal-body">
-						<input type="hidden" id="modRvseq"/>
-						<div class="del-submit contianer-float">
-							<div class="col-lg-6">
-								<input type="text" name="modNick" id="modNick" class="form-control disable">
-							</div>
-							<div class="col-lg-6">
-								<input type="password" name="modPassword" id="modPassword"
-									class="form-control" placeholder="비밀번호">
-							</div>
-							<div class="col-12">
-								<textarea name="content" id="modContent" rows="10"
-									class="form-control" ></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn" type="button" data-dismiss="modal" id="modBtn">예</button>
-						<button class="btn" type="button" data-dismiss="modal">아니요</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="delModal" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" >
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title" id="delModalLabel">내용삭제</h3>
-					<button class="close" type='button' data-dismiss="modal" aria-label="Close"></button>
-	
-				
-					</div>
-					<div class="modal-body">
-						<div class="del-submit contianer-float">
-							<input type="hidden" id="delRvseq"/>
-							<div class="col-lg-6">
-								<input type="text" name="delNick" id="delNick" class="form-control disable">
-							</div>
-							<div class="col-lg-6">
-								<input type="password" name="delPassword" id="delPassword"
-									class="form-control" placeholder="비밀번호">
-							</div>
-							<div class="col-12">
-								<textarea name="content" id="delContent" rows="10"
-									class="form-control" readonly ></textarea>
-							</div>
-						</div>
-					</div>			
-					<div class="modal-footer">
-						<button class="btn" type="button" data-dismiss="modal" id="delBtn">예</button>
-						<button class="btn" type="button" data-dismiss="modal">아니요</button>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<jsp:include page="../../component/footer.jsp"></jsp:include>
 	<!-- JAVASCRIPTS -->
 	<script src="../../plugins/jQuery/jquery.min.js"></script>
