@@ -115,7 +115,10 @@
 		}
 	}
 }
-
+.product-slider .slick-dots {
+    display: none;
+    bottom: -50px;
+}
 
 .product-slider {
 	padding:40px 0;
@@ -128,7 +131,7 @@
 	}
 	
 	.slick-dots {
-		display: flex;
+		display: none;
 		bottom: -50px;
 		li {
 			display: inline-block;
@@ -149,6 +152,16 @@
 	}
 }
 
+.slick-dots {
+	display: none;
+}
+.slick-list {
+	display: none;
+}
+
+.slick-active{
+	display: none;
+}
 
 .product-table {
 	margin-top:20px;

@@ -19,5 +19,5 @@ public class UserDTO {
 	private String greet;
 	private String authority;
 	private String msg;
-	private String area;
+
 }

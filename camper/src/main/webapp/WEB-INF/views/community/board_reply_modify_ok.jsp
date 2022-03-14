@@ -4,7 +4,8 @@
 <!--  댓글 글수정 MVC Model2 구조 -->
 <%
 	int flag = (Integer)request.getAttribute( "flag" );
-	
+	String pseq = request.getParameter("pseq");	
+
 	out.println( "<script type ='text/javascript'>" );
 	if( flag == 0 ) {
 		out.println( "alert('글수정에 성공했습니다.')" );

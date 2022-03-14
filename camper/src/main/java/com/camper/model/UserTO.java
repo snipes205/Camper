@@ -20,5 +20,5 @@ public class UserTO {
 		private String greet;
 		private String authority;
 		private String msg;
-
+		
 }

@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "애플산돌고딕"; 
+  src: url('/fonts/AppleSDGothicNeoM.eot'); 
+  src: local(※), url('/fonts/AppleSDGothicNeoM.woff') format('woff'),
+        url('/fonts/AppleSDGothicNeoM.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/AppleSDGothicNeoM.ttf') format('truetype'); 
+
+  }
+
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  
+  body {
+    height: 100%;
+    margin:0;
+    font: 14px "애플산돌고딕M";
+    display: flex;
+    flex-direction: column;
+    background: url(/images/bg.png) no-repeat;
+    background-size: 100% 1000px;
+    background-color: #f4f9fd;
+    
+  }
+  
+  header {
+    height: 600px;
+    width: 100%;
+  }
+  
+  footer {
+    padding: 8vw;
+    padding-top: 2vw;
+    height: 250px;
+    margin-top: auto;
+    background-color: rgb(139, 139, 139);
+    width: 100%;
+  }
+  
+  ul {
+    font-weight: bold;
+    list-style:none;
+  }
+  
+  li {
+    font-weight: normal;
+    margin-top: 10px;
+  }
+
+  a{
+    color: black;
+  }
+  
