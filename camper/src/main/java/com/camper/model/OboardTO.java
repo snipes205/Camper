@@ -15,4 +15,5 @@ public class OboardTO {
 	private String img;
 	private String wdate;
 	private String oreply;
+	
 }

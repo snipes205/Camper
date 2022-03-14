@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="ko">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     <title>CAMPER</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="icon" type="../../image/png" sizes="16x16" href="../../iamges/favicon.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">	
     <!-- Custom CSS -->
    <link href="../../css_a/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -64,115 +64,96 @@
                         </span>
                     </a>
                     <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
                         href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
 
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
-
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
+                        <!-- admin -->
                         <li>
                             <a class="profile-pic" href="#">
-                                <img src="../../plugins_a/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Admin</span></a>
+                                <img src="../../plugins_a/images/users/1.jpg" alt="user-img" width="36" class="img-circle">
+                                <span class="text-white font-medium">Admin</span>
+                            </a>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
+        
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ------------------ 왼쪽 전체 카테고리 ----------------  -->
         <!-- ============================================================== -->
-       <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/main.do" aria-expanded="false">
-                                <i class="fas fa-chart-area" aria-hidden="true"></i>
-                                <span class="hide-menu">관리자메인</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/member.do" aria-expanded="false">
-                                <i class="fas fa-id-badge" aria-hidden="true"></i>
-                                <span class="hide-menu">회원관리</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/comm.do" aria-expanded="false">
-                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                <span class="hide-menu">커뮤니티</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/notice.do" aria-expanded="false">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                                <span class="hide-menu">고객지원</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/ask.do" aria-expanded="false">
-                                <i class="fa fa-comment-dots" aria-hidden="true"></i>
-                                <span class="hide-menu">1:1문의</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/site.do" aria-expanded="false">
-                                <i class="fa fa-font" aria-hidden="true"></i>
-                                <span class="hide-menu">사이트정보</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/admin.do" aria-expanded="false">
-                                <i class="fas fa-cog" aria-hidden="true"></i>
-                                <span class="hide-menu">관리자설정</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/terms.do" aria-expanded="false">
-                                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                                <span class="hide-menu">가입약관</span>
-                            </a>
-                        </li>
-                        
-                    </ul>
-
-                </nav>
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+        <ul id="sidebarnav">
+        <!-- 카테고리 -->
+        <li class="sidebar-item pt-2">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/main.do" aria-expanded="false">
+            <i class="fas fa-chart-area" aria-hidden="true"></i>
+            <span class="hide-menu">관리자메인</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/member.do" aria-expanded="false">
+            <i class="fas fa-id-badge" aria-hidden="true"></i>
+            <span class="hide-menu">회원관리</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/leaveuser.do" aria-expanded="false">
+            <i class="fas fa-male" aria-hidden="true"></i>
+            <span class="hide-menu">탈퇴회원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/comm.do" aria-expanded="false">
+      		<i class="fa fa-globe" aria-hidden="true"></i>
+         	<span class="hide-menu">커뮤니티</span>
+         	</a>
+       	</li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/notice.do" aria-expanded="false">
+            <i class="fa fa-info" aria-hidden="true"></i>
+            <span class="hide-menu">고객지원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/ask.do" aria-expanded="false">
+            <i class="fa fa-comment-dots" aria-hidden="true"></i>
+            <span class="hide-menu">1:1문의</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/site.do" aria-expanded="false">
+            <i class="fa fa-font" aria-hidden="true"></i>
+            <span class="hide-menu">사이트정보</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/admin.do" aria-expanded="false">
+            <i class="fas fa-cog" aria-hidden="true"></i>
+            <span class="hide-menu">관리자설정</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/terms.do" aria-expanded="false">
+            <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+            <span class="hide-menu">가입약관</span>
+            </a>
+        </li>
+        </ul>
+		</nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -197,10 +178,9 @@
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="#" class="fw-normal">로그아웃</a></li>
                             </ol>
-                            <a href="file:///C:/project/camper/src/main/webapp/index.html" target="_blank"
-                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">
-                                홈페이지 바로가기
-                            </a>
+                            <a href="http://localhost:8080/search/theme.do" target="_blank"
+                    class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">홈페이지 바로가기
+                </a>
                         </div>
                     </div>
                 </div>
@@ -213,66 +193,40 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box">
-                            <!--
-function inputCheck(frm){
-
-   if(frm.agreement.value == ""){
-      alert("가입약관을 입력하세요");
-      frm.agreement.focus();
-      return false;
-   }
-   if(frm.safeinfo.value == ""){
-      alert("개인정보 보호정책을 입력하세요");
-      frm.safeinfo.focus();
-      return false;
-   }
-
-}
--->
-</script>
+ 
 </head>
 
-			
+			<!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row"><div class="col-md-12"><div class="white-box">
 			<table border="0" cellspacing="0" cellpadding="2">
-        <tr>
-          <td><img src="../../image/ic_tit.gif" width="11" height="15" /></td>
-          <td valign="bottom" class="tit">가입약관 및 개인정보 보호정책</td>
-          <td width="2"></td>
-          <td valign="bottom" class="tit_alt">가입약관 및 개인정보 보호정책 을 설정합니다.</td>
-        </tr>
-      </table>
-      
-      <br>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <form name="frm" action="member_save.php?" method="post" enctype="multipart/form-data" onSubmit="return inputCheck(this);">
-      <input type="hidden" name="tmp">
-      <input type="hidden" name="mode" value="config">
-      <input type="hidden" name="idx" value="">
-        <tr>
-          <td>
-            <table width="100%" border="0" cellspacing="1" cellpadding="6" class="t_style">
-              <tr>
-                <td width="15%" class="t_name">가입약관</td>
-                <td width="85%" class="t_value" colspan="3">
-                <textarea name="agreement" rows="20" cols="100" class="textarea">
-                 제 1조 (목적) 
+        		<tr>
+     				<td valign="bottom" class="tit_alt">가입약관 및 개인정보 보호정책 을 설정합니다.</td>
+        		</tr>
+    		</table>
+    		<br>
+      		&nbsp;&nbsp;<class="tit_sub"><i class="fa fa-genderless" aria-hidden="true"></i>가입약관
+     		<br>
+      		<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+      			<form name="frm" action="" method="post" enctype="multipart/form-data" onSubmit="return inputCheck(this) ;">
+      			<input type="hidden" name="tmp">
+      			<input type="hidden" name="mode" value="config">
+      			<input type="hidden" name="idx" value="">
+      				<tr>
+                	<td width="100%" class="t_value" colspan="3" >
+               			<textarea name="agreement" rows="20" cols="100" class="textarea">
+	제 1조 (목적) 
 이 약관은 전기통신 사업법 및 동 법 시행령에 의하여 OOO(이하 "회사" 라 합니다.)가 제공하는 인터넷 홈페이지 서비스 (이하 "서비스" 라 합니다.)의 이용조건 및 절차에 관한 사항, 회사와 이용자의 권리와 의무 및 책임사항을 규정함을 목적으로 합니다.
  
-제 2조 (약관의 효력과 개정) 
+	제 2조 (약관의 효력과 개정) 
 1. 이 약관은 전기통신사업법 제 31 조, 동 법 시행규칙 제 21조의 2에 따라 공시절차를 거친 후 홈페이지를 통하여 이를 공지하거나 전자우편 기타의 방법으로 이용자에게 통지함으로써 효력을 발생합니다.
- 
 2. 회사는 본 약관을 사전 고지 없이 개정할 수 있으며, 개정된 약관은 제9조에 정한 방법으로 공지합니다. 회원은 개정된 약관에 동의하지 아니하는 경우 본인의 회원등록을 취소(회원탈퇴)할 수 있으며, 계속 사용의 경우는 약관 개정에 대한 동의로 간주됩니다. 개정된 약관은 공지와 동시에 그 효력이 발생됩니다.
   
-제 3조 (약관이외의 준칙) 
+	제 3조 (약관이외의 준칙) 
 이 약관에 명시되어 있지 않은 사항은 전기통신 기본법, 전기통신 사업법, 기타 관련법령의 규정에 따릅니다.
  
-제 4조 (용어의 정의) 
+	제 4조 (용어의 정의) 
 이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
  
 1. 회원 : 서비스에 개인정보를 제공하여 회원등록을 한 자로서, 서비스의 정보를 지속적으로 제공받으며, 이용할 수 있는 자를 말합니다. 
@@ -282,247 +236,27 @@ function inputCheck(frm){
 5. 전자우편 (E-mail) : 인터넷을 통한 우편입니다.  
 6. 해지 : 회사 또는 회원이 서비스 이용 이후 그 이용계약을 종료 시키는 의사표시를 말합니다.  
 7. 홈페이지 : 회사가 이용자에게 서비스를 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 이용자가 열람 및 이용할 수 있도록 설정한 가상의 서비스 공간을 말합니다.
-  
-제 5조 (서비스의 제공 및 변경) 
-1. 회사가 제공하는 서비스는 다음과 같습니다.
- 
-1) 회사에 대한 홍보 내용
-2) 회사가 판매하는 제품 안내
-3) 기타 회사가 제공하는 각종 정보
-4) 고객 상담 서비스
-5) 회원 이용 서비스
- 
-2. 회사는 필요한 경우 서비스의 내용을 추가 또는 변경하여 제공할 수 있습니다.
-  
-제 6조 (서비스의 중단) 
-1. 회사는 컴퓨터 등 정보통신설비의 보수점검/교체 및 고장, 통신의 두절 등의 사유가 발생한 경우에는 서비스의 제공을 일시적으로 중단할 수 있습니다.
- 
-2. 제 1항에 의한 서비스 중단의 경우에는 제 9조에 정한 방법으로 이용자에게 통지합니다.
- 
-3. 회사는 제1항의 사유로 서비스의 제공이 일시적으로 중단됨으로 인하여 이용자 또는 제3자가 입은 손해에 대하여 배상하지 아니합니다. 단, 회사에 고의 또는 중과실이 있는 경우에는 그러하지 아니합니다.
-  
-제 7조 (회원가입) 
-1. 이용자는 회사가 정한 가입양식에 따라 회원정보를 기입한 후 이 약관에 동의한다는 의사표시를 함으로서 회원가입을 신청합니다.
- 
-2. 이용자는 반드시 실명으로 회원가입을 하여야 하며, 1개의 주민등록번호에 대해 1건의 회원가입신청을 할 수 있습니다.
- 
-3. 회사는 제 1항과 같이 회원으로 가입할 것을 신청한 이용자 중 다음 각 호에 해당하지 않는 한 회원으로 등록합니다.
- 
- 1) 이름이 실명이 아닌 경우
- 
-2) 등록 내용에 허위, 기재누락, 오기가 있는 경우
- 
-3) 타인의 명의를 사용하여 신청한 경우
- 
-4) 가입신청자가 이 약관 제 8조 3항에 의하여 이전에 회원자격을 상실한 적이 있는 경우(단, 제 8조 3항에 의한 회원자격 상실 후 3년이 경과한 자로서 회사의 회원 재가입 승낙을 얻은 경우는 예외로 합니다.)
- 
-5) 만 14세 미만의 아동
- 
-6) 기타 회원으로 회사 소정의 이용신청요건을 충족하지 못하는 경우
-  
-4. 회원가입계약의 성립시기는 회사의 승낙이 이용자에게 도달한 시점으로 합니다.
- 
-5. 회원은 제 10조 1항에 의한 등록사항에 변경이 있는 경우 회원정보변경 항목을 통해 직접 변경사항을 수정, 등록하여야 합니다.
-  
-제 8조 (회원탈퇴 및 자격 상실 등) 
-1. 회원은 언제든지 회원의 탈퇴를 홈페이지에 요청할 수 있으며, 홈페이지는 즉시 이에 응합니다.
- 
-2. 회원이 다음 각 호의 사유에 해당하는 경우, 회사는 회원자격을 제한 및 정지시킬 수 있습니다.
- 
- 1) 가입 신청 시에 허위 내용을 등록한 경우
- 
-2) 타인의 서비스 이용을 방해하거나 그 정보를 도용하는 등 서비스 운영질서를 위협하는 경우
- 
-3) 서비스를 이용하여 법령과 이 약관이 금지하거나, 공서양속에 반하는 행위를 하는 경우
- 
-4) 제 13조 에 명기된 회원의 의무사항을 준수하지 못할 경우
-  
-3. 회사가 회원자격을 제한/정지시킨 후, 동일한 행위가 2회 이상 반복되거나 30일 이내에 그 사유가 시정되지 아니하는 경우 회사는 회원자격을 상실 시킬 수 있습니다.
- 
-4. 회사가 회원자격을 상실 시키는 경우 회원에게 이를 통지하고 탈퇴를 처리합니다. 이 경우 회원에게 이를 통지하고, 탈퇴 전에 소명할 기회를 부여합니다.
- 
- 
-제 9조 (이용자에 대한 통지) 
-1. 회사가 이용자에 대한 통지를 하는 경우, 이용자가 서비스에 제출한 전자우편 주소로 할 수 있습니다.
- 
-2. 회사가 불특정 다수 이용자에 대한 통지의 경우 1주일 이상 서비스 게시판에 게시함으로써 개별 통지에 갈음할 수 있습니다.
- 
- 
-제 10조 (개인 정보 보호) 
-1. 회사는 이용자 정보 수집 시 회사측이 필요한 최소한의 정보를 수집합니다.
-다음 사항을 필수사항으로 하며 그 외 사항은 선택사항으로 합니다.
- 
-1) 성명
-2) 주민등록번호
-3) 희망 ID
-4) 비밀번호
-5) E-mail
-6) 주소
-7) 전화번호
-8) favor 구독 여부
- 
-2. 회사가 이용자의 개인식별이 가능한 개인정보를 수집하는 때에는 반드시 당해 이용자의 동의를 받습니다.
- 
-3. 제공된 개인정보는 당해 이용자의 동의 없이 제 3자에게 제공할 수 없으며, 이에 대한 모든 책임은 회사가 집니다. 다만 다음의 경우에는 예외로 합니다.
- 
- 1) 배송업무상 배송업체에게 배송에 필요한 최소한의 이용자의 정보
-(성명, 주소, 전화번호)를 알려주는 경우
- 
-2) 통계작성, 학술연구 또는 시장조사를 위하여 필요한 경우로서 특정 개인을 식별할 수 없는 형태로 제공하는 경우
- 
-3) 관계법령에 의하여 국가기관으로부터 요구 받은 경우
- 
-4) 범죄에 대한 수사상의 목적이 있거나, 정보통신 윤리위원회의 요청이 있는 경우
- 
-5) 기타 관계법령에서 정한 절차에 따른 요청이 있는 경우
- 
- 
-4. 이용자는 언제든지 회사가 가지고 있는 자신의 개인정보에 대해 열람 및 오류정정을 할 수 있습니다.
- 
-5. 회사로부터 개인정보를 제공받은 제 3자는 개인정보를 제공받은 목적을 달성한 때에는 당해 개인정보를 지체 없이 파기합니다.
- 
- 
-제 11조 (회사의 의무) 
-1. 회사는 이 약관에서 정한 바에 따라 계속적, 안정적으로 서비스를 제공할 수 있도록 최선의 노력을 다하여야만 합니다.
- 
-2. 회사는 서비스에 관련된 설비를 항상 운용할 수 있는 상태로 유지/보수하고, 장애가 발생하는 경우 지체 없이 이를 수리/복구할 수 있도록 최선의 노력을 다하여야 합니다.
- 
-3. 회사는 이용자가 안전하게 서비스를 이용할 수 있도록 이용자의 개인정보보호를 위한 보안시스템을 갖추어야 합니다.
- 
-4. 회사는 이용자가 원하지 않는 영리목적의 광고성 전자우편을 발송하지 않습니다.
- 
- 
-제 12조 (회원의 ID 및 비밀번호에 대한 의무) 
-1. 회원에게 부여된 아이디(ID)와 비밀번호의 관리책임은 회원에게 있으며 관리 소홀, 부정사용에 의하여 발생하는 모든 결과에 대한 책임은 회원에게 있습니다.
- 
-2. 회원이 자신의 ID 및 비밀번호를 도난 당하거나 제 3자가 사용하고 있음을 인지한 경우에는 바로 회사에 통보하고 회사의 안내가 있는 경우에는 그에 따라야 합니다.
- 
- 
-제 13조 (회원의 의무) 
-1. 회원은 관계법령, 본 약관의 규정, 이용안내 및 주의사항 등 회사가 통지하는 사항을 준수하여야 하며, 기타 회사의 업무에 방해되는 행위를 하여서는 안됩니다.
- 
-2. 회원은 회사의 사전승낙 없이 서비스를 이용하여 어떠한 영리행위도 할 수 없습니다.
- 
-3. 회원은 서비스를 이용하여 얻은 정보를 회사의 사전승낙 없이 복사, 복제, 변경, 번역, 출판/방송 기타의 방법으로 사용하거나 이를 타인에게 제공할 수 없습니다.
- 
-4. 회원은 자기 신상정보의 변경사항 발생시 즉각 변경하여야 합니다.
-회원정보를 수정하지 않아 발생하는 모든 결과에 대한 책임은 회원에게 있습니다.
- 
-5. 회원은 서비스 이용과 관련하여 다음 각 호의 행위를 하지 않아야 하며, 다음 행위를 함으로 발생하는 모든 결과에 대한 책임은 회원에게 있습니다.
- 
- 1) 다른 회원의 아이디(ID)를 부정하게 사용하는 행위
- 
-2) 다른 회원의 E-mail 주소를 취득하여 스팸메일을 발송하는 행위
- 
-3) 범죄행위를 목적으로 하거나 기타 범죄행위와 관련된 행위
- 
-4) 선량한 풍속, 기타 사회질서를 해하는 행위
- 
-5) 회사 및 타인의 명예를 훼손하거나 모욕하는 행위
- 
-6) 회사 및 타인의 지적재산권 등의 권리를 침해하는 행위
- 
-7) 해킹행위 또는 컴퓨터 바이러스의 유포행위
- 
-8) 타인의 의사에 반하여 광고성 정보 등 일정한 내용을 지속적으로 전송하는 행위
- 
-9) 서비스의 안정적인 운영에 지장을 주거나 줄 우려가 있는 일체의 행위
- 
-10) 회사가 제공하는 서비스의 내용을 변경하는 행위
 
-11) 기타 관계법령에 위배되는 행위
- 
- 
- 
-제 14조 (게시물 삭제) 
-1. 회사는 이용자가 게시하거나 등록하는 서비스내의 게시물이 제 13조의 규정에 위반되거나, 다음 각 호에 해당한다고 판단되는 경우 사전통지 없이 게시물을 삭제할 수 있습니다.
- 
- 1) 다른 이용자 또는 제 3자를 비방하거나 중상모략으로 명예를 손상시키는 내용
- 
-2) 공공질서 또는 미풍양속에 위반되는 내용
- 
-3) 범죄적 행위에 결부된다고 인정되는 내용
- 
-4) 제 3자의 저작권 등 기타 권리를 침해하는 내용
- 
-5) 서비스의 안정적인 운영에 지장을 주거나 줄 우려가 있는 내용
- 
-6) 근거나 확인절차 없이 회사를 비난하거나 유언비어를 유포한 내용용
- 
-7) 기타 관계법령에 의거하여 위반된다고 판단되는 내용
- 
-단, 독자게시판의 경우 다음과 같이 예외를 둔다.
-용량이 큰 데이터의 경우 업로드 된 게시물의 수를 제한하며 그 수를 넘을 때에는 서버의 원활한 운영을 위해 가장 오래된 게시물부터 삭제할 수 있다.
- 
-2. 회사는 이용자가 게시하거나 등록하는 서비스내의 게시물이 제 13조의 규정에 위반되거나 동 조 제1항 각 호에 해당한다고 판단되는 정보를 링크하고 있을 경우 사전통지 없이 게시물을 삭제할 수 있습니다.
- 
- 
-제 15조 (게시물에 대한 권리 / 의무) 
-게시물에 대한 저작권을 포함한 모든 권리 및 책임은 이를 게시한 이용자에게 있습니다.
- 
-제 16조 (연결 "홈페이지"와 피연결 "홈페이지"간의 관계) 
-1. 상위 "홈페이지"와 하위 "홈페이지"가 하이퍼 링크(예:하이퍼 링크의 대상에는 문자, 그림 및 동화상 등이 포함됨) 방식 등으로 연결된 경우, 전자를 연결 "홈페이지"라고 하고 후자를 피연결 "홈페이지(웹사이트)"라고 합니다.
- 
-2. 연결 "홈페이지"는 피연결 "홈페이지"가 독자적으로 제공하는 재화?용역에 의하여 이용자와 행하는 거래에 대해서 보증책임을 지지 않습니다.
- 
- 
-제 17조 (저작권의 귀속 및 이용제한) 
-1. 회사가 작성한 저작물에 대한 저작권 및 기타 지적재산권은 회사에 귀속합니다.
- 
-2. 이용자는 서비스를 이용함으로써 얻은 정보를 회사의 사전승낙 없이 복제, 송신, 출판, 배포, 방송, 기타 방법에 의하여 영리목적으로 이용하거나 제 3자에게 이용하게 하여서는 안됩니다.
- 
- 
-제 18조 (양도금지) 
-회원이 서비스의 이용권한, 기타 이용 계약상 지위를 타인에게 양도, 증여할 수 없으며, 이를 담보로 제공할 수 없습니다.
- 
-제 19조 (손해배상) 
-회사는 무료로 제공되는 서비스와 관련하여 이용자에게 어떠한 손해가 발생하더라도 동 손해가 회사의 중대한 과실에 의한 경우를 제외하고 이에 대하여 책임을 부여하지 아니합니다.
- 
-제 20조 (면책 / 배상) 
-1. 회사는 이용자가 서비스에 게재한 정보, 자료, 사실의 정확성, 신뢰성 등 그 내용에 관하여는 어떠한 책임을 부담하지 아니하고, 이용자는 자신의 책임아래 서비스를 이용하며, 서비스를 이용하여 게시 또는 전송한 자료 등에 관하여 손해가 발생하거나 자료의 취사선택, 기타 서비스 이용과 관련하여 어떠한 불이익이 발생하더라도 이에 대한 모든 책임은 이용자에게 있습니다.
- 
-2. 회사는 제 13조의 규정에 위반하여 이용자간 또는 이용자와 제 3자간에 서비스를 매개로 한 물품거래 등과 관련하여 어떠한 책임도 부담하지 아니하고, 이용자가 서비스의 이용과 관련하여 기대하는 이익에 관하여 책임을 부담하지 않습니다.
- 
-3. 이용자가 제 13조, 기타 이 약관의 규정을 위반함으로 인하여 회사가 이용자 또는 제 3자에 대하여 책임을 부담하게 되고, 이로써 회사에게 손해가 발생하게 되는 경우, 이 약관을 위반한 이용자는 회사에게 발생하는 모든 손해를 배상하여야 하며, 동 손해로부터 회사를 면책시켜야 합니다.
- 
- 
-제 21조 (분쟁의 해결) 
-1. 회사와 이용자는 서비스와 관련하여 발생한 분쟁을 원만하게 해결하기 위하여 필요한 모든 노력을 하여야 합니다.
- 
-2. 제 1항의 규정에도 불구하고, 동 분쟁으로 인하여 소송이 제기될 경우 동 소송은 서울지방법원을 관할로 합니다.
- 
-3. 동 소송에는 대한민국 법을 적용합니다.
- 
- 
-제 22조 (기타) 
-이 약관에 명시되지 아니한 사항의 처리를 위하여 이용자는 OOO.(전화번호 : 02-xxx-xxxx)를 이용합니다.
- 
-부칙 
-이 약관은 OOOO년 O월 O 일부터 시행합니다.
-                </textarea>
-                </td>
-              </tr>
-              <tr>
-                <td class="t_name">개인정보 보호정책</td>
-                <td class="t_value" colspan="3">
-                <textarea name="safeinfo" rows="20" cols="100" class="textarea">※ 총 칙
-1. OOO는 "정보통신망이용촉진및정보보호등에관한법률"상의 개인정보보호 규정과 정보통신부가 제정한 "개인정보보
-    호지침" 및 "개인정보의 기술적/관리적 보호조치 기준"을 준수하고 있습니다. 또한 OOO는 "개인정보보호정책"을 
-    제정하여 회원들의 개인정보 보호를 위해 최선을 다하겠음을 선언합니다.
-2. OOO의 "개인정보보호정책"은 관련 법률 및 정부 지침의 변경과 OOO의 내부 방침 변경에 의해 변경될 수 있습
-    니다. OOO의 "개인정보보호방침"이 변경될 경우 변경사항은 OOO 홈페이지의 공지사항에 
-    최소 7일간 게시됩니다. 
-
+이 약관은 2022년 3월 15일부터 시행합니다.
+ 		              	</textarea>
+               		</td>
+               	</tr>
+              	
+            <table>		 
+            <br>
+      		&nbsp;&nbsp;<class="tit_sub"><i class="fa fa-genderless" aria-hidden="true"></i>개인정보
+     		<br>
+             <tr>
+	 			 <td class="t_value" colspan="3">
+               	 <textarea name="safeinfo" rows="20" cols="100" class="textarea">※ 총 칙
+1. OOO는 "정보통신망이용촉진및정보보호등에관한법률"상의 개인정보보호 규정과 정보통신부가 제정한 "개인정보보호지침" 및 "개인정보의 기술적/관리적 보호조치 기준"을 준수하고 있습니다. 또한 OOO는 "개인정보보호정책"을  제정하여 회원들의 개인정보 보호를 위해 최선을 다하겠음을 선언합니다.
+2. OOO의 "개인정보보호정책"은 관련 법률 및 정부 지침의 변경과 OOO의 내부 방침 변경에 의해 변경될 수 있습 니다. OOO의 "개인정보보호방침"이 변경될 경우 변경사항은 OOO 홈페이지의 공지사항에  최소 7일간 게시됩니다. 
 
 ※ 개인정보
 OOO는 귀하께서 OOO의 이용약관의 내용에 대해 "동의한다" 버튼 또는 "동의하지 않는다" 버튼을 클릭할 수 있는 절차를 마련하여, "동의한다" 버튼을 클릭하면 개인정보 수집에 대해 동의한 것으로 봅니다. 또한, 귀하께서 “동의한다” 버튼을 클릭하면 아래의 개인정보 수집 항목 중 “비밀번호”와 “주민등록번호”를 제외한 나머지 항목들은 OOO가 서비스
 를 이행하기 위해 외주업체에 제공하는 것에 대해 동의한 것으로 간주합니다.
 
-
-1. "개인정보"의 범위는 정보통신망이용촉진및정보보호등에관한법률에서 규정하는 내용에 따라, "생존하는 개인에 관한 
-    정보로서 당해 정보에 포함되어 있는 성명, 주민등록번호 등의 사항에 의하여 당해 개인을 식별할 수 있는 정보(당해 
-    정보만으로는 특정 개인을 식별할 수 없더라도 다른 정보와 용이하게 결합하여 식별할 수 있는 것을 포함한다)"를 의미
-    합니다. 
+1. "개인정보"의 범위는 정보통신망이용촉진및정보보호등에관한법률에서 규정하는 내용에 따라, "생존하는 개인에 관한  정보로서 당해 정보에 포함되어 있는 성명, 주민등록번호 등의 사항에 의하여 당해 개인을 식별할 수 있는 정보(당해  정보만으로는 특정 개인을 식별할 수 없더라도 다른 정보와 용이하게 결합하여 식별할 수 있는 것을 포함한다)"를 의미 합니다. 
 2. OOO는 이용자 확인, 대금결제, 이용 서비스의 소유자 확인, 개별회원에게 맞춤화된 서비스, 기타 부가서비스 등을 
     위하여 회원들의 개인정보를 수집ㆍ이용 합니다. 수집하는 개인정보 항목에 따른 구체적인 수집목적 및 이용 목적은 
     다음과 같습니다.
@@ -546,186 +280,23 @@ OOO는 귀하께서 OOO의 이용약관의 내용에 대해 "동의한다" 버�
 - 계약 또는 청약철회 등에 관한 기록 : 5년
 - 대금결제 및 재화등의 공급에 관한 기록 : 5년
 - 소비자의 불만 또는 분쟁처리에 관한 기록 : 3년 등
-
-
-
-※ 제3자에 대한 정보 제공
-1. OOO는 회원들의 개인정보를 무단으로 타인 또는 다른 회사나 기관에 제공하지 않습니다. 
-    단, 다음에 해당하는 경우는 예외로 합니다. 
--  도메인 이름 등록을 위하여 해당 도메인의 등록사업자에게 신청자의 정보를 제공하는 경우
--  도메인 이름에 대한 WHOIS 서비스를 위하여 제공하는 경우 
--  정보통신망이용촉진및정보보호등에관한법률 등 관계법령에 의하여 국가기관 또는 정부에서 지정한 소비자단체들의 
-    요청에 의한 경우 
--  분쟁에 연루된 도메인 등록자의 연락처를 분쟁 조정 기구나 법원이 요청하는 경우
--  범죄에 대한 수사상의 목적이 있거나 정보통신윤리위원회, 한국정보보호진흥원 등 법정단체의 요청이 있는 경우 
--  업무상 연락을 위하여 회원의 정보(성명, 주소, 전화번호)를 사용하는 경우 
--  통계작성, 홍보자료, 학술연구 또는 시장조사를 위하여 필요한 경우로서 특정 고객임을 식별할 수 없는 형태로 제공
-    되는 경우
--  회원들이 OOO의 서비스를 신청하여 OOO가 서비스 이행을 위해 배송업체, 외주콜센터업체, 지로발송 업체 등
-    에 해당 회원의 비밀번호, 주민등록번호를 포함하지 않는 주문정보, 주소지 정보, 연락처 등을 제공하는 경우
-
-2. OOO는 보다 다양한 서비스 제공을 위하여 회원들의 개인정보를 제휴사에게 제공하거나, 제휴사와 공유하고자 할 때
-    는 반드시 사전에 회원 개개인의 동의를 구하겠습니다. 제휴사가 어디인지, 제공 또는 공유되는 개인정보항목이 무엇인
-    지, 왜 그러한 개인정보가 공유되어야 하는지, 그리고 언제까지 어떻게 보호, 관리되는지에 대해 개별적으로 전자우편을 
-    통해 고지하여 동의를 구하는 절차를 거치게 되며, 귀하께서 동의하지 않는 경우에는 제휴사에게 제공하거나 제휴사와 
-    공유하지 않습니다.
-
-
-
-※ 개인정보의 열람 및 정정 
-1. OOO의 회원은 언제든지 자신의 개인정보를 열람하거나 정정하실 수 있습니다. 개인정보 열람 및 정정을 원하시는
-    분은 OOO 사이트에 로그온 하신 후, 로그아웃 버튼 옆의 "정보변경" 버튼을 클릭하십시오. 
-2. 만일 ID와 비밀번호를 잃어버리신 회원은 홈페이지에서 "ID 확인/비밀번호 확인"서비스를 통해 ID나 비밀번호를 확인하
-    실 수 있습니다.
-3. OOO 회원 ID와 비밀번호에 대한 관리 책임은 본인에게 있습니다.
-    본인의 개인정보를 효과적으로 보호하기 위해서 자신의 회원ID 와 비밀번호를 적절하게 관리하고 책임을 져야 합니다. 
-    본인의 ID와 비밀번호를 유출하였다면 이에 대해서 OOO는 책임을 지지않습니다. 다만, OOO의 과실 혹은 고의
-    에 의한 회원 ID와 비밀번호 유출에 대해서는 해당 고객이 OOO의 책임을 물을 수 있습니다.
-    이용자는 OOO의 계정을 이용해서 웹사이트를 이용한 뒤에는 해당 계정을 종료하시고 웹 브라우저의 창을 닫아주십
-    시오. 특히 컴퓨터를 타인과 공유하거나 공공장소에서 사용하는 경우 반드시 로그아웃하시거나 웹 브라우저를 종료하여
-    야 합니다.
-
-
-
-※ 회원 탈퇴
-OOO 회원은 언제든지 본인이 원할 때 탈퇴가 가능합니다. 회원 탈퇴는 회원 정보 관리 화면에서 신청 가능합니다. 
-단, 회원이 가비아에서 이용 중인 서비스의 만기일이 지나지 않은 경우, 회원 탈퇴는 가능하지 않습니다.
-
-
-
-※ 개인정보보호를 위한 기술적 대책
-OOO는 회원들의 개인정보가 분실, 도난, 누출, 변조 또는 훼손되지 않도록 다음과 같은 기술적 대책을 마련하고 있습
-니다. 
-1. 회원 개개인의 개인정보는 비밀번호에 의해 보호되며, 개인정보 데이터는 별도의 보안기능을 통해 보호 되고 있습니다. 
-2. 회원 개개인의 비밀번호는 이용자 및 개인정보취급자가 생일, 주민등록번호, 전화번호 등 추측하기 쉬운 숫자를 비밀
-    번호로 이용하지 않도록 패스워드 작성 규칙을 수립하고 이행합니다.
-3. OOO는 백신 프로그램 및 악성코드 방어 소프트웨어을 이용하여 컴퓨터 바이러스에 의한 피해를 방지하고 있으며, 
-    해당 소프트웨어는 매일 주기적으로 업데이트하고 있습니다.
-4. OOO는 침입차단 기능과 침입탐지 기능을 탑재하고 있는 고가의 라우터와 L3 스위치 장비를 사용하여 이중으로 
-    네트워크 상의 개인정보를 안전하게 보호하고 있습니다.
-5. OOO는 또한 별도의 침입차단시스템(Firewall)을 구축하여 3중 개인정보보호시스템을 운영하고 있습니다.
-6. OOO는 개인정보를 개인정보보호시스템에 암호화하여 저장하고 있으며, OOO의 정보통신망 외부로 개인정보를 
-    송신하거나 PC에 저장할 경우 암호화하여 저장하도록 시스템을 운영하고 있습니다. 
-
-※ 의견수렴 및 불만처리
-OOO 회원 중 OOO의 개인정보보호와 관련하여 불만이 있으신 분은 개인정보 관리책임자에게 의견을 주시면, 접수 즉시 조치하여 처리결과를 통보해 드리겠습니다. 개인정보 무단 유출이나 기타 심각한 개인정보 침해 시에는 정부에서 설치하여 운영중인 개인정보침해 신고센터(http://www.cyberpr ivacy.or.kr, http://www.1336.or.kr, 전화 02-1336,)에 불만처리 또는 중재를 신청하실 수도 있습니다.
-
-
-
-※ 개인정보관리 계획의 수립 및 시행
-OOO는 회사 규정에 별도의 전산관리규정을 마련하여 다음과 같은 사항을 준수하겠습니다.
-1. 개인정보관리책임자의 지정 등 개인정보보호 조칙의 구성, 운영에 관한 사항
-2. 개인정보취급자의 교육에 관한 사항
-3. 개인정보처리시스템의 접속 기록 유지 및 정기적인 확인 감독
-4. 개인정보 출력 및 복사시의 보호조치
-5. 기타 개인정보 보호를 위해 필요한 사항
-
-
-
-※ 개인정보 관리 담당자
-OOO는 개인정보에 대한 의견수렴 및 불만처리를 담당하는 개인정보 관리담당자를 지정하고 있습니다. 
-- 개인정보 관리 담당자
-성 명 : OOO
-직 책 : OOOO 대표
-전화번호 : 02-xxx-xxxx
-E-mail : xxxx@xxxx.com
-
-
-
-※ 아동의 회원 가입에 대해
-1. OOO는 아동의 개인정보를 보호하기 위하여 만 14세 미만의 아동이 회원 가입을 신청할 경우 법정대리인(부모)의 
-    동의가 있어야 합니다. 부모님의 허락을 받지않은 14세 미만의 미성년자에 대해서는 OOO가 임의로 회원에서 제외
-    할 수 있습니다. 
-2. 만 14세 미만 미성년자의 법정대리인은 대리인의 책임하에 있는 미성년자의 개인정보에 대한 열람, 정정, 동의철회를 
-    요청할 수 있으며, 이러한 요청이 있을 경우 OOO는 지체없이 필요한 조치를 취하겠습니다. 
-
-※ 미성년자 거래시 철회에 대해
-OOO는 미성년자와의 거래시 사전에 법정대리인(부모)의 동의를 구할 의무가 있으며, 법정대리인(부모)의 동의를 얻지 못한 거래의 경우, 거래를 취소할 수 있습니다. 또한 거래 당사자인 미성년자의 법정대리인(부모)이 거래 성립 후 7일 이내에 철회를 요청할 경우, 거래를 철회(환불)하겠습니다.
-
-
-
-※ 광고성 정보 전송에 대해
-1. OOO는 회원을 대상으로 OOO가 제공하고 있는 서비스에 대한 안내, 서비스에 대한 공지 등에 대한 메일을 자유
-    롭게 보낼 수 있습니다.
-2. OOO는 회원을 대상으로 광고성 정보를 전송할 수 있습니다. 단, 이러한 경우에는 (광고)라는 문구를 표시하여 회원
-    들이 광고성 정보임을 쉽게 파악할 수 있게 하며, 수신거부 의사를 밝힌 회원에게는 광고성 정보를 전송하지 않겠습니다.</textarea>
-                </td>
+				</textarea>
               </tr>
             </table>
           </td>
         </tr>
       </table>
-	
 
-      <!-- 버튼 -->
-			<br>
-      <table align="center" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td>
-            <div class="form-group mb-4">
-              <div class="col-sm-12">
-                <input type="button" value="확인" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='write-c.html'" />
-              </div>
-        </tr>
-        </form>
-      </table>
-
-        </td>
-        <td width="25"></td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td height="50">&nbsp;</td>
-  </tr>
-  <tr>
-    <td valign="bottom" align="right" class="s11" style="padding-right:25px;">
-    	<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="f6f6f6">
-    
-    </table>
-    </td>
-  </tr>
-  <tr>
-    <td height="5"></td>
-  </tr>
-</table>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+    <!-- 버튼 -->
+	<br>
+    <table align="center" border="0" cellspacing="0" cellpadding="0">
+    	<tr>
+        	<td>
+            <div class="form-group mb-4"><div class="col-sm-12" >
+                <input type="button" value="확인" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='/admin/terms.do'" />
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
-                    href="https://www.wrappixel.com/">wrappixel.com</a>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+        </tr>
+       
     <script src="../../plugins_a/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>

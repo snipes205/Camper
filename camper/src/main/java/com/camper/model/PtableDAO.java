@@ -17,7 +17,7 @@ public class PtableDAO {
 	@Autowired
 	private DataSource dataSource;
 	
-	// 캠핑로그 List( board_list1.jsp )
+	// 커뮤니티 List
 	public ArrayList<PtableTO> boardList() {
 		
 		Connection conn = null;
@@ -28,11 +28,9 @@ public class PtableDAO {
 		
 		try {
 			conn = this.dataSource.getConnection();
-			
-			// 캠핑로그이므로 조건절에 'l' 를 준다.
-			// 캠핑 type 은 항상 가지고 간다.
+
 			String sql = 
-			"select pseq, title, nick, type, date_format( wdate, '%y-%m-%d' ) wdate from p_table where type = 't' order by pseq desc";
+			"select pseq, title, nick, date_format( wdate, '%Y-%m-%d' ) wdate from p_table order by pseq desc";
 			pstmt = conn.prepareStatement( sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
 			rs = pstmt.executeQuery();
@@ -43,7 +41,6 @@ public class PtableDAO {
 				to.setPseq( rs.getString( "pseq" ) );
 				to.setTitle( rs.getString( "title" ) );
 				to.setNick( rs.getString( "nick" ) );
-				to.setType( rs.getString( "type" ) );
 				to.setWdate( rs.getString( "wdate" ) );
 				
 				boardLists.add( to );
@@ -62,98 +59,132 @@ public class PtableDAO {
 		return boardLists;
 	}
 	
-	// 캠핑꿀팁 List( board_list2.jsp )
-	public ArrayList<PtableTO> boardList2() {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		ArrayList<PtableTO> boardLists = new ArrayList<PtableTO>();
-		
-		try {
-			conn = this.dataSource.getConnection();
+	// 캠핑로그 List
+		public ArrayList<PtableTO> boardListL() {
 			
-			// 캠핑꿀팁이므로 조건절에 't' 를 준다.
-			// 캠핑 type 은 항상 가지고 간다.
-			String sql = 
-			"select pseq, title, nick, type, date_format( wdate, '%y-%m-%d' ) wdate from p_table where type = 't' order by pseq desc";
-			pstmt = conn.prepareStatement( sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
 			
-			rs = pstmt.executeQuery();
+			ArrayList<PtableTO> boardLists = new ArrayList<PtableTO>();
 			
-			while( rs.next() ) {
-				PtableTO to = new PtableTO();
+			try {
+				conn = this.dataSource.getConnection();
+
+				String sql = 
+				"select pseq, title, nick, date_format( wdate, '%Y-%m-%d' ) wdate from p_table where type = 'l' order by pseq desc";
+				pstmt = conn.prepareStatement( sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 				
-				to.setPseq( rs.getString( "pseq" ) );
-				to.setTitle( rs.getString( "title" ) );
-				to.setNick( rs.getString( "nick" ) );
-				to.setType( rs.getString( "type" ) );
-				to.setWdate( rs.getString( "wdate" ) );
-			
+				rs = pstmt.executeQuery();
 				
-				boardLists.add( to );
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러]" + e.getMessage() );
-		} finally {
-		if( rs != null ) try { rs.close(); } catch( SQLException e ) {}
-		if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
-		if( conn != null ) try { conn.close(); } catch( SQLException e ) {}
-		
-		}
-		
-		return boardLists;
-	}
-	
-	// 캠핑가자 List( board_list3.jsp )
-	public ArrayList<PtableTO> boardList3() {
-			
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-			
-		ArrayList<PtableTO> boardLists = new ArrayList<PtableTO>();
-			
-		try {
-			conn = this.dataSource.getConnection();
-				
-			// 캠핑가자이므로 조건절에 'g' 를 준다.
-			// 캠핑 type 은 항상 가지고 간다.
-			String sql = 
-			"select pseq, title, nick, type, date_format( wdate, '%y-%m-%d' ) wdate from p_table where type = 'g' order by pseq desc";	
-			pstmt = conn.prepareStatement( sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
-				
-			rs = pstmt.executeQuery();
-				
-			while( rs.next() ) {
-				PtableTO to = new PtableTO();
+				while( rs.next() ) {
+					PtableTO to = new PtableTO();
 					
-				to.setPseq( rs.getString( "pseq" ) );
-				to.setTitle( rs.getString( "title" ) );
-				to.setNick( rs.getString( "nick" ) );
-				to.setType( rs.getString( "type" ) );
-				to.setWdate( rs.getString( "wdate" ) );
+					to.setPseq( rs.getString( "pseq" ) );
+					to.setTitle( rs.getString( "title" ) );
+					to.setNick( rs.getString( "nick" ) );
+					to.setWdate( rs.getString( "wdate" ) );
 					
-				boardLists.add( to );
-			}
+					boardLists.add( to );
+				}
 				
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러]" + e.getMessage() );
-		} finally {
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println( "[에러]" + e.getMessage() );
+			} finally {
 			if( rs != null ) try { rs.close(); } catch( SQLException e ) {}
 			if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
 			if( conn != null ) try { conn.close(); } catch( SQLException e ) {}
 			
-		}
+			}
 			
-		return boardLists;
-	}
+			return boardLists;
+		}
 		
-	// 글보기 ( board_view.jsp )
+		// 캠핑꿀팁 List
+			public ArrayList<PtableTO> boardListH() {
+				
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+					
+				ArrayList<PtableTO> boardLists = new ArrayList<PtableTO>();
+				
+				try {
+					conn = this.dataSource.getConnection();
+
+					String sql = 
+					"select pseq, title, nick, date_format( wdate, '%Y-%m-%d' ) wdate from p_table where type = 't' order by pseq desc";
+					pstmt = conn.prepareStatement( sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+						
+					rs = pstmt.executeQuery();
+						
+					while( rs.next() ) {
+						PtableTO to = new PtableTO();
+							
+						to.setPseq( rs.getString( "pseq" ) );
+						to.setTitle( rs.getString( "title" ) );
+						to.setNick( rs.getString( "nick" ) );
+						to.setWdate( rs.getString( "wdate" ) );
+							
+						boardLists.add( to );
+					}
+						
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println( "[에러]" + e.getMessage() );
+				} finally {
+				if( rs != null ) try { rs.close(); } catch( SQLException e ) {}
+				if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
+				if( conn != null ) try { conn.close(); } catch( SQLException e ) {}			
+				}
+					
+				return boardLists;
+			}
+		
+			// 캠핑가자 List
+			public ArrayList<PtableTO> boardListG() {
+					
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+					
+				ArrayList<PtableTO> boardLists = new ArrayList<PtableTO>();
+					
+				try {
+					conn = this.dataSource.getConnection();
+
+					String sql = 
+					"select pseq, title, nick, date_format( wdate, '%Y-%m-%d' ) wdate from p_table where type = 'g' order by pseq desc";
+					pstmt = conn.prepareStatement( sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+						
+					rs = pstmt.executeQuery();
+						
+					while( rs.next() ) {
+						PtableTO to = new PtableTO();
+							
+						to.setPseq( rs.getString( "pseq" ) );
+						to.setTitle( rs.getString( "title" ) );
+						to.setNick( rs.getString( "nick" ) );
+						to.setWdate( rs.getString( "wdate" ) );
+							
+						boardLists.add( to );
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println( "[에러]" + e.getMessage() );
+				} finally {
+				if( rs != null ) try { rs.close(); } catch( SQLException e ) {}
+				if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
+				if( conn != null ) try { conn.close(); } catch( SQLException e ) {}			
+				}
+					
+				return boardLists;
+			}
+	
+			
+	// View
 	public PtableTO boardView( PtableTO to ) {
 			
 		Connection conn = null;
@@ -164,7 +195,7 @@ public class PtableDAO {
 			conn = this.dataSource.getConnection();
 				
 			String sql = 
-			"select title, nick, date_format( wdate, '%y-%m-%d' ) wdate, content, type from p_table where pseq=?";
+			"select title, nick, date_format( wdate, '%Y-%m-%d' ) wdate, content from p_table where pseq=?";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getPseq() );
 				
@@ -175,7 +206,6 @@ public class PtableDAO {
 				to.setNick( rs.getString( "nick" ) );
 				to.setWdate( rs.getString( "wdate" ) );
 				to.setContent( rs.getString( "content" ) );
-				to.setType( rs.getString( "type" ) );
 			}
 				
 		} catch (SQLException e) {
@@ -192,5 +222,38 @@ public class PtableDAO {
 	}
 	
 	
+	// 글삭제 ok
+		public int boardDeleteOk( PtableTO to ) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			int flag = 1;
+			
+			try{
+
+				conn = this.dataSource.getConnection();
+				
+				String sql = "delete from p_table where pseq=? ";
+				pstmt = conn.prepareStatement( sql );
+				pstmt.setString( 1, to.getPseq() );
+				
+				int result = pstmt.executeUpdate();
+				if( result == 0 ) {
+					flag = 1;
+				} else if( result == 1 ) {
+					flag = 0;
+				}
+				
+			} catch ( SQLException e ) {
+				System.out.println( "[에러]" + e.getMessage() );
+			} finally {
+				if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
+				if( conn != null ) try {conn.close(); } catch( SQLException e ) {}
+			}
+			
+			return flag;	
+		}
+		
 }
 

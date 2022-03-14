@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+window.addEventListener('load', function() {
 	
-	function btnClick(){
+	$('#findBtn').click(function(){
 		const fid = $('#fid').val();
 		const email = $('#mail1').val().concat('@', $('#mail2').val()).trim();
 		
@@ -22,9 +23,71 @@
 			return false;
 		}
 		
-		document.findForm.action = '/findpwd.do';
+		document.findForm.action = '/findPwd.do';
 		document.findForm.submit();
-	}
+	});
+		
+		$( "#fid" ).focusout( function() {
+			const user_id = $('#fid').val();
+			if( fid != '' ) {
+					$.ajax({
+						url: '/idcheck.do',
+						type: 'POST',
+						data: {
+							"user_id": user_id,
+						},
+						success: function( data ) {
+							//controller에서 return값을 int로 넘기면 에러가 난다...
+							if( data == "1" ) {
+								$( "#checkid" ).text( "" );
+							}  else {
+								$( "#checkid" ).text( "등록되지 않은 아이디 입니다." );
+								$( "#checkid" ).css( "margin", "0 auto" );
+								$( "#checkid" ).css( "color", "red" );
+								$( "#findBtn" ).attr( "disabled", false );
+							}
+						},
+						error: function() {
+							console.log( "ajax 에러" )
+						}
+					})
+			} 
+		})
+		
+		
+		$( "#mail2" ).focusout( function() {
+			if($('#mail1') != '' && $('#mail2') != ''){
+				const fid = $('#fid').val();
+				const email = $('#mail1').val().concat('@', $('#mail2').val()).trim();
+						$.ajax({
+							url: '/findpwdcheck.do',
+							type: 'POST',
+							data: {
+								"fid": fid,
+								"email": email			
+							},
+							success: function( data ) {
+								if( data != "2" ) {
+									$( "#checkemail" ).text( "등록되지 않은 이메일입니다." );
+									$( "#checkemail" ).css( "margin", "0 auto" );
+									$( "#checkemail" ).css( "color", "red" );
+									$( "#findBtn" ).attr( "disabled", false );
+								} else {
+									$( "#checkemail" ).text( "" );
+								}
+							},
+							error: function() {
+								console.log( "ajax 에러" )
+							}
+						})
+				} else {
+					$( "#checkemail" ).text( "" );
+					$( "#findBtn" ).attr( "disabled", false );
+				}
+		})
+	
+	});
+	
 </script>
 </head>
 <body>
@@ -44,17 +107,19 @@
 						<!-- id -->
 						<div class="form-group">
 							<input type="text" class="form-control" name="fid" id="fid" placeholder="id">
+							<div id="checkid"></div>
 						</div>
 						<!-- Email -->
 						<div class="form-group d-inline-flex">
-							<input type="text" class="form-control" name="mail1" id="mail1" placeholder="email1">
+							<input type="text" class="form-control" name="mail1" id="mail1" placeholder="test">
 							<span style="font-size: 23px; text-align: center; padding-top: 5px; margin: 0 5px;">@</span>
-							<input type="text" class="form-control" name="mail2" id="mail2" placeholder="email2">
+							<input type="text" class="form-control" name="mail2" id="mail2" placeholder="example.com">
 						</div>
+							<div id="checkemail" style="display:block;"></div>
 					</form>
 				</div>
 				<div class="modal-footer border-top-0 m-auto justify-content-lg-between justify-content-center">
-					<button class="btn btn-transparent" type="button" name="findBtn" id="findBtn" onclick="btnClick();">비밀번호 찾기</button>
+					<button class="btn btn-transparent" type="button" name="findBtn" id="findBtn" >비밀번호 찾기</button>
 				</div>
 			</div>
 		</div>

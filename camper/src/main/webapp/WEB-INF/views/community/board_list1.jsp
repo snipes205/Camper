@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!--  캠핑로그 List MVC Model2 구조 -->
 
 <%@ page import="com.camper.model.BoardTO" %>
-<%@page import="com.camper.model.BoardListTO"%>
+<%@ page import="com.camper.model.BoardListTO"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.ResultSet" %>
 <% 
+
+	BoardListTO listTO = (BoardListTO)request.getAttribute( "listTO" );
+	
+	int cpage = listTO.getCpage();
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalRecord = listTO.getTotalRecord();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+	
 	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
 
 	StringBuffer sbHtml = new StringBuffer();
@@ -16,11 +29,12 @@
 			String title = to.getTitle();
 			String nick = to.getNick();
 			String wdate = to.getWdate();
+			String type = to.getType();
 			
 			// 게시물 내용 form
 			sbHtml.append( "<article>" );
 			sbHtml.append( "	<div>" );
-			sbHtml.append( "		<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>" );
+			sbHtml.append( "		<a href='/community/view.do?cpage=" + cpage +  "&pseq=" + pseq + "&type=" + type + "'>" + title + "</a>" );
 			sbHtml.append( "	</div>" );
 			sbHtml.append( "	<ul class='list-inline'>" );
 			sbHtml.append( "		<li class='list-inline-item'>by <a href=''>" + nick + "</a></li>" );
@@ -93,36 +107,56 @@
 					<%= sbHtml.toString() %>
 					
 					<!--  버튼 Part -->
-					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">글쓰기</button></a>
-					
-					<!--  페이지네이션 내용 표시 -->
-					
-					
+					<c:choose>
+						<c:when test="${empty sessionScope.nick}">
+							<input type="button" value="글쓰기" class="btn btn-transparent" style="float: right;" onclick="javascript:alert('로그인을 하셔야합니다.')" >
+						</c:when>
+						<c:otherwise>
+							<input type="button" value="글쓰기" class="btn btn-transparent" style="float: right;" onclick="location.href='/community/write.do'" >
+						</c:otherwise>
+					</c:choose>
 					<!--  페이지네이션 Part -->
 					<nav aria-label="Page navigation">
 						<ul class="pagination" style="margin-top: 0px;">
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
-								<span class="sr-only">DPrevious</span></a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-								<span class="sr-only">Previous</span></a>
-							</li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
+					
+					<!--  페이지네이션 내용 표시 -->
+					<%
+						/* if( listTO.getStartBlock() == 1 ) {
+								out.println( "<li class='page-item'><a class='page-link' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-double-left'></i></span><span class='sr-only'>DPrevious</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/camplog.do?cpage=" + ( listTO.getStartBlock()-listTO.getBlockPerPage() ) + "' aria-label='DNext'><span aria-hidden='true'><i class='fa fa-angle-double-left'></i></span><span class='sr-only'>DPrevious</span></a></li>" );
+						} */
+						
+						out.println( "<li class='page-item'><a class='page-link' href='/community/camplog.do?cpage=1' aria-label='DNext'><span aria-hidden='true'><i class='fa fa-angle-double-left'></i></span><span class='sr-only'>DPrevious</span></a></li>" );
+						
+						if( cpage == 1 ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-left'></i></span><span class='sr-only'>Previous</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/camplog.do?cpage=" + (cpage-1) + "' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-left'></i></span><span class='sr-only'>Previous</span></a></li>" );
+						}
+						
+						for( int i=startBlock; i<=endBlock; i++ ) {
+							if( cpage == i ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#'>" + i + "</a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/camplog.do?cpage=" + i + "'>" + i + "</a></li>" );	
+							}
 							
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-								<span class="sr-only">Next</span></a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
-								<span class="sr-only">DNext</span></a>
-							</li>
+						}
+						
+						if( cpage == totalPage ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-right'></i></span><span class='sr-only'>Next</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/camplog.do?cpage=" + (cpage+1) + "' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-right'></i></span><span class='sr-only'>Next</span></a></li>" );
+						}
+						
+						/* if( endBlock == totalPage ) {
+								out.println( "<li class='page-item'><a class='page-link' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-double-right'></i></span><span class='sr-only'>DNext</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/camplog.do?cpage=" + ( startBlock+blockPerPage ) + "' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-double-right'></i></span><span class='sr-only'>DNext</span></a></li>" );
+						} */
+						out.println( "<li class='page-item'><a class='page-link' href='/community/camplog.do?cpage="+listTO.getTotalPage()+"' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-double-right'></i></span><span class='sr-only'>DNext</span></a></li>" );
+					%>
 						</ul>
 					</nav>
 				</div>

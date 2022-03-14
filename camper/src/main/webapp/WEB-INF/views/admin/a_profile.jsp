@@ -1,7 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.camper.model.UserTO"%>
+<% 
+
+	UserTO to = (UserTO)request.getAttribute( "to" );
+	String id = to.getId();
+	String pwd = to.getPwd();
+	String name = to.getName();
+	String nick = to.getNick();
+	String birth = to.getBirth();
+	String phone = to.getPhone();
+	String email = to.getEmail();
+	String gen = to.getGen();
+	String area = to.getArea();
+	String greet = to.getGreet();
+	
+%>    
+    
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="ko">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +33,7 @@
     <title>CAMPER</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="icon" type="../../image/png" sizes="16x16" href="../../iamges/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
     <!-- Custom CSS -->
    <link href="../../css_a/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -81,24 +98,12 @@
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
-
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li>
                             <a class="profile-pic" href="#">
-                                <img src="../../plugins_a/images/users/varun.jpg" alt="user-img" width="36"
+                                <img src="../../plugins_a/images/users/1.jpg" alt="user-img" width="36"
                                     class="img-circle"><span class="text-white font-medium">Admin</span></a>
                         </li>
                         <!-- ============================================================== -->
@@ -109,70 +114,72 @@
             </nav>
         </header>
         <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ------------------ 왼쪽 전체 카테고리 ----------------  -->
         <!-- ============================================================== -->
-       <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/main.do" aria-expanded="false">
-                                <i class="fas fa-chart-area" aria-hidden="true"></i>
-                                <span class="hide-menu">관리자메인</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/member.do" aria-expanded="false">
-                                <i class="fas fa-id-badge" aria-hidden="true"></i>
-                                <span class="hide-menu">회원관리</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/comm.do" aria-expanded="false">
-                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                <span class="hide-menu">커뮤니티</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/notice.do" aria-expanded="false">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                                <span class="hide-menu">고객지원</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/ask.do" aria-expanded="false">
-                                <i class="fa fa-comment-dots" aria-hidden="true"></i>
-                                <span class="hide-menu">1:1문의</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/site.do" aria-expanded="false">
-                                <i class="fa fa-font" aria-hidden="true"></i>
-                                <span class="hide-menu">사이트정보</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/admin.do" aria-expanded="false">
-                                <i class="fas fa-cog" aria-hidden="true"></i>
-                                <span class="hide-menu">관리자설정</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/terms.do" aria-expanded="false">
-                                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                                <span class="hide-menu">가입약관</span>
-                            </a>
-                        </li>
-                        
-                    </ul>
-
-                </nav>
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+        <ul id="sidebarnav">
+        <!-- 카테고리 -->
+        <li class="sidebar-item pt-2">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/main.do" aria-expanded="false">
+            <i class="fas fa-chart-area" aria-hidden="true"></i>
+            <span class="hide-menu">관리자메인</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/member.do" aria-expanded="false">
+            <i class="fas fa-id-badge" aria-hidden="true"></i>
+            <span class="hide-menu">회원관리</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/leaveuser.do" aria-expanded="false">
+            <i class="fas fa-male" aria-hidden="true"></i>
+            <span class="hide-menu">탈퇴회원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/comm.do" aria-expanded="false">
+      		<i class="fa fa-globe" aria-hidden="true"></i>
+         	<span class="hide-menu">커뮤니티</span>
+         	</a>
+       	</li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/notice.do" aria-expanded="false">
+            <i class="fa fa-info" aria-hidden="true"></i>
+            <span class="hide-menu">고객지원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/ask.do" aria-expanded="false">
+            <i class="fa fa-comment-dots" aria-hidden="true"></i>
+            <span class="hide-menu">1:1문의</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/site.do" aria-expanded="false">
+            <i class="fa fa-font" aria-hidden="true"></i>
+            <span class="hide-menu">사이트정보</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/admin.do" aria-expanded="false">
+            <i class="fas fa-cog" aria-hidden="true"></i>
+            <span class="hide-menu">관리자설정</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/terms.do" aria-expanded="false">
+            <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+            <span class="hide-menu">가입약관</span>
+            </a>
+        </li>
+        </ul>
+		</nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -190,16 +197,17 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Profile page</h4>
+                        <h4 class="page-title">회원정보 상세</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
+                                <li><a href="#" class="fw-normal">로그아웃</a></li>
                             </ol>
-                            <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
-                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Upgrade
-                                to Pro</a>
+                            <a href="http://localhost:8080/" target="_blank"
+                                class="btn btn-danger d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">
+                                홈페이지 바로가기
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -223,10 +231,10 @@
                             <div class="user-bg"> <img width="100%" alt="user" >
                                 <div class="overlay-box">
                                     <div class="user-content">
-                                        <a href="javascript:void(0)"><img src="plugins/images/users/genu.jpg"
+                                        <a href="javascript:void(0)">
+                                        <img src=""
                                                 class="thumb-lg img-circle" alt="img"></a>
                                         <h4 class="text-white mt-2">User Name</h4>
-                                        <h5 class="text-white mt-2">info@myadmin.com</h5>
                                     </div>
                                 </div>
                             </div>
@@ -239,44 +247,46 @@
                             <div class="card-body">
                                 <form class="form-horizontal form-material">
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Full Name</label>
+                                        <label class="col-md-12 p-0">아이디</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="Johnathan Doe"
+                                            <input type="text" placeholder="" value=<%=id %>
                                                 class="form-control p-0 border-0"> </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Nick Name</label>
+                                        <label class="col-md-12 p-0">이름</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="Nick Name"
+                                            <input type="text" placeholder="" value=<%=name %>
                                                 class="form-control p-0 border-0"> </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">ID</label>
+                                        <label class="col-md-12 p-0">닉네임</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="ID"
+                                            <input type="text" placeholder="" value=<%=nick %>
                                                 class="form-control p-0 border-0"> </div>
                                     </div>
-                                    <!-- ////////////생일////////////////////////////////////////////////////-->
                                     <div class="form-group mb-4">
-                                        <label class="col-sm-12">Select Gender</label>
-
-                                        <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none p-0 border-0 form-control-line">
-                                                <option>Woman</option>
-                                                <option>Man</option>
-                                            </select>
-                                        </div>
+                                        <label class="col-md-12 p-0">생일</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="text" placeholder="" value=<%=birth %>
+                                                class="form-control p-0 border-0"> </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="example-email" class="col-md-12 p-0">Email</label>
+                                        <label class="col-md-12 p-0">성별</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="email" placeholder="johnathan@admin.com"
+                                            <input type="text" placeholder="" value=<%=gen %>
+                                                class="form-control p-0 border-0"> </div>
+                                    </div>
+                                    
+                                    <div class="form-group mb-4">
+                                        <label for="example-email" class="col-md-12 p-0">이메일</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="email"  placeholder="" value=<%=email %>
                                                 class="form-control p-0 border-0" name="example-email"
                                                 id="example-email">
                                         </div>    
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Password</label>
+                                        <label class="col-md-12 p-0">비밀번호</label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="password" value="password" class="form-control p-0 border-0">
                                         </div>
@@ -284,75 +294,42 @@
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">Phone No</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="123 456 7890"
+                                            <input type="text" placeholder="" value=<%=phone %>
                                                 class="form-control p-0 border-0">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Message</label>
+                                        <label class="col-md-12 p-0">우편번호</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <textarea rows="5" class="form-control p-0 border-0"></textarea>
+                                            <input type="text" placeholder="" 
+                                                class="form-control p-0 border-0">
+                                        </div>
+                                    </div>
+                                     <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0">주소</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="text" placeholder="" value=<%=area %>
+                                                class="form-control p-0 border-0">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-sm-12">Select Country</label>
-
-                                        <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none p-0 border-0 form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
+                                        <label class="col-md-12 p-0">소개글</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <textarea rows="5" class="form-control p-0 border-0" > <%=greet %></textarea>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group mb-4">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
-                                            <button class="btn btn-success"><a href="member.html">목록</button></a>
-                                        </div>
+                                   
+                                    <div class="form-group mb-4">
+                                            <button class="btn btn-success">수정</button>
+                                            <button class="btn btn-success"><a href="/admin/member.do">목록</button></a>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                </div>
-                <!-- Row -->
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
-                    href="https://www.wrappixel.com/">wrappixel.com</a>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
+                   
     <!-- ============================================================== -->
     <script src="../../plugins_a/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->

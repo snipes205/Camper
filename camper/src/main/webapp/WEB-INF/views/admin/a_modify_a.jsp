@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@page import="com.camper.model.OboardTO"%>
+<%
+	OboardTO to = (OboardTO)request.getAttribute( "to" );
+
+	String oseq = to.getOseq();
+	String title = to.getTitle();
+	String nick = to.getNick();
+	String content = to.getContent();
+
+%>
+
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="ltr" lang="ko">
 
 <head>
     <meta charset="utf-8">
@@ -25,6 +37,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<script type ="text/javascript" >
+	window.onload = function() {
+		document.getElementById( 'mbtn' ).onclick = function() {
+			
+			document.mfrm.submit();
+		};
+	};
+</script>
+
 </head>
 
 <body>
@@ -83,23 +105,13 @@
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
 
                         <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
-                        <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li>
                             <a class="profile-pic" href="#">
-                                <img src="../../plugins_a/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Admin</span></a>
+                                <img src="../../plugins_a/images/users/1.jpg" alt="user-img" width="36" class="img-circle">
+                                <span class="text-white font-medium">Admin</span>
+                            </a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -109,73 +121,75 @@
             </nav>
         </header>
         <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ------------------ 왼쪽 전체 카테고리 ----------------  -->
         <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/main.do" aria-expanded="false">
-                                <i class="fas fa-chart-area" aria-hidden="true"></i>
-                                <span class="hide-menu">관리자메인</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/member.do" aria-expanded="false">
-                                <i class="fas fa-id-badge" aria-hidden="true"></i>
-                                <span class="hide-menu">회원관리</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/comm.do" aria-expanded="false">
-                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                <span class="hide-menu">커뮤니티</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/notice.do" aria-expanded="false">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                                <span class="hide-menu">고객지원</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/ask.do" aria-expanded="false">
-                                <i class="fa fa-comment-dots" aria-hidden="true"></i>
-                                <span class="hide-menu">1:1문의</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/site.do" aria-expanded="false">
-                                <i class="fa fa-font" aria-hidden="true"></i>
-                                <span class="hide-menu">사이트정보</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/admin.do" aria-expanded="false">
-                                <i class="fas fa-cog" aria-hidden="true"></i>
-                                <span class="hide-menu">관리자설정</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/terms.do" aria-expanded="false">
-                                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                                <span class="hide-menu">가입약관</span>
-                            </a>
-                        </li>
-                        
-                    </ul>
-
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+        <ul id="sidebarnav">
+        <!-- 카테고리 -->
+        <li class="sidebar-item pt-2">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/main.do" aria-expanded="false">
+            <i class="fas fa-chart-area" aria-hidden="true"></i>
+            <span class="hide-menu">관리자메인</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/member.do" aria-expanded="false">
+            <i class="fas fa-id-badge" aria-hidden="true"></i>
+            <span class="hide-menu">회원관리</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/leaveuser.do" aria-expanded="false">
+            <i class="fas fa-male" aria-hidden="true"></i>
+            <span class="hide-menu">탈퇴회원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/comm.do" aria-expanded="false">
+      		<i class="fa fa-globe" aria-hidden="true"></i>
+         	<span class="hide-menu">커뮤니티</span>
+         	</a>
+       	</li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/notice.do" aria-expanded="false">
+            <i class="fa fa-info" aria-hidden="true"></i>
+            <span class="hide-menu">고객지원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/ask.do" aria-expanded="false">
+            <i class="fa fa-comment-dots" aria-hidden="true"></i>
+            <span class="hide-menu">1:1문의</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/site.do" aria-expanded="false">
+            <i class="fa fa-font" aria-hidden="true"></i>
+            <span class="hide-menu">사이트정보</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/admin.do" aria-expanded="false">
+            <i class="fas fa-cog" aria-hidden="true"></i>
+            <span class="hide-menu">관리자설정</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/terms.do" aria-expanded="false">
+            <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+            <span class="hide-menu">가입약관</span>
+            </a>
+        </li>
+        </ul>
+		</nav>
+        <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
         </aside>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
@@ -190,16 +204,17 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">A-modify</h4>
+                        <h4 class="page-title">1:1 문의</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
+                                <li><a href="#" class="fw-normal">로그아웃</a></li>
                             </ol>
-                            <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
-                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Upgrade
-                                to Pro</a>
+                            <a href="http://localhost:8080/" target="_blank"
+                                class="btn btn-danger d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">
+                                홈페이지 바로가기
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -215,21 +230,16 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="white-box">
-                          
-
-		<!-- 상단 디자인 -->
-	    <form action="" method="post" name="">
-		<div class="contents_sub">
-
-		<!--게시판-->
+                <div class="row"> <div class="col-md-12"><div class="white-box">
+			<!--게시판-->
 			<div class="board_write">
+			<form action="/admin/modify_aok.do" method="post" name="mfrm">
+	    	<input type="hidden" name="oseq" value="<%=oseq%>" />
+			<div class="contents_sub" />
 				<table>
 				<tr>
 					<th class="top">작성자</th>
-					<td class="top" colspan="5"><input type="text" name="writer" value="" class="board_view_input_mail" maxlength="10" style="width: 15%;" /></td>
+					<td class="top" colspan="5"><input type="text" name="writer" value="<%=nick%>" class="board_view_input_mail" maxlength="10" style="width: 15%;" /></td>
 				</tr>
 				<tr>
 					<th>제목</th>
@@ -238,14 +248,14 @@
                         <option value="" selected="">:: 목록 ::</option>
                         <option value="68">답변완료</option>
                     </select> 
-                        <input name="subject" value="" type="text" class="input" style="width:73%;"></td>
+                        <input name="title" value="<%=title %>" type="text" class="input" style="width:73%;"></td>
 					<td colspan="3">
 				</tr>
                                
                 <tr>
                     <th width="15%" class="t_name">내용</td>
                     <td width="85%" class="t_value" colspan="3">
-                    <textarea name="agreement" rows="20" cols="100" class="textarea"></textarea>
+                    <input name="content" type="text" style="width:88%; height:500px;" value="<%=content %>">
 					</td>
 				</tr>
 
@@ -266,58 +276,16 @@
                     <tbody>
                         <tr>
                             <td align="center">
-                                    <input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='faq.html'" />
-                                    <input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='board_delete1.jsp'" />
+                                    <input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='/admin/ask.do'" />
+                                    <input type="button" value="수정" id ="mbtn" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='/admin/modify_aok.do'" />
                         </tr>
                     </tbody>
                 </table>
-            </div>
+               
+           	 </div>
+		</form>
             <!-- 버튼 끝-->
 
-
-            
-			<!--//게시판-->
-		</div>
-	</form>
-</div>
-	</div>
-</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
-                    href="https://www.wrappixel.com/">wrappixel.com</a>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="../../plugins_a/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->

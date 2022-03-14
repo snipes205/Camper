@@ -1,7 +1,6 @@
 package com.camper.model;
 
 import java.util.ArrayList;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class BoardListTO {
 
-	// board_list.jsp 파일들 용 model
+	// Pagination
 	private int cpage;
 	private int recordPerPage;
 	private int blockPerPage;
@@ -34,6 +33,8 @@ public class BoardListTO {
 		
 		// 전체 페이지
 		this.totalPage = 1;
+		
+		// 총 게시물 수
 		this.totalRecord = 0;
 	}
 }

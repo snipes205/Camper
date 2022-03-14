@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.camper.model.ReviewTO" %>
-
-
 
 <!DOCTYPE html>
 
@@ -28,10 +26,6 @@
 	href="../../plugins/bootstrap/css/bootstrap-slider.css">
 <!-- Font Awesome -->
 <link href="../../plugins/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- Owl Carousel -->
-<link href="../../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-<link href="../../plugins/slick-carousel/slick/slick-theme.css"
 	rel="stylesheet">
 <!-- Fancy Box -->
 <link href="../../plugins/fancybox/jquery.fancybox.pack.css"
@@ -122,7 +116,7 @@ img .img-fluid {
 								url:"./modifyReview.do",
 								data:{
 									"nick":$("#modNick").val(),
-									"password":$("#modPassword").val(),
+									//"password":$("#modPassword").val(),
 									"rvseq":$("#modRvseq").val(),
 									"content":$('#modContent').val()
 								},
@@ -229,6 +223,8 @@ img .img-fluid {
 					const firstImageUrl = xmlData.getElementsByTagName('firstImageUrl')[0];
 					const doNm =  xmlData.getElementsByTagName('doNm')[0];
 					const hompage = xmlData.getElementsByTagName('homepage')[0];
+					// 예약링크 추가로 파싱 
+					const resveUrl = xmlData.getElementsByTagName('resveUrl')[0];
 					
 					let div = function(){
 						
@@ -238,10 +234,18 @@ img .img-fluid {
 						document.getElementById("glampInnerFclty").innerText =nvl(glampInnerFclty);
 						document.getElementById("animalCmgCl").innerText =nvl(animalCmgCl);
 						document.getElementById("sbrsCl").innerText =nvl(sbrsCl);
-						document.getElementById("lineIntro").innerText =nvl(lineIntro);
+						// 한줄 소개 분기문 처리 했습니다. 위에 만들어 놓으신 nvl 함수를 사용할 경우 공란이 되어버려서...
+						if(lineIntro == '' || lineIntro == null) {
+							document.getElementById("lineIntro").innerText = "한줄소개가 없습니다!";
+						} else {
+							document.getElementById("lineIntro").innerText = lineIntro;
+						}
 						document.getElementById("doNm").innerText =nvl(doNm);
 						document.getElementById("homepage").innerText=nvl(hompage);
 						document.getElementById("homepage").setAttribute("href",nvl(hompage));	
+						// 예약링크 추가
+						document.getElementById("resveUrl").innerText=nvl(resveUrl);
+						document.getElementById("resveUrl").setAttribute("href",nvl(resveUrl));	
 						document.getElementById("contentId").innerText=nvl(contentId) ; 
 						document.getElementById("mainImg").setAttribute("src",nvl(firstImageUrl));	
 						
@@ -264,8 +268,6 @@ img .img-fluid {
 											let html="";
 											html+="<div class='product-slider-item my-4' id='dsub"+i+"\'";
 											html+="data-image="+nvl(images[i])+">";
-											html+="<img class='d-block img-fluid w-100'";
-											html+="src="+nvl(images[i])+" alt='slides'id='sub"+i+"Img'>";
 											html+="</div>";
 											
 											$("#slider").append(html);	
@@ -322,6 +324,9 @@ img .img-fluid {
 		marker.setMap(map);
 		}
 
+	function needLogin(){
+		alert('로그인이 필요한 서비스입니다!')
+	}
 	
 		
 
@@ -342,7 +347,7 @@ img .img-fluid {
 				<div class="col-lg">
 					<div class="row">
 						<div
-							class="container-fluid p-5 my-5 bg-light border col-lg-8 shadow-sm pt-3">
+							class="container-fluid p-5 my-5 bg-light border col-lg-7 shadow-sm pt-3">
 							<div class="product-details"  data-auto-refresh="true">
 								<div id='facltNm' class="h1"></div>
 								<div id="contentId" style="display:none;"></div>
@@ -356,41 +361,43 @@ img .img-fluid {
 								</div>
 								<div class="product-slider" id="slider" data-auto-refresh="true">
 									<div class="product-slider-item my-4" id="dMain">
-										<img class="img-fluid w-100" 
-											alt="product-img" style="height: 500px; "id="mainImg">
+										<img class="img-fluid w-100" alt="product-img" style="height: 500px; "id="mainImg">
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div
-							class="container-fluid col-lg-4 shadow-sm p-5 my-5 border bg-light pt-3">
+						<div class="container-fluid col-lg-5 shadow-sm p-3 my-5 border bg-light pt-3">
 							<p></p>
-							<table class="table table-sm">
+							<table class="table table-sm mt-10" style="margin-top:30px">
 								<tbody>
 									<tr>
-										<td>주소</td>
+										<th>주소</th>
 										<td><div id="addr1">주소1</div></td>
 									</tr>
 									<tr>
-										<td>홈페이지</td>
+										<th>홈페이지</th>
 										<td><a id="homepage" href=""></a></td>
 									</tr>
 									<tr>
-										<td>기본 제공</td>
+										<th>예약링크</th>
+										<td><a id="resveUrl" href=""></a></td>
+									</tr>
+									<tr>
+										<th>기본 제공</th>
 										<td><div id="sbrsCl"></div></td>
 									</tr>
 									<tr>
-										<td>캠프 시설</td>
+										<th>캠프 시설</th>
 										<td><div id="glampInnerFclty"></div></td>
 									</tr>
 									<tr>
-										<td>캠핑 형태</td>
+										<th>캠핑 형태</th>
 										<td><div id="induty"></div></td>
 									</tr>
 
 									<tr>
-										<td>애완동물출입</td>
+										<th>애완동물출입</th>
 										<td><div id="animalCmgCl"></div></td>
 									</tr>
 
@@ -410,36 +417,59 @@ img .img-fluid {
 					</div>
 
 
-					<div
-						class="container-block shadow-sm content mt-5 pt-5 border bg-light">
-
-						<h3 class=" text-center">&nbsp;&nbsp;&nbsp;&nbsp; 캠핑 리뷰</h3>
+					<div class="container-block shadow-sm content mt-5 pt-5 mb-5 border bg-light">
+						<h1 class=" text-center"><img src="../../images/review.png" style="margin-right:10px; width:45px; height:45px">캠핑 리뷰</h1>
 						<div class="container product-review" id="reviews">
-						
-						</div>
-							<div class="container review-submission bg-light">
-								
-
-
+					</div>
+					<c:choose>
+						<c:when test="${null eq sessionScope.nick or empty sessionScope.nick}">
+							<div class="container review-submission bg-light mt-5">
 								<div class="review-submit contianer-float">
 									<div class="col-lg-6">
-										<input type="text" name="nick" id="nick" class="form-control"
+										<input type="text" name="nick" id="nick" class="form-control mb-2"
 											placeholder="닉네임">
 									</div>
+									<!-- 이미 로그인 되어 있는 상태인데 비밀번호를 또 입력받으면 번거로울 듯?  
+											이런 폼은 비회원도 글 쓰기가 가능할 때 사용하는 폼인거 같습니다 
 									<div class="col-lg-6">
 										<input type="password" name="password" id="password"
-											class="form-control" placeholder="비밀번호">
+											class="form-control mb-2" placeholder="비밀번호">
 									</div>
+									 -->
 									<div class="col-12">
 										<textarea name="content" id="content" rows="10"
 										class="form-control" placeholder="리뷰를 작성하세요"></textarea>
 									</div>
 									<div class="col-12">
-										<button type="submit" class="btn btn-main btn-sm" id="rvSub">작성</button>
+										<button type="submit" class="btn btn-main btn-sm mt-4 mb-4 text-align-right" style="text-align:right" onclick="needLogin();">작성</button>
 									</div>
-								
 							</div>
 						</div>
+						</c:when>
+						<c:otherwise>
+							<div class="container review-submission bg-light mt-5">
+								<div class="review-submit contianer-float">
+									<div class="col-lg-6">
+										<input type="text" name="nick" id="nick" class="form-control mb-2"
+											value="${sessionScope.nick}" readonly>
+									</div>
+									<!-- 이미 로그인 되어 있는 상태인데 비밀번호를 또 입력받으면 번거로울 듯?  
+									<div class="col-lg-6">
+										<input type="password" name="password" id="password"
+											class="form-control mb-2" placeholder="비밀번호">
+									</div>
+									 -->
+									 <div class="col-12">
+										<textarea name="content" id="content" rows="10"
+										class="form-control" placeholder="리뷰를 작성하세요"></textarea>
+									</div>
+									<div class="col-12">
+										<button type="submit" class="btn btn-main btn-sm mt-4 mb-4 text-align-right" style="text-align:right" id="rvSub">작성</button>
+									</div>
+							</div>
+						</div>
+						</c:otherwise>
+					</c:choose>	
 					</div>
 				</div>
 			</div>
@@ -519,7 +549,6 @@ img .img-fluid {
 	<!-- tether js -->
 	<script src="../../plugins/tether/js/tether.min.js"></script>
 	<script src="../../plugins/raty/jquery.raty-fa.js"></script>
-	<script src="../../plugins/slick-carousel/slick/slick.min.js"></script>
 	<script
 		src="../../plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="../../plugins/fancybox/jquery.fancybox.pack.js"></script>

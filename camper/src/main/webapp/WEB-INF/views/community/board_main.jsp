@@ -10,10 +10,10 @@
 
 	// 캠핑로그 
 	
-	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
+	ArrayList<BoardTO> boardLists5 = (ArrayList)request.getAttribute( "boardLists5" );
 	
 	StringBuffer sbHtml = new StringBuffer();
-		for( BoardTO to : boardLists ) {
+		for( BoardTO to : boardLists5 ) {
 			String pseq = to.getPseq();
 			String title = to.getTitle();
 			String nick = to.getNick();
@@ -30,10 +30,10 @@
 <%
 	// 캠핑꿀팁
 	
-	ArrayList<BoardTO> boardLists2 = (ArrayList)request.getAttribute( "boardLists2" );
+	ArrayList<BoardTO> boardLists6 = (ArrayList)request.getAttribute( "boardLists6" );
 	
 	StringBuffer sbHtml2 = new StringBuffer();
-		for( BoardTO to : boardLists2 ) {
+		for( BoardTO to : boardLists6 ) {
 			String pseq = to.getPseq();
 			String title = to.getTitle();
 			String nick = to.getNick();
@@ -50,10 +50,10 @@
 <% 
 		
 	// 캠핑가자
-	ArrayList<BoardTO> boardLists3 = (ArrayList)request.getAttribute( "boardLists3" );
+	ArrayList<BoardTO> boardLists7 = (ArrayList)request.getAttribute( "boardLists7" );
 	
 	StringBuffer sbHtml3 = new StringBuffer();
-		for( BoardTO to : boardLists3 ) {
+		for( BoardTO to : boardLists7 ) {
 			String pseq = to.getPseq();
 			String title = to.getTitle();
 			String nick = to.getNick();

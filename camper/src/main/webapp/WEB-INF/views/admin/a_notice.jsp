@@ -21,13 +21,11 @@
 		sbHtml.append( "<td height='30'>" );
 		sbHtml.append( "<form style='margin:0;'>" );
 		sbHtml.append( "<input type='hidden' name='idx' value='5279'>" );
-		sbHtml.append( "<input type='checkbox' name='select_checkbox'>" );
 		sbHtml.append( "</form>" );
 		sbHtml.append( "</td>" );
 		sbHtml.append( "<td>&nbsp;</td>" );
-		sbHtml.append( "<td>&nbsp;&nbsp;&nbsp;"  + nseq + "</td>" );
 		sbHtml.append( "<td align='left' style='padding-left:10px; word-break:break-all;'>" );
-		sbHtml.append( "[공지사항] <a href='view.do?nseq=" + nseq + "'>" + title + "</a>" );
+		sbHtml.append( "<a href='view.do?nseq=" + nseq + "'>" + title + "</a>" );
 		sbHtml.append( "</td>" );
 		sbHtml.append( "<td>" + nick + "</td>" );
 		sbHtml.append( "<td>" + wdate + "</td>" );
@@ -55,8 +53,7 @@
 <link rel="canonical"
 	href="https://www.wrappixel.com/templates/ample-admin-lite/" />
 <!-- Favicon icon -->
-<link rel="icon" type="../../image/png" sizes="16x16"
-	href="../../iamges/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
 <!-- Custom CSS -->
 <link href="../../css_a/style.min.css" rel="stylesheet">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -101,116 +98,96 @@
 					</span>
 					</a>
 					<!-- ============================================================== -->
-					<!-- End Logo -->
-					<!-- ============================================================== -->
-					<!-- ============================================================== -->
-					<!-- toggle and nav items -->
-					<!-- ============================================================== -->
-					<a
-						class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-						href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-				</div>
-				<!-- ============================================================== -->
-				<!-- End Logo -->
-				<!-- ============================================================== -->
-				<div class="navbar-collapse collapse" id="navbarSupportedContent"
-					data-navbarbg="skin5">
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
 
-					<!-- ============================================================== -->
-					<!-- Right side toggle and nav items -->
-					<!-- ============================================================== -->
-					<ul class="navbar-nav ms-auto d-flex align-items-center">
-
-						<!-- ============================================================== -->
-						<!-- Search -->
-						<!-- ============================================================== -->
-						<li class=" in">
-							<form role="search" class="app-search d-none d-md-block me-3">
-								<input type="text" placeholder="Search..."
-									class="form-control mt-0"> <a href="" class="active">
-									<i class="fa fa-search"></i>
-								</a>
-							</form>
-						</li>
-						<!-- ============================================================== -->
-						<!-- User profile and search -->
-						<!-- ============================================================== -->
-						<li><a class="profile-pic" href="#"> <img
-								src="../../plugins_a/images/users/varun.jpg" alt="user-img"
-								width="36" class="img-circle"><span
-								class="text-white font-medium">Admin</span></a></li>
-						<!-- ============================================================== -->
-						<!-- User profile and search -->
-						<!-- ============================================================== -->
-					</ul>
-				</div>
-			</nav>
-		</header>
-		<!-- ============================================================== -->
-		<!-- End Topbar header -->
-		<!-- ============================================================== -->
-		<!-- ============================================================== -->
-		<!-- Left Sidebar - style you can find in sidebar.scss  -->
-		<!-- ============================================================== -->
-		<aside class="left-sidebar" data-sidebarbg="skin6">
-			<!-- Sidebar scroll-->
-			<div class="scroll-sidebar">
-				<!-- Sidebar navigation-->
-				<nav class="sidebar-nav">
-					<ul id="sidebarnav">
-						<!-- 왼쪽 카테고리 -->
-						<li class="sidebar-item pt-2"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/main.do" aria-expanded="false"> <i
-								class="fas fa-chart-area" aria-hidden="true"></i> <span
-								class="hide-menu">관리자메인</span>
-						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/member.do" aria-expanded="false"> <i
-								class="fas fa-id-badge" aria-hidden="true"></i> <span
-								class="hide-menu">회원관리</span>
-						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/comm.do" aria-expanded="false"> <i
-								class="fa fa-globe" aria-hidden="true"></i> <span
-								class="hide-menu">커뮤니티</span>
-						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/notice.do" aria-expanded="false"> <i
-								class="fa fa-info" aria-hidden="true"></i> <span
-								class="hide-menu">고객지원</span>
-						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/ask.do" aria-expanded="false"> <i
-								class="fa fa-comment-dots" aria-hidden="true"></i> <span
-								class="hide-menu">1:1문의</span>
-						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/site.do" aria-expanded="false"> <i
-								class="fa fa-font" aria-hidden="true"></i> <span
-								class="hide-menu">사이트정보</span>
-						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/admin.do" aria-expanded="false"> <i
-								class="fas fa-cog" aria-hidden="true"></i> <span
-								class="hide-menu">관리자설정</span>
-						</a></li>
-						<li class="sidebar-item"><a
-							class="sidebar-link waves-effect waves-dark sidebar-link"
-							href="../../admin/terms.do" aria-expanded="false"> <i
-								class="fas fa-clipboard-list" aria-hidden="true"></i> <span
-								class="hide-menu">가입약관</span>
-						</a></li>
-
-					</ul>
-
-				</nav>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+                        <!-- admin -->
+                        <li>
+                            <a class="profile-pic" href="#">
+                                <img src="../../plugins_a/images/users/1.jpg" alt="user-img" width="36" class="img-circle">
+                                <span class="text-white font-medium">Admin</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ------------------ 왼쪽 전체 카테고리 ----------------  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+        <ul id="sidebarnav">
+        <!-- 카테고리 -->
+        <li class="sidebar-item pt-2">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/main.do" aria-expanded="false">
+            <i class="fas fa-chart-area" aria-hidden="true"></i>
+            <span class="hide-menu">관리자메인</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/member.do" aria-expanded="false">
+            <i class="fas fa-id-badge" aria-hidden="true"></i>
+            <span class="hide-menu">회원관리</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/leaveuser.do" aria-expanded="false">
+            <i class="fas fa-male" aria-hidden="true"></i>
+            <span class="hide-menu">탈퇴회원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/comm.do" aria-expanded="false">
+      		<i class="fa fa-globe" aria-hidden="true"></i>
+         	<span class="hide-menu">커뮤니티</span>
+         	</a>
+       	</li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/notice.do" aria-expanded="false">
+            <i class="fa fa-info" aria-hidden="true"></i>
+            <span class="hide-menu">고객지원</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/ask.do" aria-expanded="false">
+            <i class="fa fa-comment-dots" aria-hidden="true"></i>
+            <span class="hide-menu">1:1문의</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/site.do" aria-expanded="false">
+            <i class="fa fa-font" aria-hidden="true"></i>
+            <span class="hide-menu">사이트정보</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/admin.do" aria-expanded="false">
+            <i class="fas fa-cog" aria-hidden="true"></i>
+            <span class="hide-menu">관리자설정</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../admin/terms.do" aria-expanded="false">
+            <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+            <span class="hide-menu">가입약관</span>
+            </a>
+        </li>
+        </ul>
+		</nav>
 				<!-- End Sidebar navigation -->
 			</div>
 			<!-- End Sidebar scroll-->
@@ -235,7 +212,7 @@
 							<ol class="breadcrumb ms-auto">
 								<li><a href="#" class="fw-normal">로그아웃</a></li>
 							</ol>
-							<a href="https://www.wrappixel.com/templates/ampleadmin/"
+							<a href="http://localhost:8080/search/theme.do"
 								target="_blank"
 								class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">홈페이지
 								바로가기 </a>
@@ -251,206 +228,93 @@
 			<!-- Container fluid  -->
 			<!-- ============================================================== -->
 			<div class="container-fluid">
-				<!-- ============================================================== -->
-				<!-- Start Page Content -->
-				<!-- ============================================================== -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="white-box">
-							<body marginwidth="0" marginheight="0">
-								<table width="100%" border="0" cellpadding="0" cellspacing="0"
-									class="top15">
+			<!-- ============================================================== -->
+			<!-- Start Page Content -->
+			<!-- ============================================================== -->
+			<div class="row"><div class="col-md-12"><div class="white-box">
+				<body marginwidth="0" marginheight="0">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="top15">
+					<tbody>
+						<tr>
+							<td style="padding: 0px 10px 10px 10px">
+							<script language="JavaScript" src="/adm/js/lib.js"></script>
+							<link href="/adm/bbs/skin/bbsBasic/style.css" rel="stylesheet" type="text/css"> 
+							<!-- 카테고리 -->
+							<div class="category">
+							<a href="/admin/notice.do"><b>전체</b></a><font style="color: #ddd;"> | </font> 
+							<a href="/admin/notice_n.do"><b>공지사항</b></a><font style="color: #ddd;"> | </font>
+							<a href="/admin/faq.do"><b>FAQ</b></a>
+			</div>
+																					
+                            <!-- 상단 -->
+							<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-top: 1px solid #333;">
+								<tbody>
+									<tr style="background: #fdfcfc;">
+										<td width="1%"></td>
+										<th width="4%" height="38">&nbsp;</th>
+										<th>&nbsp;&nbsp;제목</th>
+										<th width="13%">작성자</th>
+										<th width="10%">작성일</th>
+										<th width="5%">&nbsp;</th>
+									</tr>
+									<tr>
+										<td colspan="10" height="1" bgcolor="#d7d7d7"></td>
+									</tr>
+
+									<!-- 게시판 -->
+									<tr style="">
+										<form style="margin: 0;">
+											<input type="hidden" name="idx" value=""> 
+											
+											<%= sbHtml.toString() %>
+										</form>
+									</tr>
+									<tr>
+										<td colspan="10" height="1" bgcolor="#d7d7d7"></td>
+									</tr>
+								</tbody>
+							</table>
+                     
+                            <br><br>
+							<!-- 검색 -->
+							<div class="Search">
+							<table width="0%" border="0" cellpadding="0" cellspacing="0" align="center">
+								<form name="sfrm" action=" "></form>
+								<input type="hidden" name="" value=" ">
+								<input type="hidden" name="" value="">
 									<tbody>
 										<tr>
-											<td style="padding: 0px 10px 10px 10px"><script
-													language="JavaScript" src="/adm/js/lib.js"></script>
-												<link href="/adm/bbs/skin/bbsBasic/style.css"
-													rel="stylesheet" type="text/css"> <!-- 카테고리 -->
-												<div class="category_pd">
-													<a
-														href="/adm/manage/bbs/bbs.php?ptype=list&amp;code=bbsBasic"><b>전체</b></a>
-													<font style="color: #ddd;"> | </font> <a
-														href="/adm/manage/bbs/bbs.php?ptype=list&amp;code=bbsBasic&amp;category=65"><b>공지사항</b></a>
-													<font style="color: #ddd;"> | </font> <a
-														href="/adm/manage/bbs/bbs.php?ptype=list&amp;code=bbsBasic&amp;category=66"><b>FAQ</b></a>
-													<!-- 카테고리 끝-->
-
-
-
-													<!-- 게시물 시작 -->
-													<table width="100%" border="0" cellpadding="0"
-														cellspacing="0" style="border-top: 1px solid #333;">
-														<tbody>
-															<tr style="background: #fdfcfc;">
-																<td width="1%">
-																	<form style="margin: 0;">
-																		<input type="checkbox" name="select_tmp"
-																			onclick="selectReverseBbs(this.form)">
-																	</form>
-																</td>
-																<th width="3%">&nbsp;</th>
-
-																<th width="8%" height="38">번호</th>
-																<th>제목</th>
-																<th width="10%">작성자</th>
-																<th width="10%">작성일</th>
-																<th width="5%">&nbsp;</th>
-															</tr>
-															<tr>
-																<td colspan="10" height="1" bgcolor="#d7d7d7"></td>
-															</tr>
-
-															<!-- 게시판 -->
-															<tr style="">
-															<form style="margin: 0;">
-															<input type="hidden" name="idx" value=""> 
-															<%= sbHtml.toString() %>
-															</form>
-															</tr>
-
-
-															<tr>
-																<td colspan="10" height="1" bgcolor="#d7d7d7"></td>
-															</tr>
-														</tbody>
-													</table>
-													<!-- 게시물 끝 -->
-
-													<!-- 페이지 번호 -->
-													<table width="100%" border="0" cellpadding="0"
-														cellspacing="0">
-														<tbody>
-															<tr>
-																<td height="50" align="center" class="Paging_Num">
-																	<table width="100%" border="0" cellspacing="0"
-																		cellpadding="0">
-																		<tbody>
-																			<tr>
-																				<td align="center">
-																					<table border="0" cellspacing="0" cellpadding="0">
-																						<tbody>
-																							<tr>
-																								<td width="22" height="50"><a
-																									href="?ptype=&amp;page=1&amp;code=bbsBasic">
-																										<i class="fas fa-chevron-left"
-																										aria-hidden="true" align="absmiddle"
-																										border="0'"></i>
-																								</a></td>
-
-																								<td align="center">&nbsp; <b>1</b> &nbsp;
-																								</td>
-																								<td width="22" align="right"><a
-																									href="?ptype=&amp;page=1&amp;code=bbsBasic">
-																										<i class="fas fa-chevron-right"
-																										aria-hidden="true" align="absmiddle"
-																										border="0"></i>
-																								</a></td>
-																							</tr>
-																						</tbody>
-																					</table>
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-													<!-- 페이지 번호끝 -->
-
-													<!-- 검색 -->
-													<div class="AWbbs_f_search">
-														<table width="0%" border="0" cellpadding="0"
-															cellspacing="0" align="center">
-															<form name="sfrm" action="/adm/manage/bbs/bbs.php"></form>
-															<input type="hidden" name="code" value="bbsBasic">
-															<input type="hidden" name="category" value="">
-															<tbody>
-																<tr>
-																	<td><select name="searchopt">
-																			<option value="">--검색--</option>
-																			<option value="subject">제 목</option>
-																			<option value="content">내 용</option>
-																			<option value="name">작성자</option>
-																	</select> 
-																	</td>
-																	<td><input name="searchkey" type="text" value=""></td>
-																	<td>
-																		<button type="submit">
-																			<i class="fa fa-search" aria-hidden="true"></i>
-																		</button>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-													<!-- 검색 끝 -->
-
-													<!-- 버튼 -->
-													<div style="margin: 10px 0 0;">
-														<table width="100%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tbody>
-																<tr>
-																	<td width="20%">
-																		<div class="col-sm-12">
-																			<input type="button" value="삭제"
-																				class="btn_write btn_txt01" style="cursor: pointer;"
-																				onclick="location.href='write.html'" />
-																		</div>
-																	</td>
-																	<table width="100%" border="0" cellpadding="0"
-																		cellspacing="0">
-																		<tbody>
-																			<tr>
-																				<td align="right">
-																				<td width="7%">
-																					<div class="align_right">
-																						<input type="button" value="쓰기"
-																							class="btn_write btn_txt01"
-																							style="cursor: pointer;"
-																							onclick="location.href='write-n.do'" />
-																					</div>
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																	</div>
-																	<!-- 버튼 끝 -->
-							</body>
-						</div>
-					</div>
-				</div>
-				<!-- ============================================================== -->
-				<!-- End PAge Content -->
-				<!-- ============================================================== -->
-				<!-- ============================================================== -->
-				<!-- Right sidebar -->
-				<!-- ============================================================== -->
-				<!-- .right-sidebar -->
-				<!-- ============================================================== -->
-				<!-- End Right sidebar -->
-				<!-- ============================================================== -->
-			</div>
-			<!-- ============================================================== -->
-			<!-- End Container fluid  -->
-			<!-- ============================================================== -->
-			<!-- ============================================================== -->
-			<!-- footer -->
-			<!-- ============================================================== -->
-			<!-- End footer -->
-			<!-- ============================================================== -->
-		</div>
-		<!-- ============================================================== -->
-		<!-- End Page wrapper  -->
-		<!-- ============================================================== -->
-	</div>
-	<!-- ============================================================== -->
-	<!-- End Wrapper -->
-	<!-- ============================================================== -->
-	<!-- ============================================================== -->
-	<!-- All Jquery -->
-	<!-- ============================================================== -->
+											<td><select name="">
+												<option value="title">제 목</option>
+												<option value="content">내 용</option>
+												<option value="nick">작성자</option>
+												</select> 
+											</td>
+											<td><input name="searchkey" type="text" value=""></td>
+											<td>
+												<button type="submit">
+												<i class="fa fa-search" aria-hidden="true"></i>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								</div>
+						                                      
+						        <!-- 버튼 -->
+								<div style="margin: 10px 0 0;">													
+								<table width="100%" border="0" cellpadding="0" cellspacing="0">
+									<tbody>
+										<tr>
+											<td align="right" />
+											<td width="7%" />
+											<div class="align_right">
+											<input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='/admin/write_n.do'" />
+										</tr>
+									</tbody>
+								</table>
+								</div>
+				
 	<script src="../../plugins_a/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap tether Core JavaScript -->
 	<script src="../../bootstrap/dist/js/bootstrap.bundle.min.js"></script>

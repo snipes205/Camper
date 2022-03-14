@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.camper.mapper.ReplyMapper">
+
+	<!--  댓글 Mapper.xml -->
+	
+	<!--  댓글 테이블의 마지막 auto-increment 값을 가져옴 -->
+	<select id="callMaxRno" resultType="int">
+		SELECT IFNULL(MAX(rno),0) FROM p_reply;
+	</select>
+	
+	<!--  댓글 쓰기 -->
+	<insert id="writeReply" parameterType="com.camper.model.ReplyTO">
+		<selectKey resultType="int" keyProperty="rno" order="BEFORE">
+	        SELECT IFNULL(MAX(rno),0) + 1 FROM p_reply      
+	    </selectKey>
+		INSERT INTO p_reply
+		VALUES( #{rno}, #{bno}, #{nick}, #{content}, now(), #{rno}, 0, 0 );
+	</insert>
+	
+	<!--  모댓글일 경우 rno, grp 일치 -->
+	<update id="checkReply" parameterType="com.camper.model.ReplyTO">
+		UPDATE p_reply SET grp=#{grp}
+		WHERE rno != grp
+	</update>
+	
+	<!--  모댓글이 삭제된 경우, 딸린 답글들도 모두 삭제되면 테이블에서 완전 삭제 -->
+	<delete id="togetherDelete" parameterType="com.camper.model.ReplyTO">
+		DELETE FROM p_reply
+		WHERE content="" and grp=#{grp}
+	</delete>
+	
+	<!--  답글 쓰기 -->
+	<insert id="writeRereply" parameterType="com.camper.model.ReplyTO">
+		INSERT INTO p_reply
+		VALUES( 0, #{bno}, #{nick}, #{content}, now(), #{grp}, #{depth}, 0 )
+	</insert>
+	
+	<!--  p_table에 댓글수 증가 -->
+	<update id="hitUpReply" parameterType="com.camper.model.BoardTO">
+		UPDATE p_table SET preply=preply+1
+		WHERE pseq=#{rno}
+	</update>
+	
+	<!--  댓글 리스트 호출 -->
+	<select id="replyList" parameterType="com.camper.model.ReplyTO" resultType="com.camper.model.ReplyTO">
+		SELECT rno, bno, r.nick, r.content, date_format(wdate, '%y-%m-%d') wdate
+		FROM p_reply r left outer join user u
+		ON r.nick = u.nick
+		WHERE r.bno = #{pseq}
+		ORDER BY grp asc, grps desc
+	</select>
+	
+	<!--  댓글 추가/삭제시 댓글 개수 가져오기 -->
+	<select id="countChangeReply" parameterType="com.camper.model.BoardTO" resultType="com.camper.model.BoardTO">
+		SELECT preply
+		FROM p_table
+		WHERE pseq=#{bno}
+	</select>
+	
+	<!-- 모댓글 답글수 카운트 -->
+	<select id="countRereply" parameterType="com.camper.model.BoardTO" resultType="int">
+		SELECT count(rno)
+		FROM p_reply
+		WHERE rno != #{rno} and grp = #{rno}
+	</select>
+	
+	<!--  답글수 카운트 -->
+	<select id="countOnlyRereply" parameterType="com.camper.model.ReplyTO" resultType="int">
+		SELECT count(rno)
+		FROM p_reply
+		WHERE rno != #{grp} and grp = #{grp}
+	</select>
+	
+	<!--  모든 댓글 카운트 -->
+	<select id="selectReplyCount" parameterType="com.camper.model.ReplyTO" resultType="int">
+		SELECT count(rno)
+		FROM p_reply
+		WHERE bno=#{bno}
+	</select>
+	
+	<!--  모댓글 삭제, 답글 X -->
+	<select id="deleteNotHaveRereply" parameterType="com.camper.model.ReplyTO">
+		DELETE FROM p_reply
+		WHERE rno=#{rno}
+	</select>
+	
+	<!--  모댓글 삭제, 답글 O -->
+	<update id="deleteHaveRereply" parameterType="com.camper.model.ReplyTO">
+		UPDATE p_reply SET content=""
+		WHERE rno=#{rno}
+	</update>
+	
+	<!--  답글 삭제 -->
+	<delete id="deleteRereply" parameterType="com.camper.model.ReplyTO">
+		DELETE FROM p_reply
+		WHERE rno=#{rno} and depth=1
+	</delete>
+	
+	<!--  p_table 댓글수 감소 -->
+	<update id="hitDownReply" parameterType="com.camper.model.ReplyTO">
+		UPDATE p_table SET preply=preply-1
+		WHERE rno=#{rno}
+	</update>
+	
+</mapper>
+

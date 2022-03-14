@@ -4,14 +4,26 @@
 <!--  공지사항 List MVC Model2 구조 -->
 
 <%@ page import="com.camper.model.BoardTO" %>
-<%@page import="com.camper.model.BoardListTO"%>
+<%@	page import="com.camper.model.BoardListTO"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.ResultSet" %>
 <% 
-	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists4" );
+	BoardListTO listTO = (BoardListTO)request.getAttribute( "listTO" );
+	
+	int cpage = listTO.getCpage();
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalRecord = listTO.getTotalRecord();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+
+
+	ArrayList<BoardTO> boardLists4 = (ArrayList)request.getAttribute( "boardLists4" );
 
 	StringBuffer sbHtml = new StringBuffer();
-		for( BoardTO to : boardLists ) {
+		for( BoardTO to : boardLists4 ) {
 			String nseq = to.getNseq();
 			String title = to.getTitle();
 			String nick = to.getNick();
@@ -20,7 +32,7 @@
 			// 게시물 내용 form
 			sbHtml.append( "<article>" );
 			sbHtml.append( "	<div>" );
-			sbHtml.append( "		<a href='/community/view.do?nseq=" + nseq + "'>" + title + "</a>" );
+			sbHtml.append( "		<a href='/community/view2.do?cpage=" + cpage +  "&nseq=" + nseq + "'>" + title + "</a>" );
 			sbHtml.append( "	</div>" );
 			sbHtml.append( "	<ul class='list-inline'>" );
 			sbHtml.append( "		<li class='list-inline-item'>by <a href=''>" + nick + "</a></li>" );
@@ -92,31 +104,44 @@
 					<%= sbHtml.toString() %>
 					
 					<!--  페이지네이션  part -->
-
 					<nav aria-label="Page navigation example">
 						<ul class="pagination" style="margin-top: 0px;">
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
-									<span class="sr-only">DPrevious</span></a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-									<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-									<span class="sr-only">Previous</span></a>
-							</li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-									<span class="sr-only">Next</span></a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
-									<span class="sr-only">DNext</span></a>
-							</li>
+						
+					<!--  페이지네이션 내용 표시 -->
+					<%
+						if( startBlock == 1 ) {
+								out.println( "<li class='page-item'><a class='page-link' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-double-left'></i></span><span class='sr-only'>DPrevious</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/ask/notice.do?cpage=" + ( startBlock-blockPerPage ) + "' aria-label='DNext'><span aria-hidden='true'><i class='fa fa-angle-double-left'></i></span><span class='sr-only'>DPrevious</span></a></li>" );
+						}
+	
+						if( cpage == 1 ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-left'></i></span><span class='sr-only'>Previous</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/ask/notice.do?cpage=" + (cpage-1) + "' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-left'></i></span><span class='sr-only'>Previous</span></a></li>" );
+						}
+						
+						for( int i=startBlock; i<=endBlock; i++ ) {
+							if( cpage == i ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#'>" + i + "</a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/ask/notice.do?cpage=" + i + "'>" + i + "</a></li>" );	
+							}
+							
+						}
+						
+						if( cpage == totalPage ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-right'></i></span><span class='sr-only'>Next</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/ask/notice.do?cpage=" + (cpage+1) + "' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-right'></i></span><span class='sr-only'>Next</span></a></li>" );
+						}
+						
+						if( endBlock == totalPage ) {
+								out.println( "<li class='page-item'><a class='page-link' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-double-right'></i></span><span class='sr-only'>DNext</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/ask/notice.do?cpage=" + ( startBlock+blockPerPage ) + "' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-double-right'></i></span><span class='sr-only'>DNext</span></a></li>" );
+						}
+					%>
 						</ul>
 					</nav>
 				</div>

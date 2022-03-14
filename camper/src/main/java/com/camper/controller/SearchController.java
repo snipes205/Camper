@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +72,10 @@ public class SearchController {
 		return modelAndView;
 	}
 	@RequestMapping(value="/search/writeReview.do",method=RequestMethod.POST)
-	public int writeReview(HttpServletRequest request, HttpServletResponse response) {
-
+	public int writeReview(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ReviewTO to = new ReviewTO();
 		to.setNick(request.getParameter("nick"));
-		to.setPwd(request.getParameter("password"));
+		to.setPwd(session.getAttribute("pwd").toString());
 		to.setContentId(request.getParameter("contentId"));
 		to.setContent(request.getParameter("content"));
 		
@@ -115,10 +115,7 @@ public class SearchController {
 		to.setRvseq(request.getParameter("rvseq"));
 		to.setPwd(request.getParameter("password"));
 		to.setContent(request.getParameter("content"));
-		System.out.println(request.getParameter("nick"));
-		System.out.println(request.getParameter("rvseq"));
-		System.out.println(request.getParameter("password"));
-		System.out.println(request.getParameter("content"));
+
 		int flag = dao.ReviewModyfy(to);
 		
 		return flag;

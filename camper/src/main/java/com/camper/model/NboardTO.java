@@ -6,6 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class NboardTO {
+	
 	private String nseq;
 	private String title;
 	private String nick;

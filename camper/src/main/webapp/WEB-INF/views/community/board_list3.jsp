@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!--  캠핑가자 List MVC Model2 구조 -->
 
 <%@ page import="com.camper.model.BoardTO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@page import="com.camper.model.BoardListTO"%>
 
 <%
+	BoardListTO listTO = (BoardListTO)request.getAttribute( "listTO" );
+	
+	int cpage = listTO.getCpage();
+	int recordPerPage = listTO.getRecordPerPage();
+	int totalRecord = listTO.getTotalRecord();
+	int totalPage = listTO.getTotalPage();
+	int blockPerPage = listTO.getBlockPerPage();
+	
+	int startBlock = listTO.getStartBlock();
+	int endBlock = listTO.getEndBlock();
+
 	ArrayList<BoardTO> boardLists3 = (ArrayList)request.getAttribute( "boardLists3" );
 	
 	StringBuffer sbHtml = new StringBuffer();
@@ -16,11 +29,12 @@
 			String title = to.getTitle();
 			String nick = to.getNick();
 			String wdate = to.getWdate();
+			String type = to.getType();
 			
 			// 게시물 내용 form
 			sbHtml.append( "<article>" );
 			sbHtml.append( "	<div>" );
-			sbHtml.append( "		<a href='/community/view.do?pseq=" + pseq + "'>" + title + "</a>" );
+			sbHtml.append( "		<a href='/community/view.do?cpage=" + cpage +  "&pseq=" + pseq + "&type=" + type + "'>" + title + "</a>" );
 			sbHtml.append( "	</div>" );
 			sbHtml.append( "	<ul class='list-inline'>" );
 			sbHtml.append( "		<li class='list-inline-item'>by <a href=''>" + nick + "</a></li>" );
@@ -28,7 +42,7 @@
 			sbHtml.append( "	</ul>" );
 			sbHtml.append( "</article>" );
 
-}
+			}
 %>
 
 <!DOCTYPE html>
@@ -94,34 +108,54 @@
 					<%= sbHtml.toString() %>
 
 					<!--  버튼 Part -->					
-					<a href="/community/write.do"><button type="button" class="btn btn-transparent" style="float: right;">글쓰기</button></a>
+					<c:choose>
+						<c:when test="${empty sessionScope.nick}">
+							<input type="button" value="글쓰기" class="btn btn-transparent" style="float: right;" onclick="javascript:alert('로그인을 하셔야합니다.')" >
+						</c:when>
+						<c:otherwise>
+							<input type="button" value="글쓰기" class="btn btn-transparent" style="float: right;" onclick="location.href='/community/write3.do'" >
+						</c:otherwise>
+					</c:choose>
 
 					<!--  페이지네이션 Part -->
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
-									<span class="sr-only">DPrevious</span></a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-									<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-									<span class="sr-only">Previous</span></a>
-							</li>
-
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">4</a></li>
-							<li class="page-item"><a class="page-link" href="#">5</a></li>
-
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-									<span class="sr-only">Next</span></a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
-									<span class="sr-only">DNext</span></a>
-							</li>
+						
+					<!--  페이지네이션 내용표시 -->
+					<%
+						if( startBlock == 1 ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-double-left'></i></span><span class='sr-only'>DPrevious</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/campgo.do?cpage=" + ( startBlock-blockPerPage ) + "' aria-label='DNext'><span aria-hidden='true'><i class='fa fa-angle-double-left'></i></span><span class='sr-only'>DPrevious</span></a></li>" );
+						}
+	
+						if( cpage == 1 ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-left'></i></span><span class='sr-only'>Previous</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/campgo.do?cpage=" + (cpage-1) + "' aria-label='Previous'><span aria-hidden='true'><i class='fa fa-angle-left'></i></span><span class='sr-only'>Previous</span></a></li>" );
+						}
+						
+						for( int i=startBlock; i<=endBlock; i++ ) {
+							if( cpage == i ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#'>" + i + "</a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/campgo.do?cpage=" + i + "'>" + i + "</a></li>" );	
+							}
+							
+						}
+						
+						if( cpage == totalPage ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-right'></i></span><span class='sr-only'>Next</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/campgo.do?cpage=" + (cpage+1) + "' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-right'></i></span><span class='sr-only'>Next</span></a></li>" );
+						}
+						
+						if( endBlock == totalPage ) {
+								out.println( "<li class='page-item'><a class='page-link' href='#' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-double-right'></i></span><span class='sr-only'>DNext</span></a></li>" );
+							} else {
+								out.println( "<li class='page-item'><a class='page-link' href='/community/campgo.do?cpage=" + ( startBlock + blockPerPage ) + "' aria-label='Next'><span aria-hidden='true'><i class='fa fa-angle-double-right'></i></span><span class='sr-only'>DNext</span></a></li>" );
+						}
+					%>
 						</ul>
 					</nav>
 				</div>

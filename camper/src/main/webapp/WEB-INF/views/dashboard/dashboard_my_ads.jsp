@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-HttpSession httpSession = request.getSession(true);
-String strEmail = String.valueOf(httpSession.getAttribute("email"));
-String[] email = strEmail.split("@");
-%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -46,6 +42,81 @@ String[] email = strEmail.split("@");
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+		window.addEventListener('load', function() {
+			
+			$('#submit1').click(function(){
+				
+				const current_pwd = $('#current_pwd').val();
+				const new_pwd = $('#new_pwd').val();
+				const confirm_pwd = $('#confirm_pwd').val();
+				
+				if(current_pwd == '' || current_pwd == null){
+					alert('현재 비밀번호를 입력해주세요!');
+					$('#current_pwd').focus();
+					return false;
+				}
+				if(new_pwd == '' || new_pwd == null || confirm_pwd == '' || confirm_pwd == null){
+					alert('새로운 비밀번호를 입력해주세요!');
+					$('#confirm_pwd').focus();
+					return false;
+				}
+				
+			document.pwdForm.action = '/updatePwd.do';
+			document.pwdForm.submit();
+			})
+			
+			// ID와 PWD 형식을 검사하는 정규식(영어대소문자와 숫자로 5~20자리) 
+			let idpwCheck = /[a-zA-Z0-9]{5,20}$/	
+			
+			// 형식검사하는 메서드
+			function check( val, target ) {
+				if( val.test( target ) ) {
+					return true;
+				}
+			}
+			
+			// 비밀번호 유효성 검사와 일치여부 확인
+			$( "#new_pwd" ).focusout( function() {
+				const new_pwd = $( "#new_pwd" ).val();
+				
+				if( !check( idpwCheck, new_pwd ) ) {
+					$( "#pwd_chk" ).text( "영어대소문자와 숫자 5~20자리로 비밀번호를 만들어주세요!" );
+					$( "#pwd_chk" ).css( "margin", "0 auto" );
+					$( "#pwd_chk" ).css( "color", "red" );
+					$( "#new_pwd" ).val( "" );
+					$( "#submit1" ).attr( "disabled", true );
+				} else{
+					$( "#pwd_chk" ).text( "" );
+					//패스워드 똑같이 입력했는지 검사
+					$( "#confirm_pwd" ).focusout( function() {
+						const new_pwd = $( "#new_pwd" ).val();
+						const confirm_pwd = $( "#confirm_pwd" ).val();
+						
+						if( new_pwd != '' && confirm_pwd != '' ) {
+							if( new_pwd == confirm_pwd ) {
+								$( "#pwd_chk" ).text( "비밀번호가 일치합니다!" );
+								$( "#pwd_chk" ).css( "margin", "0 auto" );
+								$( "#pwd_chk" ).css( "color", "blue" );
+								$( "#submit1" ).attr( "disabled", false );
+							} else {
+								$( "#pwd_chk" ).text( "비밀번호가 일치하지 않습니다!" );
+								$( "#pwd_chk" ).css( "margin", "0 auto" );
+								$( "#pwd_chk" ).css( "color", "red" );
+								$( "#pwd_chk" ).val( "" );
+								$( "#pwd_chk" ).focus();
+								$( "#submit1" ).attr( "disabled", true );
+							}
+						} else {
+							$( "#pwd_chk" ).text( "" );
+							$( "#submit1" ).attr( "disabled", false );
+						}
+						
+					})
+				}
+			})
+		})
+		
+		
 		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 		function execDaumPostcode() {
 			new daum.Postcode({
@@ -140,20 +211,16 @@ String[] email = strEmail.split("@");
 									<!-- Address -->
 									<label for="form-add">주소</label>
 									<div class="form-group d-inline-flex">
-										<input type="text" class="form-control  mr-2" id="postcode"
-											placeholder="우편번호"> <input type="button"
-											onclick="execDaumPostcode()"
-											class="btn btn-transparent mt-0 text-center" value="주소검색">
+										<input type="text" class="form-control  mr-2" id="postcode" value="${sessionScope.zipcode }" readonly>
+										<input type="button" onclick="execDaumPostcode()" class="btn btn-transparent mt-0 text-center" value="주소검색">
 									</div>
 
 									<input type="text" class="form-control" id="jibunAddress"
-										placeholder="지번주소" readonly> <br>
+										readonly value="${sessionScope.address }"> <br>
 									<!-- Email -->
 									<label for="form-mail">E-mail</label>
-									<div class="form-group d-inline-flex">
-										<input type="text" class="form-control" id="form-mail1" value=<%=email[0] %>><span
-											style="font-size: 23px; text-align: center; padding-top: 5px; margin: 0 5px;">@</span>
-										<input type="text" class="form-control" id="form-mail2" value=<%=email[1] %>>
+									<div class="form-group">
+										<input type="text" class="form-control" id="form-email" value="${sessionScope.email }">
 									</div>
 
 									<label for="form-greet">한 줄 소개</label>
@@ -170,24 +237,25 @@ String[] email = strEmail.split("@");
 							<!-- Change Password -->
 							<div class="widget change-password">
 								<h3 class="widget-header user">비밀번호 변경</h3>
-								<form action="#">
+								<form name="pwdForm" method="POST">
 									<!-- Current Password -->
 									<div class="form-group">
 										<label for="current-password">현재 비밀번호</label> <input
-											type="password" class="form-control" id="current-password">
+											type="password" class="form-control" id="current_pwd" name="current_pwd">
 									</div>
 									<!-- New Password -->
 									<div class="form-group">
 										<label for="new-password">새 비밀번호</label> <input
-											type="password" class="form-control" id="new-password">
+											type="password" class="form-control" id="new_pwd" name="new_pwd">
 									</div>
 									<!-- Confirm New Password -->
 									<div class="form-group">
 										<label for="confirm-password">새 비밀번호 확인</label> <input
-											type="password" class="form-control" id="confirm-password">
+											type="password" class="form-control" id="confirm_pwd" name="confirm_pwd">
 									</div>
+									<div id="pwd_chk"></div>
 									<!-- Submit Button -->
-									<button class="btn btn-transparent">비밀번호 변경</button>
+									<button class="btn btn-transparent" id="submit1" name="submit1">비밀번호 변경</button>
 								</form>
 							</div>
 						</div>

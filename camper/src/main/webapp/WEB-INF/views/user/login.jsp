@@ -52,10 +52,6 @@ if (request.getAttribute("flag") != null && !request.getAttribute("flag").equals
 <!-- Font Awesome -->
 <link href="../../plugins/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet">
-<!-- Owl Carousel -->
-<link href="../../plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-<link href="../../plugins/slick-carousel/slick/slick-theme.css"
-	rel="stylesheet">
 <!-- Fancy Box -->
 <link href="../../plugins/fancybox/jquery.fancybox.pack.css"
 	rel="stylesheet">
@@ -164,7 +160,7 @@ if (request.getAttribute("flag") != null && !request.getAttribute("flag").equals
 								<a class="mt-3 mr-2 d-inline-block  text-primary" href
 									data-toggle="modal" data-target="#findPwd">비밀번호 찾기</a> | <a
 									class="mt-3 ml-2 d-inline-block text-primary"
-									href="register.do">회원가입</a> <input type="hidden"
+									href="/login/register.do">회원가입</a> <input type="hidden"
 									name="kakaoemail" id="kakaoemail" /> <input type="hidden"
 									name="kakaoaccount" id="kakaoaccount" /> <input type="hidden"
 									name="kakaobirth" id="kakaobirth" /> <a class="mt-4 d-block"
@@ -190,7 +186,6 @@ if (request.getAttribute("flag") != null && !request.getAttribute("flag").equals
 	<!-- tether js -->
 	<script src="../../plugins/tether/js/tether.min.js"></script>
 	<script src="../../plugins/raty/jquery.raty-fa.js"></script>
-	<script src="../../plugins/slick-carousel/slick/slick.min.js"></script>
 	<script src="../../plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="../../plugins/fancybox/jquery.fancybox.pack.js"></script>
 	<script src="../../plugins/smoothscroll/SmoothScroll.min.js"></script>

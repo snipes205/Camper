@@ -92,84 +92,136 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44d54500db491a25378cc4604dd20efc&libraries=services"></script>
 <script type="text/javascript">
-	window.onload=()=>{
-		
-		const url = window.location.href
-		
-		urls =url.split("/");
-		let underBar = "<div class='underbar'></div>";
-		if(urls[4]=="map.do"){
-			$("#searchMapBar").append(underBar);
-			$("#searchMapBar").attr("class",'tab_txt');
-			$("#searchThemeBar").attr("class",'tab_txt2');
-			$("#searchMapBarLi").attr("data-selected","true");
-		}else{
-			$("#searchThemeBar").append(underBar);
-			$("#searchMapBar").attr("class",'tab_txt2');
-			$("#searchThemeBar").attr("class",'tab_txt');
-			$("#searchThemeBarLi").attr("data-selected","true");
+	const url = window.location.href
+	
+	
+	
+	
+	function nvl(item){
+		if(typeof item==="undefined"|| item===null|| item==""){
+			return "";
 		}
-		let btn = document.querySelector("#searchButton");
+	        return item.textContent;
+		}
+	function getSum (contentId){
+		let sum;
+		$.ajax({
+			url:"./getNumReview.do",
+			async:'false',
+			data:{
+				"contentId":contentId,
+			},
+			dataType:"json",
+			type:'POST',
+			success:function(data){
+				console.log(data.sum)
+				sum= parseInt(data.sum);
+			},
+			error:function(){
+			}	
+		});
+		return sum
+	}
+
+	function getSum (contentId){
+		let sum;
+		$.ajax({
+			url:"./getNumReview.do",
+			async:'false',
+			data:{
+				"contentId":contentId,
+			},
+			dataType:"json",
+			type:'POST',
+			success:function(data){
+				console.log(data.sum)
+				sum= parseInt(data.sum);
+			},
+			error:function(){
+			}	
+		});
+		return sum
+	}
+	
+	
+	const getNameList = (pageNo)=>{
+	
+		
+		const strSearchName= document.getElementById("strSearchName").value;
 		let container = document.getElementById('map');
-		let pageNo = 1;
-		
-		
 		container.style.display="none";
-		
-		function nvl(item){
-			if(typeof item==="undefined"|| item===null|| item==""){
-				return "";
-			}
-	            return item.textContent;
-			}
-		
-		
-		btn.addEventListener('click',function(){
-			const strSearchName= document.getElementById("strSearchName").value;
 			if(strSearchName.length<2){
 				alert("이름을 두글자 이상 입력하세요");
 			}else{
 				let keyword= encodeURIComponent(strSearchName);
 				if (keyword != null){
 					const request = new XMLHttpRequest();
-					request.onreadystatechange = function(){
+					request.onreadystatechange = function() {
 						if(request.readyState==4){
 							if(request.status==200){
+								
+								
 								container.style.display="block";
 								let xmlData =request.responseXML;
 								$("#resultNum").empty();
 								$("#map").empty();
 								$("#pagenation").empty();
+										
 								const result=xmlData.getElementsByTagName('totalCount')[0].textContent;
-	
+								
 								//페이지네이션
-								totalPage= Math.floor(xmlData.getElementsByTagName('totalCount')[0].textContent/10);	
+								totalPage= Math.floor(xmlData.getElementsByTagName('totalCount')[0].textContent/10)+1;	
 								$("#pagenation").empty();
 								$("#pagenation").append("<li class='page-item'>"
-										+"<a class='page-link' href='#'aria-label='Previous' id='prev'>"
+										+"<div class='page-link' aria-label='Previous' id='prev'>"
 										+"<span aria-hidden='true'>&laquo;</span>"
-										+"<span class='sr-only'>Previous</span></a></li>"
+										+"<span class='sr-only'>Previous</span></div></li>"
 										)
 								
+								if(pageNo>2){
+										$("#pagenation").append("<li class='page-item'><div class='page-link cpageNo'>"+"1"+"</div></li>");	
+										$("#pagenation").append("<li class='page-item disabled'>"+"..."+"</li>")
+								}		
 								if(pageNo>1){
-									$("#pagenation").append("<li class='page-item'><a class='page-link'>"+(pageNo-1)+"</a></li>");	
+									$("#pagenation").append("<li class='page-item'><div class='page-link cpageNo'>"+(pageNo-1)+"</div></li>");	
 									}
-								for(let i = pageNo; i<pageNo+10&&i<totalPage; i++){
-									$("#pagenation").append("<li class='page-item'><a class='page-link'>"+i+"</a></li>");
+								for(let j = pageNo; j< pageNo+10&&j<totalPage; j++){
+								
+									$("#pagenation").append("<li class='page-item'><div class='page-link cpageNo'>"+j+"</div></li>");
 								}
+								
 								if(totalPage>10){
 								$("#pagenation").append("<li class='page-item disabled'>"+"..."+"</li>")
-								$("#pagenation").append("<li class='page-item'><a class='page-link' >"+totalPage+"</a></li>")
+								$("#pagenation").append("<li class='page-item'><div class='page-link cpageNo' >"+totalPage+"</div></li>")
 								}
 								$("#pagenation").append("<li class='page-item'>"
-										+"<a class='page-link' href='#'aria-label='Next'>" 
+										+"<div class='page-link next' aria-label='Next' id='next'>" 
 										+"<span aria-hidden='true'>&raquo;</span>"
-										+"<span class='sr-only' id='next'>Next</span></a></li>");
+										+"<span class='sr-only' >Next</span></div></li>");
 								
-								if(result==0){
-									alert("결과가 없습니다");
-								}else{
 								
+								$(".cpageNo").button().on("click",function(){
+									$("#pagenation").empty();	
+									pageNo = parseInt( $(this).text());
+									getNameList(pageNo);
+								
+								})
+								$("#prev").on('click',function(){
+									if(pageNo>1){
+										$("#pagenation").empty();
+										pageNo = pageNo-1;
+										getNameList(pageNo);
+									}
+								})
+								$("#next").on('click',function(){
+									if(pageNo<totalPage){
+										$("#pagenation").empty();
+										pageNo = pageNo+1;		
+										getNameList(pageNo);
+									}
+								})
+								
+	
 								const facltNm =xmlData.getElementsByTagName('facltNm');
 								const addr1 = xmlData.getElementsByTagName('addr1');
 								const smapX=xmlData.getElementsByTagName('mapX');
@@ -178,29 +230,39 @@
 								const induty = xmlData.getElementsByTagName('induty');
 								const contentId = xmlData.getElementsByTagName("contentId");
 								
-															
 								let options = {
-									center: new kakao.maps.LatLng(smapY[0].childNodes[0].nodeValue,smapX[0].childNodes[0].nodeValue),
+									
+										center: new kakao.maps.LatLng(smapY[0].childNodes[0].nodeValue,smapX[0].childNodes[0].nodeValue),
 										level: 1
 									};
 								let map = new kakao.maps.Map(container, options);
 								let imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-								let positions = [];					
-								let html = "";
+								let positions = [];
 								
-								$("#resultNum").html("결과\t<b>"+xmlData.getElementsByTagName('totalCount')[0].textContent+"</b>개");
+								let html = "";
+							
+								$("#resultNum").html("결과\t<b>"+nvl(xmlData.getElementsByTagName('totalCount')[0])+"</b>개");
+								
+								
+								
+
 								for(i=0;i<facltNm.length;i++){
+
 									$("#list").empty();
+									
 									html+="<tr>";
 									html+="<td class='product-thumb'><img width='80px' height='80px'";
 									if(nvl(firstImageUrl[i])==""){
 										html+="src='../images/no-image.jpg' alt='이미지 없음'></td>"	
 									}else{
 										html+="src='"+nvl(firstImageUrl[i])+"' alt='이미지 없음'></td>"	
-									}			
+									}
+									
+												
 									html+="<td class='product-details'>";
-									html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"&contentId="+nvl(contentId[i])+"'>"+nvl(facltNm[i])+"</a></h3>";
-									html+="<span class='location'>"+nvl(addr1[i])+"</span>";			
+									html+="<h3 class='title'><a href='./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"&contentId="+nvl(contentId[i])+"'>"+nvl(facltNm[i])+"</a></h3>";	
+									html+="<span class='location'>"+nvl(addr1[i])+"</span>";
+									
 									html+="</td>";		
 									html+="<td class='product-category'><span class='categories'>"+nvl(induty[i])+"</span></td>";		
 									html+="<td class='action' data-title='Action'>";		
@@ -209,57 +271,57 @@
 									html+="<li class='list-inline-item'><a data-toggle='tooltip'";	
 									html+="data-placement='top' title='View' class='view'";
 									html+="'./detail.do?sampX="+nvl(smapX[i])+"&smapY="+nvl(smapY[i])+"&contentId="+nvl(contentId[i])+"'>";
-									html+="</a></li></ul></div></td></tr>";	
-										
-										
+									html+="</a></li>";
+									
+									html+="</ul></div></td></tr>";	
 									positions.push({
 								        title: facltNm[i].childNodes[0].nodeValue,
 								        latlng: new kakao.maps.LatLng(smapY[i].textContent,smapX[i].textContent)
-									    	
+								    	
 									})
-								 	// 마커 이미지의 이미지 크기 입니다
-							    	let imageSize = new kakao.maps.Size(24, 35); 
-								    
-								    	// 마커 이미지를 생성합니다    
-							    	let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-								    
-								   	 // 마커를 생성합니다
-							   	 	let marker = new kakao.maps.Marker({
-							       		 map: map, // 마커를 표시할 지도
-							       		 position: positions[i].latlng, // 마커를 표시할 위치
-							       		 title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-							       		 image : markerImage // 마커 이미지 
-							    	});
-							   	 	let infowindow = new kakao.maps.InfoWindow({
-							         	content: "<div style='width:200px;' ><b>"+positions[i].title+"</b></div>" // 인포윈도우에 표시할 내용
-							     	});
-							   	 	let location="./detail.do?sampX="+smapX[i].textContent+"&smapY="+smapY[i].textContent+"&contentId="+nvl(contentId[i]);
-							   		kakao.maps.event.addListener(marker, 'click', function() { 
-							   			window.location.href=location					    
+								// 마커 이미지의 이미지 크기 입니다
+							   		let imageSize = new kakao.maps.Size(24, 35); 
+							    
+							    // 마커 이미지를 생성합니다    
+							   		let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+							    
+							   	 // 마커를 생성합니다
+							   		let marker = new kakao.maps.Marker({
+							    		map: map, // 마커를 표시할 지도
+							    	   	position: positions[i].latlng, // 마커를 표시할 위치
+							 	    	title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+							 	      	image : markerImage // 마커 이미지 
+								    });
+								   	let infowindow = new kakao.maps.InfoWindow({
+								         content: "<div style='width:200px;' ><b>"+positions[i].title+"</b></div>" // 인포윈도우에 표시할 내용
+								    });
+								   	let location="./detail.do?sampX="+smapX[i].textContent+"&smapY="+smapY[i].textContent+"&contentId="+nvl(contentId[i]);
+								   	kakao.maps.event.addListener(marker, 'click', function() { 
+								   		window.location.href=location					    
 							   	
-							   		});
+								   	});
 							   		function makeOverListener(map, marker, infowindow) {
-									    return function() {
-									        infowindow.open(map, marker);
+										return function() {
+											infowindow.open(map, marker);
 									    };
 									}
-										// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+									// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
 									function makeOutListener(infowindow) {
-									    return function() {
-									        infowindow.close();
+										return function() {
+										     infowindow.close();
 									    };
 									}
 									kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-							   	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-									
-							   		$("#list").append(html);
-							   		}
-									}
+							 	  	kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+								
+							  	 	$("#list").append(html);
+							  	 	
+							 
+								}
 							}else{
 								alert("페이지 에러");
-							}
-								
-						}
+							}	
+						}		
 					};
 					//요청방식 / 요청 url// 동기
 					request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
@@ -271,61 +333,36 @@
 							+"&keyword="+keyword
 							,true);
 					request.send();
-					
 				}else{
-					alert("이름이 정확하지 않습니다");
+					alert("주소 정보가 정확하지 않습니다");
 				}
-			}
-		})
-	
-		$(".page-item").on("click",function(){
-			$("#pagenation").empty();
-			pageNo = $(this).text();
-			request.onreadystatechange()
-			request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
-					+"searchList"
-					+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
-					+"&numOfRows=10"
-					+"&pageNo="+pageNo
-					+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
-					+"&keyword="+keyword
-					,true);
-			request.send();
-		})
-	
-		$("#prev").on('click',function(){
-			if(pageNo>1){
-				$("#pagenation").empty();
-				pageNo = pageNo-1;
-				request.onreadystatechange()
-				request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
-					+"searchList"
-					+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
-					+"&numOfRows=10"
-					+"&pageNo="+pageNo
-					+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
-					+"&keyword="+keyword
-					,true);
-				request.send();
-			}
-		})
-		$("#prev").on('click',function(){
-			if(pageNo<totalPage){
-				$("#pagenation").empty();
-				pageNo = pageNo+1;
-				request.onreadystatechange()
-				request.open('GET',' http://api.visitkorea.or.kr/openapi/service/rest/GoCamping/'
-						+"searchList"
-						+"?ServiceKey=02RP9yCl0%2BWeb7VZ9RjglX%2FY7k%2Bp%2FoHbLo2WDTgd2JVPrM7LjxoFNkAesm7JPgQZ6BSxAa23m2Oe6c%2F8BANHVw%3D%3D"
-						+"&numOfRows=10"
-						+"&pageNo="+pageNo
-						+"&MobileOS=ETC&MobileApp=TestApp&_type=xml"
-						+"&keyword="+keyword
-						,true);
-				request.send();
-			}
-		})
+		} 	 
 	}
+	$(function(){	
+		urls =url.split("/");
+		let underBar = "<div class='underbar'></div>";
+		if(urls[4]=="map.do"){
+			
+			$("#searchMapBar").append(underBar);
+			$("#searchMapBar").attr("class",'tab_txt');
+			$("#searchThemeBar").attr("class",'tab_txt2');
+			$("#searchMapBarLi").attr("data-selected","true");
+		}else{
+			$("#searchThemeBar").append(underBar);
+			$("#searchMapBar").attr("class",'tab_txt2');
+			$("#searchThemeBar").attr("class",'tab_txt');
+			$("#searchThemeBarLi").attr("data-selected","true");
+			
+		}
+		
+		
+		
+		$("#searchButton").on('click',function(){
+			let pageNo =1;
+			getNameList(pageNo);
+		});			
+		
+	});
 
 </script>
 
@@ -482,29 +519,26 @@
 				<!-- Recently Favorited -->
 				<div class="container">
 					<div id="resultNum" class="h4"></div>
-					<table class="table table-responsive product-dashboard-table">
+						<table class="table product-dashboard-table mr-auto ml-auto col-md-12" style="margin-left:auto; margin-right:auto">
 						<thead>
 							<tr>
-								<th>Image</th>
-								<th>Product Title</th>
-								<th class="text-center">Category</th>
-								<th class="text-center">Action</th>
+								<th class="text-center">썸네일</th>
+								<th class="text-center">캠핑장명</th>
+								<th class="text-center">캠핑유형</th>
 							</tr>
 						</thead>
 						<tbody id="list">
-
-
-
 						</tbody>
 					</table>
 
 				</div>
 
 				<!-- pagination -->
-				<!-- 
+
 				<div class="pagination justify-content-center">
 					<nav aria-label="Page navigation example">
-						<ul class="pagination">
+						<ul class="pagination" id="pagenation">
+						<!--
 							<li class="page-item"><a class="page-link" href="#"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									<span class="sr-only">Previous</span>
@@ -515,12 +549,13 @@
 							<li class="page-item"><a class="page-link" href="#"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
 									class="sr-only">Next</span>
+									
 							</a></li>
+						  -->	
 						</ul>
 					</nav>
 				</div>
-				 -->
-				<!-- pagination -->
+				
 			</div>
 		</div>
 	</section>

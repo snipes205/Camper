@@ -4,8 +4,10 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.mail.HtmlEmail;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.camper.mapper.UserMapper;
@@ -17,10 +19,23 @@ public class UserService implements UserMapper {
 	@Autowired
 	public UserMapper mapper;
 
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
+
 	@Override
 	public int checkId(UserDTO to) {
 		// TODO Auto-generated method stub
 		return mapper.checkId(to);
+	}
+
+	@Override
+	public int checkNick(UserDTO to) {
+		// TODO Auto-generated method stub
+		return mapper.checkNick(to);
 	}
 
 	@Override
@@ -50,90 +65,61 @@ public class UserService implements UserMapper {
 	}
 
 	@Override
-	public void sendEmail(UserDTO to, String div) throws Exception {
-		// TODO Auto-generated method stub
-		// Mail Server 설정
-		String charSet = "utf-8";
-		String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
-		String hostSMTPid = "ddd0128888@gmail.com";
-		String hostSMTPpwd = "dongram88*";
-
-		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "CAMPER";
-		String fromName = "CAMPER";
-		String subject = "";
-		String msg = "";
-
-		if(div.equals("findpwd")) {
-			subject = "베프마켓 임시 비밀번호 입니다.";
-			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-			msg += "<h3 style='color: blue;'>";
-			msg += to.getId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-			msg += "<p>임시 비밀번호 : ";
-			msg += to.getPwd() + "</p></div>";
-		}
-
-		// 받는 사람 E-Mail 주소
-		String mail = to.getEmail();
-		try {
-			HtmlEmail email = new HtmlEmail();
-			email.setDebug(true);
-			email.setCharset(charSet);
-			email.setSSL(true);
-			email.setHostName(hostSMTP);
-			email.setSmtpPort(465); //네이버 이용시 587
-
-			email.setAuthentication(hostSMTPid, hostSMTPpwd);
-			email.setTLS(true);
-			email.addTo(mail, charSet);
-			email.setFrom(fromEmail, fromName, charSet);
-			email.setSubject(subject);
-			email.setHtmlMsg(msg);
-			email.send();
-		} catch (Exception e) {
-			System.out.println("메일발송 실패 : " + e);
-		}
-		
-	}
-	
-	@Override
 	public int updatePwd(UserDTO to) throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.updatePwd(to);
 	}
 
 	@Override
-	public void findPwd(HttpServletResponse response, UserDTO to) throws Exception {
+	public int findPwdCheck(UserDTO to) {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		
+		int flag = 2;
+		
 		// 위의 매개 변수로 받은 UserDTO는 사용자가 입력한 ID / EMAIL
 		// 아래의 UserDTO는 ID가 존재할 경우 그 해당 아이디에 대한 모든 정보를 담은 UserDTO
-		UserDTO ck = mapper.successLogin(to);
-		PrintWriter out = response.getWriter();
-		// 가입된 아이디가 없으면
+		UserDTO ckto = mapper.successLogin(to);
+		
 		if(mapper.checkId(to) != 1) {
-			out.print("등록되지 않은 아이디입니다.");
-			out.close();
+			// 등록되지 않은 아이디
+			flag = 1;
+		} else if(!to.getEmail().equals(ckto.getEmail())) {
+			// 회원가입 시 기입한 이메일과 일치하지 않음
+			flag = 0;
 		}
-		// 가입된 이메일이 아니면
-		else if(!to.getEmail().equals(ck.getEmail())) {
-			out.print("등록되지 않은 이메일입니다.");
-			out.close();
-		}else {
-			// 임시 비밀번호 생성
-			String pwd = "";
-			for (int i = 0; i < 12; i++) {
-				pwd += (char) ((Math.random() * 26) + 97);
-			}
-			to.setPwd(pwd);
-			// 비밀번호 변경
-			mapper.updatePwd(to);
-			// 비밀번호 변경 메일 발송
-			sendEmail(to, "findpwd");
-
-			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
-			out.close();
+		return flag;
+	}
+	
+	@Override
+	public int findPwd(HttpServletResponse response, UserDTO to) throws Exception {
+		
+		// 임시비밀 번호 메일 발송을 위한 코드 
+		SimpleMailMessage simpleMessage = new SimpleMailMessage();
+		simpleMessage.setTo(to.getEmail());
+		simpleMessage.setSubject("CAMPER 임시비밀번호가 도착했어요!");
+		String pwd = "";
+		for (int i = 0; i < 12; i++) {
+			pwd += (char) ((Math.random() * 26) + 97);
 		}
+		String msg = "임시비밀번호 발급 \n"+ to.getId()+"\t님의 임시 비밀번호는" + pwd + "\t입니다.\n"
+				+ "로그인 후 비밀번호를 변경해주세요!";
+		simpleMessage.setText(msg);
+		javaMailSender.send(simpleMessage);
+		
+		// 위에 생성한 임시 비밀 번호를 메일로 발송 후 DB에도 업데이트 시켜준다
+		to.setPwd(pwd);
+		int flag = mapper.updatePwd(to);
+		return flag;
 	}
 
+	@Override
+	public int signup(UserDTO to) {
+		int flag = 1;
+		int result = sqlSession.insert("signup", to);
+		if(result == 1) {
+			flag = 0;
+		}
+		return flag;
+	}
+	
 }

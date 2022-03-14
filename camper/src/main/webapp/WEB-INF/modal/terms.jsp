@@ -5,23 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	window.onload = function() {
-		$('#leaveBtn').click(function() {
-			const pwd = $('#pwd').val().trim();
-			const msg = $('#msg').val().trim();
-
-			if (pwd == '' || pwd == null) {
-				alert('비밀번호를 입력해주세요!');
-				$('#pwd').focus();
-				return false;
-			}
-
-			document.leaveForm.action = '/leave.do';
-			document.leaveForm.submit();
-		})
-	}
-</script>
 </head>
 <body>
 	<div class="modal fade" id="terms" tabindex="-1" role="dialog"

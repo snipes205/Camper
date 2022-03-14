@@ -42,6 +42,9 @@
 	<link href="../../plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 	<!-- CUSTOM CSS -->
 	<link href="../../css/style.css" rel="stylesheet">
+	<!--  ckeditor -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script> 
+	
 	
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -54,11 +57,6 @@
 <script type ="text/javascript" >
 	window.onload = function() {
 		document.getElementById( 'mbtn' ).onclick = function() {
-			if( document.mfrm.pwd.value.trim() == '' ) {
-				alert( '비밀번호를 입력하셔야 합니다.' );
-				
-				return;
-			}
 			document.mfrm.submit();
 		};
 	};
@@ -73,7 +71,7 @@
 
 	<!--  글수정 section -->
 	<section class="modify section">
-		<form action="/community/modifyOk.do" method="post" name="mfrm">
+		<form action="/community/modifyOk.do" method="post" name="mfrm" enctype="multipart/form-data">
 			<input type="hidden" name="pseq" value="<%=pseq %>" />
 			<input type="hidden" name="type" value="<%=type %>" />
 				<div class="container">
@@ -93,25 +91,23 @@
 										<div class="form-group">
 											<label for="title">제목</label>
 											<input type="text" class="form-control" name="title" value="<%=title %>">
-										</div>
-									
-										<!-- 닉네임 입력 part -->
-										<div class="form-group">
-											<label for="nick">닉네임</label>
-											<input type="text" class="form-control" name="nick" value="<%=nick %>">
-										</div>
-		
-										<!-- 비밀번호 입력 part -->
-										<div class="form-group">
-											<label for="pwd">비밀번호</label>
-											<input type="password" class="form-control" name="pwd">
-										</div>
-		
-										<!-- 내용 입력 part -->
-										<div class="form-group">
-											<label for="content">내용</label>
-											<input type="text" class="form-control" name="content"
-												style="width:70%x; height:500px;" value="<%=content %>">
+										</div>	
+										
+										<!-- 내용 입력 part --> 
+										<div class="value">
+											<div class="form-group">
+												<textarea class="form-control" rows="10" id="content" name="content"  ><%=content %></textarea>
+												<script>
+											 		const ckeditor_config = {
+													   	resize_enaleb : false,
+													   	enterMode : CKEDITOR.ENTER_BR,
+													   	shiftEnterMode : CKEDITOR.ENTER_P,
+													   	filebrowserUploadUrl : "${pageContext.request.contextPath}/admin/resources/ckUpload"
+													 	};
+											
+													CKEDITOR.replace( 'content', ckeditor_config );
+												</script>
+											</div>
 										</div>
 		
 										<!-- 버튼 part -->

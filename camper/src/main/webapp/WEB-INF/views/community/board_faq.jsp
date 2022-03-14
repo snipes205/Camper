@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!--  FAQ List MVC Model2 구조 -->
+
+<%@page import="com.camper.model.BoardTO"%>
+<%@page import="java.util.ArrayList"%>
+
+<%
+	ArrayList<BoardTO> boardLists = (ArrayList)request.getAttribute( "boardLists" );
+	
+	StringBuffer sbHtml = new StringBuffer();
+		for( BoardTO to : boardLists ) {
+			String nseq = to.getNseq();
+			String title = to.getTitle();
+			String content = to.getContent();
+			String nick = to.getNick();
+			String wdate = to.getWdate();
+			String type = to.getType();
+			
+			// href 와 div id 값이 변해야 1개만 열리므로 nseq값을 넣어준다.
+			sbHtml.append( "<div class='card'>" );
+			sbHtml.append( "	<div class='card-header'>" );
+			sbHtml.append( "		<a class='collapsed card-link' data-toggle='collapse' href='#collapse"+ nseq +"'>"+ title + "</a>" );
+			sbHtml.append( "	</div>" );
+			sbHtml.append( "	<div id='collapse"+ nseq +"' class='collapse' data-parent='#accordion'>" );
+			sbHtml.append( "		<div class='card-body'>" + content + "</div>" );
+			sbHtml.append( "	</div>" );
+			sbHtml.append( "</div>" );
+		}
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -65,95 +94,21 @@
 					<!-- FAQ 아코디언 part -->
 					<article>
 						<div id="accordion">
-							<h3>자주 묻는 질문</h3>
-							<div class="card" style="margin-top:20px;">
-								<div class="card-header">
-									<a class="card-link" data-toggle="collapse" href="#collapseOne">
-										캠핑가자에서 캠핑을 같이가고싶으면 어떡해야 하나요 ? </a>
-								</div>
-								<div id="collapseOne" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 캠핑가자 카테고리에 올라온 다른 회원님의 글을 통해서 캠핑에 같이가고
-									싶으신 회원님은 쪽지로 상호간의 약속을 잡으셔서 함께 가시면 됩니다.  </div>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-										쪽지는 어떻게 보내나요 ? </a>
-								</div>
-								<div id="collapseTwo" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 게시물 작성하신 다른 회원님의 닉네임을 누르셔서 뜨는 회원프로필 창 하단에
-									팔로우 / 쪽지하기 버튼을 누르셔서 보내고 싶으신 내용을 보내시면 됩니다. </div>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-										좋아요 눌렀던 게시물을 취소하려면 어떻게 해야하나요 ? </a>
-								</div>
-								<div id="collapseThree" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 마이페이지안의 좋아요 목록보기에서 회원님이 누르신 게시물들을
-									확인 할수 있기 때문에 다시 게시물 들어가셔서 좋아요를 취소하시면 됩니다. </div>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
-										자주묻는 질문 4입니다. </a>
-								</div>
-								<div id="collapseFour" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 자주 묻는 질문 4에 대한 대답입니다. 이러쿵저러쿵 이러쿵저러쿵
-										이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 </div>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
-										자주묻는 질문 5입니다. </a>
-								</div>
-								<div id="collapseFive" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 자주 묻는 질문 5에 대한 대답입니다. 이러쿵저러쿵 이러쿵저러쿵
-										이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 </div>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
-										자주묻는 질문 6입니다. </a>
-								</div>
-								<div id="collapseSix" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 자주 묻는 질문 6에 대한 대답입니다. 이러쿵저러쿵 이러쿵저러쿵
-										이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 </div>
-								</div>
-							</div>
-
-							<div class="card">
-								<div class="card-header">
-									<a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
-										자주묻는 질문 7입니다. </a>
-								</div>
-								<div id="collapseSeven" class="collapse" data-parent="#accordion">
-									<div class="card-body"> 자주 묻는 질문 7에 대한 대답입니다. 이러쿵저러쿵 이러쿵저러쿵
-										이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 이러쿵저러쿵 </div>
-								</div>
-							</div>
+							<h3 style="margin-bottom: 40px;">자주 묻는 질문</h3>
+							<!--  FAQ 내용 들어오는 part -->
+							<%= sbHtml.toString() %>
 
 						</div>
 					</article>
 				</div>
 
-				<!--  우측 part -->
-				<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
-					<div class="sidebar">
+
+					<!--  우측 part -->
+					<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+						<div class="sidebar">
 
 
 						<!-- 검색 부분 -->
-
 						<div class="widget search p-0">
 							<div class="input-group">
 								<input type="text" class="form-control" id="expire" placeholder="Search..."> <span
@@ -163,7 +118,6 @@
 
 
 						<!-- 카테고리 부분 -->
-
 						<div class="widget category">
 							<!-- Widget Header -->
 							<h5 class="widget-header">카테고리</h5>
