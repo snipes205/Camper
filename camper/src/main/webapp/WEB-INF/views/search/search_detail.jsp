@@ -67,8 +67,6 @@ img .img-fluid {
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44d54500db491a25378cc4604dd20efc&libraries=services"></script>
 <script type="text/javascript">
 	
-	
-
 	window.onload=()=>{
 		let urls = location.href;
 		let strParams = urls.toString().split("?");
@@ -116,7 +114,7 @@ img .img-fluid {
 								url:"./modifyReview.do",
 								data:{
 									"nick":$("#modNick").val(),
-									//"password":$("#modPassword").val(),
+									"password":$("#modPassword").val(),
 									"rvseq":$("#modRvseq").val(),
 									"content":$('#modContent').val()
 								},
@@ -125,11 +123,12 @@ img .img-fluid {
 								success:function(flag){
 									if(flag==0){
 									alert("리뷰가 수정되었습니다");
-									$("#modModal").modal("hide");
+										$("#modModal").modal("hide");
+										getReview();
 									}else{
 										alert("수정에 실패했습니다");
 									}
-									getReview();
+									
 								},
 								error:function(){
 								}
@@ -154,12 +153,12 @@ img .img-fluid {
 								success:function(flag){
 									
 									if(flag==0){
-									alert("리뷰가 삭제되었습니다");
-									$("#delModal").modal("hide");
+										alert("리뷰가 삭제되었습니다");
+										$("#delModal").modal("hide");
+										getReview();
 									}else{
 									alert("삭제에 실패했습니다");
 									}
-									getReview();
 								},
 								error:function(){
 								}
@@ -189,9 +188,9 @@ img .img-fluid {
 				type:'POST',
 				success:function(flag){
 					if(flag==0){
-					alert("리뷰가 작성되었습니다");
-					}
-					getReview();
+						alert("리뷰가 작성되었습니다");
+						getReview();
+					}	
 				},
 				error:function(){
 					
@@ -238,7 +237,7 @@ img .img-fluid {
 						if(lineIntro == '' || lineIntro == null) {
 							document.getElementById("lineIntro").innerText = "한줄소개가 없습니다!";
 						} else {
-							document.getElementById("lineIntro").innerText = lineIntro;
+							document.getElementById("lineIntro").innerText =nvl( lineIntro);
 						}
 						document.getElementById("doNm").innerText =nvl(doNm);
 						document.getElementById("homepage").innerText=nvl(hompage);
@@ -327,9 +326,6 @@ img .img-fluid {
 	function needLogin(){
 		alert('로그인이 필요한 서비스입니다!')
 	}
-	
-		
-
 </script>
 
 </head>
@@ -489,7 +485,7 @@ img .img-fluid {
 						<input type="hidden" id="modRvseq"/>
 						<div class="del-submit contianer-float">
 							<div class="col-lg-6">
-								<input type="text" name="modNick" id="modNick" class="form-control disable">
+								<input type="text" name="modNick" id="modNick" value="${sessionScope.nick}" readonly class="form-control disable">
 							</div>
 							<div class="col-lg-6">
 								<input type="password" name="modPassword" id="modPassword"
@@ -521,7 +517,7 @@ img .img-fluid {
 						<div class="del-submit contianer-float">
 							<input type="hidden" id="delRvseq"/>
 							<div class="col-lg-6">
-								<input type="text" name="delNick" id="delNick" class="form-control disable">
+								<input type="text" name="delNick" id="delNick" value="${sessionScope.nick}" readonly class="form-control disable">
 							</div>
 							<div class="col-lg-6">
 								<input type="password" name="delPassword" id="delPassword"
